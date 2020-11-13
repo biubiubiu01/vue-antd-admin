@@ -1,0 +1,7 @@
+@mixin cardBg($leftColor, $rightColor) {
+  background: -webkit-linear-gradient(to right, $leftColor, $rightColor);
+  background: -o-linear-gradient(to right, $leftColor, $rightColor);
+  background: -moz-linear-gradient (to right, $leftColor, $rightColor);
+  background: linear-gradient(to right, $leftColor, $rightColor);
+  box-shadow: 0 5px 10px $rightColor;
+}

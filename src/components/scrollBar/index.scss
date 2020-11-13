@@ -1,0 +1,49 @@
+.scrollbar {
+  overflow: hidden;
+  position: relative;
+  .scrollbar__wrap {
+    overflow: scroll;
+    overflow-x: hidden;
+    height: 100%;
+  }
+  .scrollbar__bar {
+    position: absolute;
+    right: 2px;
+    bottom: 2px;
+    z-index: 1;
+    border-radius: 4px;
+    opacity: 0;
+    transition: opacity 0.12s ease-out;
+    &.is-horizontal {
+      height: 6px;
+      left: 2px;
+    }
+    &.is-vertical {
+      width: 6px;
+      top: 2px;
+    }
+    &.is-horizontal > div {
+      height: 100%;
+    }
+    &.is-vertical > div {
+      width: 100%;
+    }
+  }
+  .scrollbar__thumb {
+    position: relative;
+    display: block;
+    width: 0;
+    height: 0;
+    cursor: pointer;
+    border-radius: inherit;
+    background-color: rgba(144, 147, 153, 0.3);
+    transition: background-color 0.3s;
+  }
+}
+
+.scrollbar:active > .scrollbar__bar,
+.scrollbar:focus > .scrollbar__bar,
+.scrollbar:hover > .scrollbar__bar {
+  opacity: 1;
+  transition: opacity 0.34s ease-out;
+}

@@ -1,0 +1,40 @@
+.logo-wrapper {
+  position: relative;
+  height: 64px;
+  padding-left: 24px;
+  overflow: hidden;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  line-height: 64px;
+  display: inline-block;
+  .logo-title {
+    font-size: 1.2rem;
+    color: #fff;
+    font-weight: 600;
+    margin-left: 12px;
+    display: inline-block;
+  }
+}
+
+.closeSide {
+  .logo-title {
+    display: none;
+  }
+  .menu-title {
+    display: none;
+  }
+}
+
+.side-wrapper {
+  .side-main {
+    width: 100%;
+    min-height: calc(100vh - 64px);
+  }
+  .ant-menu {
+    background: rgb(41, 51, 72) !important;
+  }
+  .ant-menu-dark .ant-menu-inline.ant-menu-sub {
+    background: rgb(19, 29, 48) !important;
+    box-shadow: none !important;
+  }
+}
