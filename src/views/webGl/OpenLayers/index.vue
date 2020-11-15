@@ -1,5 +1,5 @@
 <template>
-  <div class="openlayers-wrapper">
+  <div class="openlayers-wrapper ">
     <open-map class="all-container" />
   </div>
 </template>
@@ -18,6 +18,6 @@ export default {
 <style lang="scss" scoped>
 .openlayers-wrapper {
   width: 100%;
-  height: 100%;
+  height: calc(100vh - 148px);
 }
 </style>

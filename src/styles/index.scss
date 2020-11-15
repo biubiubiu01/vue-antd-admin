@@ -180,6 +180,9 @@ div:focus {
 .verticalMiddle {
   vertical-align: middle !important;
 }
+.vertical-bottom {
+  vertical-align: text-bottom !important;
+}
 
 [v-cloak] {
   display: none;

@@ -4,6 +4,7 @@ import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 
 import Layout from '@/layouts';
+import mainLayout from '@/layouts/mainLayout';
 
 const routes = [
   {
@@ -34,7 +35,7 @@ const routes = [
       {
         name: 'echarts',
         path: '/echarts',
-        component: () => import('@/views/echarts/index'),
+        component: mainLayout,
         redirect: '/echarts/bar',
         children: [
           {
@@ -71,7 +72,7 @@ const routes = [
       },
       {
         name: 'webGl',
-        component: () => import('@/views/webGl/index'),
+        component: mainLayout,
         path: '/webGl',
         redirect: '/webGl/ArcGis',
         children: [
@@ -90,13 +91,70 @@ const routes = [
       {
         name: 'components',
         path: '/components',
-        component: () => import('@/views/components/index'),
+        component: mainLayout,
         redirect: '/components/vr',
         children: [
           {
             name: 'vr',
             path: '/components/vr',
             component: () => import('@/views/components/vr/index')
+          }
+        ]
+      },
+      {
+        name: 'nest',
+        path: '/nest',
+        component: mainLayout,
+        redirect: '/nest/menu1',
+        children: [
+          {
+            name: 'menu1',
+            path: '/nest/menu1',
+            component: () => import('@/views/nest/menu1/index'),
+            redirect: '/nest/menu1/menu1-1',
+            children: [
+              {
+                name: 'menu1-1',
+                path: '/nest/menu1/menu1-1',
+                component: () => import('@/views/nest/menu1/menu1-1/index')
+              },
+              {
+                name: 'menu1-2',
+                path: '/nest/menu1/menu1-2',
+                component: () => import('@/views/nest/menu1/menu1-2/index'),
+                redirect: '/nest/menu1/menu1-2/menu1-2-1',
+                children: [
+                  {
+                    name: 'menu1-2-1',
+                    path: '/nest/menu1/menu1-2/menu1-2-1',
+                    component: () => import('@/views/nest/menu1/menu1-2/menu1-2-1/index')
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            name: 'menu2',
+            path: '/nest/menu2',
+            component: () => import('@/views/nest/menu2/index')
+          }
+        ]
+      },
+      {
+        name: 'userSystem',
+        component: mainLayout,
+        path: '/userSystem',
+        redirect: '/userSystem/userInfo',
+        children: [
+          {
+            name: 'userInfo',
+            path: '/userSystem/userInfo',
+            component: () => import('@/views/userSystem/userInfo/index')
+          },
+          {
+            name: 'setting',
+            path: '/userSystem/setting',
+            component: () => import('@/views/userSystem/setting/index')
           }
         ]
       }

@@ -17,7 +17,13 @@
       <div class="right-menu-item pointer boxHover">
         <svg-icon icon="color" :size="18" />
       </div>
-      <nav-international class="right-menu-item pointer boxHover" style="margin-right:5px" />
+
+      <nav-international class="right-menu-item pointer boxHover" />
+      <div class="right-menu-item pointer boxHover" style="margin-right:15px">
+        <a-badge :count="10" :overflow-count="99" :offset="[3, -4]">
+          <svg-icon icon="bell" :size="18" />
+        </a-badge>
+      </div>
       <nav-user class="right-menu-item pointer boxHover flex-sub" />
     </div>
   </div>

@@ -1,5 +1,5 @@
 <template>
-  <div class="arcgis-wrapper">
+  <div class="arcgis-wrapper ">
     <div class="handle-list flex flex-wrap align-content-around" v-if="map">
       <div class="handle-item" v-for="item in handleList" :key="item.icon" @click="changeHandle(item.icon)">
         <a-tooltip placement="right">
@@ -200,12 +200,11 @@ export default {
 <style lang="scss" scoped>
 .arcgis-wrapper {
   width: 100%;
-  height: 100%;
-  position: relative;
+  height: calc(100vh - 148px);
   .handle-list {
     position: absolute;
-    left: 24px;
-    top: 82px;
+    left: 15px;
+    top: 15px;
     height: 400px;
     width: 50px;
     text-align: center;

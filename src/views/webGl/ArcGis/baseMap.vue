@@ -140,10 +140,15 @@ export default {
     }
   },
   beforeDestroy() {
-    this.map.destroy();
-    this.basemapGallery.destroy();
-    this.search.destroy();
-    this.search = null;
+    if (this.map) {
+      this.map.destroy();
+    }
+    if (this.basemapGallery) {
+      this.basemapGallery.destroy();
+    }
+    if (this.search) {
+      this.search.destroy();
+    }
   },
   watch: {
     current(nl) {

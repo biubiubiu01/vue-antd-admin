@@ -33,10 +33,7 @@ export default {
       tagShow: state => state.setting.tagShow,
       settingShow: state => state.setting.settingShow
     })
-  },
-  created() {},
-  mounted() {},
-  methods: {}
+  }
 };
 </script>
 <style lang="scss" scoped>
@@ -48,6 +45,7 @@ export default {
   top: 0;
   left: 0;
   z-index: 996;
+  height: 100%;
 }
 
 .main-container {
@@ -63,6 +61,7 @@ export default {
     width: calc(100% - 256px);
     & ~ .app-main {
       padding-top: 100px;
+      min-height: 100vh;
     }
   }
 }
@@ -95,6 +94,6 @@ export default {
   z-index: 999;
 }
 .app-main {
-  min-height: 100%;
+  min-height: calc(100vh - 100px);
 }
 </style>

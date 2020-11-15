@@ -4,7 +4,7 @@
       <div class="text-center" style="font-size:1.3rem">N</div>
       <img src="../../../assets/map/north.png" class="northImg" alt />
     </div>
-    <canvas id="canvas" width="50" height="250"> </canvas>
+    <canvas id="canvas" width="50" height="150"> </canvas>
   </div>
 </template>
 
@@ -70,7 +70,7 @@ export default {
         layers: [tiandituBaseMap, tiandituVector],
         view: new View({
           projection: 'EPSG:4326', // 使用这个坐标系
-          zoom: 9.5
+          zoom: 8.95
           // center: [112.316200103, 28.5810841269]
         })
       });
@@ -150,7 +150,7 @@ export default {
         return false;
       }
       var ctx = canvas.getContext('2d');
-      var grad = ctx.createLinearGradient(0, 0, 20, 160);
+      var grad = ctx.createLinearGradient(0, 0, 20, 150);
       // var index = 0;
       for (var i = 0, j = 0; i < params.colorList.length; i++) {
         grad.addColorStop(j, params.colorList[i]);
@@ -159,16 +159,13 @@ export default {
         }
       }
       ctx.fillStyle = grad;
-      ctx.fillRect(0, 0, 20, 160);
+      ctx.fillRect(0, 0, 20, 150);
       ctx.font = '14px bold';
       ctx.textAlign = 'start';
       ctx.textBaseline = 'middle';
       ctx.fillStyle = '#666';
       ctx.fillText('100', 25, 10);
-      ctx.fillText('75', 25, 45);
-      ctx.fillText('50', 25, 80);
-      ctx.fillText('25', 25, 115);
-      ctx.fillText('0', 25, 150);
+      ctx.fillText('0', 25, 145);
     }
   }
 };
@@ -177,8 +174,8 @@ export default {
 <style lang="scss" scoped>
 .direction {
   position: absolute;
-  top: 80px;
-  right: 100px;
+  top: 35px;
+  right: 65px;
   z-index: 99;
   .northImg {
     width: 40px;
@@ -189,8 +186,8 @@ export default {
 }
 #canvas {
   position: absolute;
-  left: 50px;
-  bottom: 20px;
+  left: 3%;
+  bottom: 2%;
   z-index: 99;
 }
 </style>

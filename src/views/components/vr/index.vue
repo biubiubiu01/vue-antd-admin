@@ -9,7 +9,9 @@ import MarkersPlugin from 'photo-sphere-viewer/dist/plugins/markers';
 export default {
   name: 'vr',
   data() {
-    return {};
+    return {
+      img: require('../../../assets/vr/base.jpg')
+    };
   },
   mounted() {
     this.init();
@@ -34,7 +36,7 @@ export default {
                   id: 'image',
                   longitude: 0.931,
                   latitude: 0.3,
-                  image: require('../../../assets/vr/sign.png'),
+                  image: require('../../../assets/vr/exit.png'),
                   anchor: 'bottom center',
                   width: 48,
                   height: 48,

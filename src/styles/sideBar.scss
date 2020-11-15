@@ -28,7 +28,7 @@
 .side-wrapper {
   .side-main {
     width: 100%;
-    min-height: calc(100vh - 64px);
+    height: calc(100% - 64px);
   }
   .ant-menu {
     background: rgb(41, 51, 72) !important;

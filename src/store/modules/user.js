@@ -1,15 +1,17 @@
-import { getCache, setCache } from '@/utils/session';
-import { login, getCodeTest } from '@/api/user';
+import { getCache, setCache, removeCache } from '@/utils/session';
+import { login, logout, getCodeTest, getInfo } from '@/api/user';
 
 const state = {
-  userInfo: {},
-  token: getCache('TOKEN') || '',
-  loginInfo: getCache('LOGIN_INFO') || {}
+  accountInfo: null,
+  token: getCache('TOKEN') || ''
 };
 
 const mutations = {
   SET_TOKEN(state, token) {
     state.token = token;
+  },
+  SET_USERINFO(state, userInfo) {
+    state.accountInfo = userInfo;
   }
 };
 
@@ -40,6 +42,37 @@ const actions = {
             setCache('TOKEN', data.token);
           }
           resolve();
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
+  },
+
+  logout({ commit, state }) {
+    return new Promise((resolve, reject) => {
+      logout()
+        .then(() => {
+          commit('SET_TOKEN', '');
+          commit('SET_USERINFO', '');
+          removeCache('TOKEN');
+          resolve();
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
+  },
+
+  getInfo({ commit, state }) {
+    return new Promise((resolve, reject) => {
+      getInfo({ token: state.token })
+        .then(res => {
+          const { data } = res;
+          if (data) {
+            commit('SET_USERINFO', data);
+          }
+          resolve(data);
         })
         .catch(err => {
           reject(err);

@@ -1,22 +1,21 @@
 <template>
-  <div class="webGl-container border-box">
+  <div class="paddingBox-container  border-box">
     <router-view />
   </div>
 </template>
 
 <script>
 export default {
-  name: 'webGl',
-  components: {},
+  name: 'paddingBox',
   data() {
     return {};
   }
 };
 </script>
 <style lang="scss" scoped>
-.webGl-container {
+.paddingBox-container {
   padding: 24px;
-  height: calc(100vh - 100px);
   background: #f0f2f5;
+  min-height: calc(100vh - 100px);
 }
 </style>
