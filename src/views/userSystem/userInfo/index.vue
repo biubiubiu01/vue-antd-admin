@@ -9,22 +9,12 @@
             <div class="userRole">{{ userInfo.role }}</div>
           </div>
           <div class="accountMajor">
-            <div class="major-wrapper">
-              <svg-icon icon="position" class="vertical-bottom" />
-              <span class="major-name">{{ userInfo.position }}</span>
-            </div>
-            <div class="major-wrapper">
-              <svg-icon icon="location" class="vertical-bottom" />
-              <span class="major-name">{{ userInfo.location }}</span>
-            </div>
-            <div class="major-wrapper">
-              <svg-icon icon="label" class="vertical-bottom" />
-              <span class="major-name">{{ userInfo.label }}</span>
-            </div>
-            <div class="major-wrapper">
-              <svg-icon icon="skill" class="vertical-bottom" />
-              <span class="major-name">{{ userInfo.skill }}</span>
-            </div>
+            <template v-for="(v, k) in userInfo">
+              <div class="major-wrapper" :key="k" v-if="k != 'username' && k != 'role'">
+                <svg-icon :icon="k" class="vertical-bottom" />
+                <span class="major-name">{{ v }}</span>
+              </div>
+            </template>
           </div>
           <a-divider />
           <div class="tabList">
@@ -67,18 +57,15 @@
 
 <script>
 import { mapState } from 'vuex';
-import statisticsPage from './components/statisticsPage';
+import dynamicPage from './components/dynamicPage/index';
+import articlePage from './components/articlePage/index';
 export default {
   name: 'userInfo',
-  components: { statisticsPage },
+  components: { dynamicPage, articlePage },
 
   data() {
     return {
       tabList: [
-        {
-          key: 'statisticsPage',
-          tab: '统计'
-        },
         {
           key: 'dynamicPage',
           tab: '动态'
@@ -96,7 +83,7 @@ export default {
           tab: '项目'
         }
       ],
-      currentKey: 'statisticsPage',
+      currentKey: 'dynamicPage',
       userInfo: {},
       skillList: [
         {

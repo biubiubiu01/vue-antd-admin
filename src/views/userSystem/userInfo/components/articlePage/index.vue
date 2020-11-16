@@ -1,19 +1,14 @@
 <template>
-  <div class="statistics-wrapper">
-    12345
-  </div>
+  <div class="article-wrapper"></div>
 </template>
 
 <script>
 export default {
-  name: 'statistics',
+  name: 'articlePage',
   components: {},
   data() {
     return {};
-  },
-  created() {},
-  mounted() {},
-  methods: {}
+  }
 };
 </script>
 <style lang="scss" scoped></style>
