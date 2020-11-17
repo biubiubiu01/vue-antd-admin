@@ -9,12 +9,12 @@
     hideRequiredMark
   >
     <a-form-model-item prop="imgUrl" label="头像">
-      12345
+      <a-avatar :src="accountFrom.imgUrl" :size="108" />
     </a-form-model-item>
     <a-form-model-item prop="username" label="用户名">
       <a-input v-model="accountFrom.username" placeholder="请输入用户名" allow-clear />
     </a-form-model-item>
-    <a-form-model-item prop="role" label="权限">
+    <a-form-model-item label="权限">
       <a-input v-model="accountFrom.role" disabled />
     </a-form-model-item>
     <a-form-model-item prop="position" label="职位">
@@ -32,7 +32,7 @@
         placeholder="请输入个人技能"
         :maxTagCount="3"
         allowClear
-        :defaultValue="accountFrom.skill"
+        :default-value="accountFrom.skill"
         @change="changeSkill"
       >
         <a-select-option v-for="item in skillList" :key="item">
@@ -96,7 +96,7 @@ export default {
   },
   methods: {
     changeSkill(key) {
-      this.accountFrom.skill = key;
+      this.accountFrom.skill = key.join(',');
     },
     updateValue() {
       this.$refs.accountFrom.validate(valid => {
@@ -112,8 +112,8 @@ export default {
     },
     resetFrom() {
       this.$refs.accountFrom.resetFields();
-      this.accountFrom.skill = '';
     }
   }
 };
 </script>
+<style lang="scss" scoped></style>

@@ -21,18 +21,24 @@ router.beforeEach((to, from, next) => {
     if (!isLogin) {
       next('/login');
     } else {
-      store
-        .dispatch('user/getInfo')
-        .then(data => {
-          const { role } = data;
-          next();
-          NProgress.done();
-        })
-        .catch(err => {
-          message.err('获取用户信息失败');
-          next('/login');
-          NProgress.done();
-        });
+      const userInfo = store.state.user.accountInfo;
+      if (userInfo) {
+        next();
+        NProgress.done();
+      } else {
+        store
+          .dispatch('user/getInfo')
+          .then(data => {
+            const { role } = data;
+            next();
+            NProgress.done();
+          })
+          .catch(err => {
+            message.err('获取用户信息失败');
+            next('/login');
+            NProgress.done();
+          });
+      }
     }
   }
 });
