@@ -1,5 +1,5 @@
 <template>
-  <div class="arcgis-wrapper ">
+  <div class="arcgis-wrapper relative">
     <div class="handle-list flex flex-wrap align-content-around" v-if="map">
       <div class="handle-item" v-for="item in handleList" :key="item.icon" @click="changeHandle(item.icon)">
         <a-tooltip placement="right">

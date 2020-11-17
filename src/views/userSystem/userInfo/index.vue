@@ -5,11 +5,11 @@
         <a-card :hoverable="true" :bordered="false">
           <div class="accountInfo">
             <img src="../../../assets/nav//user.gif" alt="" class="accountImg" />
-            <div class="username">{{ userInfo.username }}</div>
-            <div class="userRole">{{ userInfo.role }}</div>
+            <div class="username">{{ accountInfo.username }}</div>
+            <div class="userRole">{{ accountInfo.role }}</div>
           </div>
           <div class="accountMajor">
-            <template v-for="(v, k) in userInfo">
+            <template v-for="(v, k) in accountInfo">
               <div class="major-wrapper" :key="k" v-if="k != 'username' && k != 'role'">
                 <svg-icon :icon="k" class="vertical-bottom" />
                 <span class="major-name">{{ v }}</span>
@@ -57,11 +57,10 @@
 
 <script>
 import { mapState } from 'vuex';
-import dynamicPage from './components/dynamicPage/index';
-import articlePage from './components/articlePage/index';
+import { articlePage, dynamicPage, noticePage } from './components';
 export default {
   name: 'userInfo',
-  components: { dynamicPage, articlePage },
+  components: { dynamicPage, articlePage, noticePage },
 
   data() {
     return {
@@ -77,14 +76,9 @@ export default {
         {
           key: 'noticePage',
           tab: '通知'
-        },
-        {
-          key: 'projectPage',
-          tab: '项目'
         }
       ],
       currentKey: 'dynamicPage',
-      userInfo: {},
       skillList: [
         {
           title: 'Vue',
@@ -143,26 +137,10 @@ export default {
       accountInfo: state => state.user.accountInfo
     })
   },
-  mounted() {
-    if (!this.accountInfo) {
-      this.getUserInfo();
-    } else {
-      this.userInfo = this.accountInfo;
-    }
-  },
+  mounted() {},
   methods: {
     changeTab(key) {
       this.currentKey = key;
-    },
-    getUserInfo() {
-      this.$store
-        .dispatch('user/getInfo')
-        .then(data => {
-          this.userInfo = data;
-        })
-        .catch(err => {
-          this.$message.error('获取用户信息失败！');
-        });
     },
 
     inputConfirm() {

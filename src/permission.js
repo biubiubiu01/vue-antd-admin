@@ -3,6 +3,8 @@ import { getCache } from '@/utils/session';
 import getPageTitle from '@/utils/getPageTitle';
 import NProgress from 'nprogress'; // progress bar
 import 'nprogress/nprogress.css'; // progress bar style
+import { message } from 'ant-design-vue';
+import store from './store';
 
 NProgress.configure({ showSpinner: false }); // NProgress Configuration
 
@@ -19,8 +21,18 @@ router.beforeEach((to, from, next) => {
     if (!isLogin) {
       next('/login');
     } else {
-      next();
-      NProgress.done();
+      store
+        .dispatch('user/getInfo')
+        .then(data => {
+          const { role } = data;
+          next();
+          NProgress.done();
+        })
+        .catch(err => {
+          message.err('获取用户信息失败');
+          next('/login');
+          NProgress.done();
+        });
     }
   }
 });

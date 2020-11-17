@@ -78,6 +78,13 @@ const actions = {
           reject(err);
         });
     });
+  },
+
+  updateInfo({ commit }, userInfo) {
+    return new Promise((resolve, reject) => {
+      commit('SET_USERINFO', userInfo);
+      resolve();
+    });
   }
 };
 
