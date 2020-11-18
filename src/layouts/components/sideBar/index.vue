@@ -48,7 +48,9 @@ export default {
   methods: {
     changeOpen(keys) {
       const currentOpenKey = keys.find(key => this.openKeys.indexOf(key) === -1);
-      if (this.baseRoute.findIndex(item => item.path == currentOpenKey) === -1) {
+      const children = this.baseRoute.filter(item => item.children);
+
+      if (children[0].children.findIndex(item => item.path == currentOpenKey) === -1) {
         this.openKeys = keys;
       } else {
         this.openKeys = currentOpenKey ? [currentOpenKey] : [];
