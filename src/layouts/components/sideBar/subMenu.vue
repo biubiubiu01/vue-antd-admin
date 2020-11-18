@@ -5,20 +5,17 @@
       <span style="margin-left:16px" class="menu-title">{{ props.currentRoute.meta.title }}</span>
     </template>
     <template v-for="item in props.currentRoute.children">
-      <a-menu-item :key="item.path" v-if="!item.children">
-        <router-link :to="item.path">
-          <svg-icon v-if="item.meta.icon" :icon="item.meta.icon"> </svg-icon>
-          <span style="margin-left:16px" class="menu-title">{{ item.meta.title }}</span>
-        </router-link>
-      </a-menu-item>
+      <menu-item v-if="!item.children" :key="item.path" :currentRoute="item" />
       <sub-menu v-else :key="item.path" :currentRoute="item" />
     </template>
   </a-sub-menu>
 </template>
 
 <script>
+import menuItem from './menuItem';
 export default {
   name: 'subMenu',
+  components: { menuItem },
   props: {
     currentRoute: {
       type: Object,

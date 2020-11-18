@@ -1,5 +1,6 @@
 import { getCache, setCache, removeCache } from '@/utils/session';
 import { login, logout, getCodeTest, getInfo } from '@/api/user';
+import { resetRouter } from '@/router';
 
 const state = {
   accountInfo: null,
@@ -56,6 +57,7 @@ const actions = {
           commit('SET_TOKEN', '');
           commit('SET_USERINFO', '');
           removeCache('TOKEN');
+          resetRouter();
           resolve();
         })
         .catch(err => {

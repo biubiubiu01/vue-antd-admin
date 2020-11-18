@@ -14,7 +14,7 @@
             <a-form-model-item prop="username" v-if="currentTab === 'user'">
               <a-input
                 v-model="loginForm.username"
-                placeholder="请输入账号 (admin or test)"
+                placeholder="请输入账号 (admin or test or editor)"
                 size="large"
                 allow-clear
                 @pressEnter="focusPassword"

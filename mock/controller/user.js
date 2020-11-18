@@ -4,12 +4,15 @@ const tokens = {
   },
   test: {
     token: 'test20201013'
+  },
+  editor: {
+    token: 'editor20201013'
   }
 };
 
 const userInfo = {
   admin20201013: {
-    username: 'Admin',
+    username: 'admin',
     location: 'Wuhan',
     position: '混元太极门掌门人',
     role: '超级管理员',
@@ -17,12 +20,20 @@ const userInfo = {
     skill: '闪电五连鞭'
   },
   test20201013: {
-    username: 'Test',
+    username: 'test',
     location: 'Wuhan',
     position: '四皇',
     role: '普通用户',
     label: '给我一个面子',
     skill: '面子果实'
+  },
+  editor20201013: {
+    username: 'editor',
+    location: 'ShangHai',
+    position: '小说界泰斗',
+    role: '作家',
+    label: '暂无',
+    skill: '暂无'
   }
 };
 

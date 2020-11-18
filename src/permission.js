@@ -8,12 +8,10 @@ import store from './store';
 
 NProgress.configure({ showSpinner: false }); // NProgress Configuration
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   NProgress.start();
   document.title = getPageTitle(to.meta.title);
   const isLogin = getCache('TOKEN');
-  document.body.scrollTop = 0;
-  document.documentElement.scrollTop = 0;
   if (to.path == '/login') {
     next();
     NProgress.done();
@@ -26,18 +24,17 @@ router.beforeEach((to, from, next) => {
         next();
         NProgress.done();
       } else {
-        store
-          .dispatch('user/getInfo')
-          .then(data => {
-            const { role } = data;
-            next();
-            NProgress.done();
-          })
-          .catch(err => {
-            message.err('获取用户信息失败');
-            next('/login');
-            NProgress.done();
-          });
+        try {
+          const { username } = await store.dispatch('user/getInfo');
+          const accountRoute = await store.dispatch('permission/getRoute', username);
+          router.addRoutes(accountRoute);
+          next({ ...to, replace: true });
+          NProgress.done();
+        } catch {
+          message.error('获取用户信息失败');
+          next('/login');
+          NProgress.done();
+        }
       }
     }
   }
