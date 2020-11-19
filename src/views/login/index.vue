@@ -25,7 +25,7 @@
             <a-form-model-item prop="password" v-if="currentTab === 'user'">
               <a-input-password
                 v-model="loginForm.password"
-                placeholder="请输入密码 (123456)"
+                placeholder="请输入密码 (任意输入6位数)"
                 size="large"
                 allow-clear
                 @pressEnter="toLogin"

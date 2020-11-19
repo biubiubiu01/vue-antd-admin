@@ -14,3 +14,13 @@ import request from '@/utils/request';
 export function getUserTable(data) {
   return request.post('/userManage/userTable', data);
 }
+
+/**
+ * @description 删除当前列
+ * @param {string}  id
+ * @returns {}
+ */
+
+export function deleteTable(data) {
+  return request.post('/userManage/deleteTable', data);
+}

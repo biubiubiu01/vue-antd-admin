@@ -2,10 +2,10 @@
   <div class="userManage-wrapper">
     <a-card :hoverable="true" :bordered="false">
       <div slot="title" class="flex flex-wrap">
-        <a-button type="primary" icon="plus" style="margin-bottom:10px">
+        <a-button type="primary" icon="plus" class="select-bottom">
           新增用户
         </a-button>
-        <a-button type="danger" icon="delete" style="margin:0 35px 10px 16px">
+        <a-button type="danger" icon="delete" style="margin:0 16px 10px">
           批量删除
         </a-button>
         <a-select placeholder="用户权限" class="select-width" allowClear @change="changeRole">
@@ -26,31 +26,102 @@
           :placeholder="['开始日期', '结束日期']"
           allowClear
           @change="changeTime"
-          locale="{locale}"
         />
-        <a-button type="primary" icon="search" style="margin:0 16px 10px" @click="handleSearch">
+        <a-button type="primary" icon="search" class="select-bottom" style="margin-right:16px" @click="handleSearch">
           查询
         </a-button>
-        <a-button type="primary" icon="export" style="margin-bottom:10px">
+        <a-button type="primary" icon="export" class="select-bottom">
           导出
         </a-button>
       </div>
-      <table-common :tableData="tableData" :tableHead="tableHead" />
+      <standard-table :tableData="tableData" :tableHead="tableHead" :loading="loading" :pagination="false">
+        <div slot="index" slot-scope="{ index }">
+          {{ index + 1 }}
+        </div>
+        <div slot="role" slot-scope="{ text }">
+          <a-tag :color="text | statusFilter">
+            {{ text }}
+          </a-tag>
+        </div>
+        <div slot="action" slot-scope="{ text }">
+          <a-button type="primary" size="small">
+            编辑
+          </a-button>
+          <a-popconfirm title="你确定要删除当前列吗?" ok-text="是" cancel-text="否" @confirm="handleDelete(text.id)">
+            <a-button type="danger" size="small" style="margin-left:8px" :disabled="text.role && text.role == 'admin'">
+              删除
+            </a-button>
+          </a-popconfirm>
+        </div>
+      </standard-table>
     </a-card>
   </div>
 </template>
 
 <script>
-import { getUserTable } from '@/api/system';
-import tableCommon from '@/components/tableCommon/index';
+import { getUserTable, deleteTable } from '@/api/system';
+import standardTable from '@/components/standardTable/index';
 import moment from 'moment';
-import locale from 'ant-design-vue/es/date-picker/locale/zh_CN';
 import 'moment/locale/zh-cn';
 moment.locale('zh-cn');
 
+const tableHead = [
+  {
+    title: '序号',
+    dataIndex: 'index',
+    scopedSlots: { customRender: 'index' },
+    width: 60
+  },
+  {
+    title: 'id',
+    dataIndex: 'id',
+    ellipsis: true
+  },
+  {
+    title: '用户名',
+    dataIndex: 'username'
+  },
+  {
+    title: '密码',
+    dataIndex: 'password'
+  },
+  {
+    title: '权限',
+    dataIndex: 'role',
+    scopedSlots: { customRender: 'role' }
+  },
+  {
+    title: '创建日期',
+    dataIndex: 'date',
+    defaultSortOrder: 'ascend',
+    sorter: (a, b) => a.date > b.date,
+    ellipsis: true
+  },
+  {
+    title: '描述',
+    dataIndex: 'text',
+    ellipsis: true
+  },
+  {
+    title: '操作',
+    scopedSlots: { customRender: 'action' },
+    width: 140
+  }
+];
 export default {
   name: 'userManage',
-  components: { tableCommon },
+  components: { standardTable },
+  filters: {
+    statusFilter(status) {
+      const statusList = {
+        admin: '#f50',
+        test: '#2db7f5',
+        editor: '#87d068',
+        custom: ''
+      };
+      return statusList[status];
+    }
+  },
   data() {
     return {
       roleOption: [
@@ -79,8 +150,9 @@ export default {
         page: 1,
         size: 10
       },
+      loading: false,
       tableData: [],
-      tableHead: []
+      tableHead
     };
   },
   mounted() {
@@ -100,17 +172,19 @@ export default {
       this.getTableList();
     },
     getTableList() {
+      this.loading = true;
       getUserTable(this.tableQuery).then(res => {
-        const data = res.data || {};
-        data.tableHead.forEach(item => {
-          if (item.column_name == 'role') {
-            item.tag = true;
-          }
-        });
+        const data = res.data || [];
         Object.assign(this, {
-          tableData: data.tableData,
-          tableHead: data.tableHead
+          tableData: data,
+          loading: false
         });
+      });
+    },
+    handleDelete(id) {
+      deleteTable(id).then(() => {
+        this.$message.success('删除成功!');
+        this.getTableList();
       });
     }
   }
@@ -120,6 +194,9 @@ export default {
 .select-width {
   width: 150px;
   margin-right: 16px;
+  margin-bottom: 10px;
+}
+.select-bottom {
   margin-bottom: 10px;
 }
 </style>

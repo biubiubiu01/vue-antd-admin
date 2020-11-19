@@ -1,29 +1,3 @@
-const tableHead = [
-  {
-    column_description: 'id',
-    column_name: 'id'
-  },
-  {
-    column_description: '用户名',
-    column_name: 'username'
-  },
-  {
-    column_description: '密码',
-    column_name: 'password'
-  },
-  {
-    column_description: '权限',
-    column_name: 'role'
-  },
-  {
-    column_description: '创建日期',
-    column_name: 'date'
-  },
-  {
-    column_description: '描述',
-    column_name: 'text'
-  }
-];
 const tableData = [
   {
     id: 'admin00001',
@@ -31,7 +5,8 @@ const tableData = [
     password: '123456',
     role: 'admin',
     date: '2020-10-13',
-    text: '系统管理员，拥有所有权限'
+    text: '系统管理员，拥有所有权限',
+    key: 'admin'
   },
   {
     id: 'editor00001',
@@ -39,7 +14,8 @@ const tableData = [
     password: '123456',
     role: 'editor',
     date: '2020-10-13',
-    text: 'admin签约金牌作家--马老师'
+    text: 'admin签约金牌作家--马老师',
+    key: 'editor'
   },
   {
     id: 'test00001',
@@ -47,7 +23,8 @@ const tableData = [
     password: '123456',
     role: 'test',
     date: '2020-10-13',
-    text: '不知名体验者，峡谷最快乐的男人'
+    text: '不知名体验者，峡谷最快乐的男人',
+    key: 'test'
   },
   {
     id: 'custom00001',
@@ -55,7 +32,35 @@ const tableData = [
     password: '123456',
     role: 'custom',
     date: '2020-10-13',
-    text: '早安，打工人(自定义权限，路由权限由管理员分配)'
+    text: '早安，打工人(自定义权限，路由权限由管理员分配)',
+    key: 'custom11'
+  },
+  {
+    id: 'custom00002',
+    username: '黑虎阿福',
+    password: '123456',
+    role: 'custom',
+    date: '2020-10-16',
+    text: '乌鸦坐飞机',
+    key: 'custom22'
+  },
+  {
+    id: 'custom00003',
+    username: '马大师',
+    password: '123456',
+    role: 'custom',
+    date: '2020-10-18',
+    text: '闪电五连鞭',
+    key: 'custom33'
+  },
+  {
+    id: 'custom00004',
+    username: '张三',
+    password: '123456',
+    role: 'custom',
+    date: '2020-10-20',
+    text: '不知名用户张三',
+    key: 'custom44'
   }
 ];
 
@@ -89,13 +94,24 @@ module.exports = [
       }
 
       return {
-        data: {
-          tableHead,
-          tableData: list,
-          total: list.length
-        },
+        data: tableData,
         code: 200,
         message: '用户table获取成功'
+      };
+    }
+  },
+  {
+    url: '/userManage/deleteTable',
+    type: 'post',
+    response: config => {
+      const { id } = config.body;
+
+      let index = tableData.findIndex(item => item.id == id);
+      tableData.splice(index, 1);
+
+      return {
+        code: 200,
+        message: '删除成功'
       };
     }
   }
