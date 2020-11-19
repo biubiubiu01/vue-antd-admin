@@ -29,8 +29,8 @@ const userInfo = {
   },
   editor20201013: {
     username: 'editor',
-    location: 'ShangHai',
-    position: '小说界泰斗',
+    location: 'Wuhan',
+    position: '金牌作者',
     role: '作家',
     label: '暂无',
     skill: '暂无'
