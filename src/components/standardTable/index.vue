@@ -1,6 +1,12 @@
 <template>
   <div class="tableCommon-wrapper">
-    <a-table :columns="tableHead" :dataSource="tableData" :loading="loading" :pagination="pagination">
+    <a-table
+      :columns="tableHead"
+      :dataSource="tableData"
+      :loading="loading"
+      :pagination="pagination"
+      :row-selection="rowSelection"
+    >
       <template
         slot-scope="text, record, index"
         :slot="slot"
@@ -31,6 +37,9 @@ export default {
     pagination: {
       type: Boolean,
       default: true
+    },
+    rowSelection: {
+      type: Object
     }
   },
   data() {

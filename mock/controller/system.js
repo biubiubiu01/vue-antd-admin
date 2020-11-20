@@ -1,6 +1,6 @@
-const tableData = [
+var tableData = [
   {
-    id: 'admin00001',
+    id: parseInt(Math.random() * 1000000000000),
     username: 'admin',
     password: '123456',
     role: 'admin',
@@ -9,7 +9,7 @@ const tableData = [
     key: 'admin'
   },
   {
-    id: 'editor00001',
+    id: parseInt(Math.random() * 1000000000000),
     username: 'editor',
     password: '123456',
     role: 'editor',
@@ -18,7 +18,7 @@ const tableData = [
     key: 'editor'
   },
   {
-    id: 'test00001',
+    id: parseInt(Math.random() * 1000000000000),
     username: 'test',
     password: '123456',
     role: 'test',
@@ -27,7 +27,7 @@ const tableData = [
     key: 'test'
   },
   {
-    id: 'custom00001',
+    id: parseInt(Math.random() * 1000000000000),
     username: 'custom',
     password: '123456',
     role: 'custom',
@@ -36,7 +36,7 @@ const tableData = [
     key: 'custom11'
   },
   {
-    id: 'custom00002',
+    id: parseInt(Math.random() * 1000000000000),
     username: '黑虎阿福',
     password: '123456',
     role: 'custom',
@@ -45,7 +45,7 @@ const tableData = [
     key: 'custom22'
   },
   {
-    id: 'custom00003',
+    id: parseInt(Math.random() * 1000000000000),
     username: '马大师',
     password: '123456',
     role: 'custom',
@@ -54,7 +54,7 @@ const tableData = [
     key: 'custom33'
   },
   {
-    id: 'custom00004',
+    id: parseInt(Math.random() * 1000000000000),
     username: '张三',
     password: '123456',
     role: 'custom',
@@ -63,6 +63,8 @@ const tableData = [
     key: 'custom44'
   }
 ];
+
+const moment = require('moment');
 
 function filterTable(list, key, value) {
   if (key == 'role') {
@@ -94,9 +96,9 @@ module.exports = [
       }
 
       return {
-        data: tableData,
+        data: list,
         code: 200,
-        message: '用户table获取成功'
+        message: '用户table获取成功！'
       };
     }
   },
@@ -105,13 +107,76 @@ module.exports = [
     type: 'post',
     response: config => {
       const { id } = config.body;
-
       let index = tableData.findIndex(item => item.id == id);
       tableData.splice(index, 1);
 
       return {
         code: 200,
-        message: '删除成功'
+        message: '删除成功！'
+      };
+    }
+  },
+  {
+    url: '/userManage/batchDeleteTable',
+    type: 'post',
+    response: config => {
+      const { batchId } = config.body;
+      const arr = batchId.split(',');
+      arr.forEach(item => {
+        const index = tableData.findIndex(j => j.id == item);
+        tableData.splice(index, 1);
+      });
+
+      return {
+        code: 200,
+        message: '删除成功！'
+      };
+    }
+  },
+  {
+    url: '/userManage/editTable',
+    type: 'post',
+    response: config => {
+      const { id, role, username, password, text } = config.body;
+      tableData.forEach(item => {
+        if (item.id == id) {
+          Object.assign(item, {
+            role,
+            username,
+            password,
+            text
+          });
+        }
+      });
+
+      return {
+        code: 200,
+        message: '修改成功！'
+      };
+    }
+  },
+  {
+    url: '/userManage/addTable',
+    type: 'post',
+    response: config => {
+      const { role, username, password, text } = config.body;
+      const id = parseInt(Math.random() * 1000000000000);
+      const date = moment(new Date())
+        .add(0, 'year')
+        .format('YYYY-MM-DD');
+      tableData.push({
+        role,
+        username,
+        password,
+        text,
+        id,
+        date,
+        key: id
+      });
+
+      return {
+        code: 200,
+        message: '添加成功！'
       };
     }
   }

@@ -2,10 +2,16 @@
   <div class="userManage-wrapper">
     <a-card :hoverable="true" :bordered="false">
       <div slot="title" class="flex flex-wrap">
-        <a-button type="primary" icon="plus" class="select-bottom">
+        <a-button type="primary" icon="plus" class="select-bottom" @click="handleAdd">
           新增用户
         </a-button>
-        <a-button type="danger" icon="delete" style="margin:0 16px 10px">
+        <a-button
+          type="danger"
+          icon="delete"
+          style="margin:0 16px 10px"
+          :loading="deleteLoading"
+          @click="handleBatchDelete"
+        >
           批量删除
         </a-button>
         <a-select placeholder="用户权限" class="select-width" allowClear @change="changeRole">
@@ -34,7 +40,13 @@
           导出
         </a-button>
       </div>
-      <standard-table :tableData="tableData" :tableHead="tableHead" :loading="loading" :pagination="false">
+      <standard-table
+        :tableData="tableData"
+        :tableHead="tableHead"
+        :loading="loading"
+        :pagination="false"
+        :rowSelection="{ selectedRowKeys: selectedRowKeys, onChange: handleSelect, getCheckboxProps: getCheckboxProps }"
+      >
         <div slot="index" slot-scope="{ index }">
           {{ index + 1 }}
         </div>
@@ -44,10 +56,10 @@
           </a-tag>
         </div>
         <div slot="action" slot-scope="{ text }">
-          <a-button type="primary" size="small">
+          <a-button type="primary" size="small" @click="handleEdit(text)">
             编辑
           </a-button>
-          <a-popconfirm title="你确定要删除当前列吗?" ok-text="是" cancel-text="否" @confirm="handleDelete(text.id)">
+          <a-popconfirm title="你确定要删除当前列吗?" ok-text="是" cancel-text="否" @confirm="handleDelete(text)">
             <a-button type="danger" size="small" style="margin-left:8px" :disabled="text.role && text.role == 'admin'">
               删除
             </a-button>
@@ -55,14 +67,24 @@
         </div>
       </standard-table>
     </a-card>
+    <user-model
+      :roleOption="roleOption"
+      :currentRow="currentRow"
+      :dialogVisible="dialogVisible"
+      @cancel="dialogVisible = false"
+      @ok="handleOk"
+      v-if="dialogVisible"
+    />
   </div>
 </template>
 
 <script>
-import { getUserTable, deleteTable } from '@/api/system';
+import { getUserTable, deleteTable, batchDeleteTable } from '@/api/system';
+import userModel from './userModel';
 import standardTable from '@/components/standardTable/index';
 import moment from 'moment';
 import 'moment/locale/zh-cn';
+import UserModel from './userModel.vue';
 moment.locale('zh-cn');
 
 const tableHead = [
@@ -110,7 +132,7 @@ const tableHead = [
 ];
 export default {
   name: 'userManage',
-  components: { standardTable },
+  components: { standardTable, userModel },
   filters: {
     statusFilter(status) {
       const statusList = {
@@ -151,7 +173,12 @@ export default {
         size: 10
       },
       loading: false,
+      deleteLoading: false,
       tableData: [],
+      selectedRowKeys: [],
+      selectValue: [],
+      dialogVisible: false,
+      currentRow: null,
       tableHead
     };
   },
@@ -168,9 +195,60 @@ export default {
         endTime: time[1]
       });
     },
+    getCheckboxProps: record => ({
+      props: {
+        disabled: record.role === 'admin',
+        name: record.name
+      }
+    }),
+    handleSelect(key, value) {
+      this.selectedRowKeys = key;
+      this.selectValue = value;
+    },
+    //查询
     handleSearch() {
       this.getTableList();
     },
+    //删除
+    handleDelete(val) {
+      if (val.role && role == 'admin') {
+        return;
+      }
+      deleteTable({ id: val.id }).then(() => {
+        this.$message.success('删除成功!');
+        this.getTableList();
+      });
+    },
+    //批量删除
+    handleBatchDelete() {
+      if (this.selectValue.length == 0) {
+        this.$message.error('请至少勾选一项');
+        return;
+      }
+      this.deleteLoading = true;
+      const batchId = this.selectValue.map(item => item.id).join(',');
+      batchDeleteTable({ batchId }).then(() => {
+        this.$message.success('删除成功!');
+        this.getTableList();
+        this.deleteLoading = false;
+      });
+    },
+    //编辑
+    handleEdit(row) {
+      this.currentRow = { ...row };
+      this.dialogVisible = true;
+    },
+    //新增
+    handleAdd() {
+      this.currentRow = null;
+      this.dialogVisible = true;
+    },
+    handleOk() {
+      this.dialogVisible = false;
+      this.currentRow = null;
+      this.getTableList();
+    },
+    //获取table数据
     getTableList() {
       this.loading = true;
       getUserTable(this.tableQuery).then(res => {
@@ -179,12 +257,6 @@ export default {
           tableData: data,
           loading: false
         });
-      });
-    },
-    handleDelete(id) {
-      deleteTable(id).then(() => {
-        this.$message.success('删除成功!');
-        this.getTableList();
       });
     }
   }
