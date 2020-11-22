@@ -25,7 +25,7 @@ const actions = {
   }
 };
 
-function filterAsyncRoute(routes, role) {
+export function filterAsyncRoute(routes, role) {
   let arr = [];
   routes.forEach(item => {
     const temp = { ...item };
@@ -39,7 +39,7 @@ function filterAsyncRoute(routes, role) {
   return arr;
 }
 
-function hasChildren(route, role) {
+export function hasChildren(route, role) {
   if (route.meta && route.meta.role) {
     return route.meta.role.some(item => item == role);
   } else {

@@ -46,7 +46,7 @@ export const asyncRoutes = [
         path: '/index',
         component: () => import('@/views/index/index'),
         meta: {
-          role: ['ad,min', 'test'],
+          role: ['admin', 'test'],
           title: '首页',
           icon: 'dashboard'
         }

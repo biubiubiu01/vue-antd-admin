@@ -36,7 +36,7 @@
         <a-button type="primary" icon="search" class="select-bottom" style="margin-right:16px" @click="handleSearch">
           查询
         </a-button>
-        <a-button type="primary" icon="export" class="select-bottom">
+        <a-button type="primary" icon="export" class="select-bottom" @click="handleExport" :loading="exportLoading">
           导出
         </a-button>
       </div>
@@ -59,7 +59,13 @@
           <a-button type="primary" size="small" @click="handleEdit(text)">
             编辑
           </a-button>
-          <a-popconfirm title="你确定要删除当前列吗?" ok-text="是" cancel-text="否" @confirm="handleDelete(text)">
+          <a-popconfirm
+            title="你确定要删除当前列吗?"
+            ok-text="是"
+            cancel-text="否"
+            :disabled="text.role && text.role == 'admin'"
+            @confirm="handleDelete(text)"
+          >
             <a-button type="danger" size="small" style="margin-left:8px" :disabled="text.role && text.role == 'admin'">
               删除
             </a-button>
@@ -79,7 +85,7 @@
 </template>
 
 <script>
-import { getUserTable, deleteTable, batchDeleteTable } from '@/api/system';
+import { getUserTable, deleteTable, batchDeleteTable } from '@/api/userManage';
 import userModel from './userModel';
 import standardTable from '@/components/standardTable/index';
 import moment from 'moment';
@@ -174,6 +180,7 @@ export default {
       },
       loading: false,
       deleteLoading: false,
+      exportLoading: false,
       tableData: [],
       selectedRowKeys: [],
       selectValue: [],
@@ -211,9 +218,6 @@ export default {
     },
     //删除
     handleDelete(val) {
-      if (val.role && role == 'admin') {
-        return;
-      }
       deleteTable({ id: val.id }).then(() => {
         this.$message.success('删除成功!');
         this.getTableList();
@@ -235,6 +239,7 @@ export default {
     },
     //编辑
     handleEdit(row) {
+      //这里还需要通过id获取用户对应的菜单，这里就不写了。
       this.currentRow = { ...row };
       this.dialogVisible = true;
     },
@@ -247,6 +252,31 @@ export default {
       this.dialogVisible = false;
       this.currentRow = null;
       this.getTableList();
+    },
+    //导出
+    handleExport() {
+      this.exportLoading = true;
+      import('@/vendor/Export2Excel').then(excel => {
+        const header = [],
+          filterVal = [];
+        this.tableHead.forEach(item => {
+          if (item.title != '操作' && item.title != '序号') {
+            header.push(item.title);
+            filterVal.push(item.dataIndex);
+          }
+        });
+        const data = this.formatJson(filterVal);
+
+        excel.export_json_to_excel({
+          header,
+          data,
+          filename: '用户列表'
+        });
+        this.exportLoading = false;
+      });
+    },
+    formatJson(filterVal) {
+      return this.tableData.map(v => filterVal.map(j => v[j].toString()));
     },
     //获取table数据
     getTableList() {

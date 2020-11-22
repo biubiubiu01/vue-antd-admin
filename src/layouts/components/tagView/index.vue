@@ -1,54 +1,80 @@
 <template>
-  <div class="tagView-wrapper white flex align-center">
-    <div
-      class="tag-item pointer"
-      v-for="(item, index) in tagList"
-      :key="item.path"
-      :class="currentActive == item.path ? 'activeTag' : ''"
-    >
-      <span class="tag-title">{{ item.meta.title }}</span>
-      <svg-icon icon="close" v-if="index != 0" class="verticalMiddle tag-icon" />
-    </div>
+  <div class="tagView-wrapper relative white ">
+    <scroll-bar style="height:46px;">
+      <a-icon type="left" class="absolute pointer tag_btn" style="left:0" />
+      <router-link
+        class="tag-item pointer fl"
+        :to="item.path"
+        v-for="(item, index) in tagList"
+        :key="item.path"
+        :class="isActive(item.path) ? 'activeTag' : ''"
+      >
+        <span class="tag-title">{{ item.meta.title }}</span>
+        <svg-icon
+          icon="close"
+          v-if="index != 0"
+          class="verticalMiddle tag-icon"
+          :size="14"
+          @click.prevent.stop.native="closeTag(item.path)"
+        />
+      </router-link>
+      <a-icon type="right" class="absolute pointer tag_btn" style="right:0" />
+    </scroll-bar>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex';
 export default {
   name: 'tagView',
   data() {
-    return {
-      tagList: [
-        {
-          path: '/dashboard',
-          meta: { title: '首页', icon: 'dashboard' }
-        },
-        {
-          path: '/other',
-          meta: { title: '其他', icon: 'dashboard' }
-        },
-        {
-          path: '/okl',
-          meta: { title: '其他2', icon: 'dashboard' }
-        },
-        {
-          path: '/ll',
-          meta: { title: '其他3', icon: 'dashboard' }
-        }
-      ],
-      currentActive: '/dashboard'
-    };
+    return {};
   },
-  created() {},
-  mounted() {},
-  methods: {}
+  computed: {
+    ...mapState({
+      tagList: state => state.tagsView.tagList
+    })
+  },
+  mounted() {
+    this.addTag();
+  },
+
+  methods: {
+    isActive(path) {
+      return path == this.$route.path;
+    },
+    addTag() {
+      const { path, meta } = this.$route;
+      this.$store.dispatch('tagsView/addTag', { path, meta });
+    },
+    closeTag(path) {
+      this.$store.dispatch('tagsView/removeTag', path).then(data => {
+        if (this.isActive(path)) {
+          this.$router.push({
+            path: data[data.length - 1].path
+          });
+        }
+      });
+    }
+  },
+  watch: {
+    $route() {
+      this.addTag();
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>
 .tagView-wrapper {
   height: 46px;
+  line-height: 46px;
   -webkit-box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
   box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
-
+  padding: 0 15px;
+  .tag_btn {
+    width: 28px;
+    text-align: center;
+  }
   .tag-item {
     height: 32px;
     line-height: 26px;
@@ -57,10 +83,13 @@ export default {
     border-radius: 4px;
     padding: 0 8px;
     margin-left: 10px;
+    transition: all 0.3s;
+    display: inline-block;
     .tag-title {
       display: inline-block;
       vertical-align: middle;
       margin-right: 7px;
+      color: #666;
     }
     .tag-icon {
       &:hover {
@@ -75,6 +104,10 @@ export default {
     color: #fff;
     .tag-title {
       margin-right: 0 !important;
+      color: #fff;
+    }
+    .tag-icon {
+      margin-left: 6px;
     }
     &:before {
       content: '';

@@ -30,18 +30,18 @@ export default {
           color: 'red'
         },
         {
-          title: '写个电商购物小程序',
-          time: '紧接着',
-          color: 'red'
-        },
-        {
-          title: '写之前没写完的网易云小程序，使用uniapp去写',
-          time: '写完这个项目后',
-          color: 'red'
-        },
-        {
           title: '',
           time: '...',
+          color: 'gray'
+        },
+        {
+          title: '完成系统设置的一些功能',
+          time: '2020-11-21',
+          color: 'gray'
+        },
+        {
+          title: '完成页面权限，分为admin、test、editor和custom自定义权限',
+          time: '2020-11-20',
           color: 'gray'
         },
         {
