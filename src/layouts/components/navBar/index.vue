@@ -2,12 +2,7 @@
   <div class="nav-wrapper flex justify-between align-center">
     <a-icon :type="collapsed ? 'menu-fold' : 'menu-unfold'" class="nav-fold boxHover" @click="toggleOpen" />
 
-    <a-breadcrumb class="flex-sub bread-wrapper" separator="/">
-      <a-breadcrumb-item v-for="item in breadList" :key="item.path">
-        <span v-if="!item.children">{{ item.meta.title }}</span>
-        <a v-else>{{ item.meta.title }}</a>
-      </a-breadcrumb-item>
-    </a-breadcrumb>
+    <bread-crumb />
 
     <div class="right-menu flex">
       <nav-search class="right-menu-item pointer" />
@@ -34,6 +29,7 @@ import navSearch from './navSearch';
 import navInternational from './navInternational';
 import navUser from './navUser';
 import screenfull from 'screenfull';
+import breadCrumb from './breadCrumb';
 export default {
   name: 'navBar',
   props: {
@@ -42,7 +38,7 @@ export default {
       default: true
     }
   },
-  components: { navSearch, navInternational, navUser },
+  components: { navSearch, navInternational, navUser, breadCrumb },
   data() {
     return {
       breadList: [
@@ -54,6 +50,7 @@ export default {
       isFullscreen: false
     };
   },
+
   mounted() {},
   methods: {
     toggleOpen() {
@@ -91,11 +88,7 @@ export default {
     line-height: 58px;
     transition: all 0.3s, padding 0s;
   }
-  .bread-wrapper {
-    height: 100%;
-    line-height: 54px;
-    margin-left: 3px;
-  }
+
   .right-menu {
     height: 100%;
     width: 280px;

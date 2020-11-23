@@ -45,6 +45,12 @@ export default {
   computed: {
     ...mapGetters(['baseRoute'])
   },
+  mounted() {
+    let matched = this.$route.matched.filter(item => item.meta && item.meta.title);
+    if (matched.length > 1) {
+      this.openKeys = matched.map(item => item.path);
+    }
+  },
   methods: {
     changeOpen(keys) {
       const currentOpenKey = keys.find(key => this.openKeys.indexOf(key) === -1);

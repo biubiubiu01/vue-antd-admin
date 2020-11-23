@@ -1,25 +1,23 @@
 <template>
-  <div class="tagView-wrapper relative white ">
-    <scroll-bar style="height:46px;">
-      <a-icon type="left" class="absolute pointer tag_btn" style="left:0" />
-      <router-link
-        class="tag-item pointer fl"
-        :to="item.path"
-        v-for="(item, index) in tagList"
-        :key="item.path"
-        :class="isActive(item.path) ? 'activeTag' : ''"
-      >
-        <span class="tag-title">{{ item.meta.title }}</span>
-        <svg-icon
-          icon="close"
-          v-if="index != 0"
-          class="verticalMiddle tag-icon"
-          :size="14"
-          @click.prevent.stop.native="closeTag(item.path)"
-        />
-      </router-link>
-      <a-icon type="right" class="absolute pointer tag_btn" style="right:0" />
-    </scroll-bar>
+  <div class="tagView-wrapper relative white flex align-center">
+    <a-icon type="left" class="absolute pointer tag_btn" style="left:0" />
+    <router-link
+      class="tag-item pointer fl"
+      :to="item.path"
+      v-for="(item, index) in tagList"
+      :key="item.path"
+      :class="isActive(item.path) ? 'activeTag' : ''"
+    >
+      <span class="tag-title">{{ item.meta.title }}</span>
+      <svg-icon
+        icon="close"
+        v-if="index != 0"
+        class="verticalMiddle tag-icon"
+        :size="14"
+        @click.prevent.stop.native="closeTag(item.path)"
+      />
+    </router-link>
+    <a-icon type="right" class="absolute pointer tag_btn" style="right:0" />
   </div>
 </template>
 
@@ -67,10 +65,9 @@ export default {
 <style lang="scss" scoped>
 .tagView-wrapper {
   height: 46px;
-  line-height: 46px;
   -webkit-box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
   box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
-  padding: 0 15px;
+  padding: 0 25px;
   .tag_btn {
     width: 28px;
     text-align: center;
@@ -84,7 +81,6 @@ export default {
     padding: 0 8px;
     margin-left: 10px;
     transition: all 0.3s;
-    display: inline-block;
     .tag-title {
       display: inline-block;
       vertical-align: middle;
