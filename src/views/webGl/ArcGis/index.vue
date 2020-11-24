@@ -65,15 +65,7 @@ export default {
       map: ''
     };
   },
-  mounted() {
-    this.$notification.success(
-      {
-        message: '提示',
-        description: '地图第一次加载会有点慢，请耐心等待'
-      },
-      4
-    );
-  },
+  mounted() {},
   methods: {
     changeHandle(val) {
       if (val == 'clear') {

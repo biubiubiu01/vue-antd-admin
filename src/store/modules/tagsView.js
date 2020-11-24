@@ -1,10 +1,5 @@
 const state = {
-  tagList: [
-    {
-      path: '/index',
-      meta: { title: '首页' }
-    }
-  ]
+  tagList: []
 };
 
 const mutations = {
@@ -19,6 +14,9 @@ const mutations = {
   REMOVE_TAGS(state, path) {
     const index = state.tagList.findIndex(item => item.path == path);
     state.tagList.splice(index, 1);
+  },
+  CLEAR_TAGS(state) {
+    state.tagList = [];
   }
 };
 
@@ -31,6 +29,9 @@ const actions = {
       commit('REMOVE_TAGS', path);
       resolve(state.tagList);
     });
+  },
+  clearTag({ commit }) {
+    commit('CLEAR_TAGS');
   }
 };
 

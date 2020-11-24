@@ -33,6 +33,7 @@ export default {
   methods: {
     async logout() {
       await this.$store.dispatch('user/logout');
+      await this.$store.dispatch('tagsView/clearTag');
       this.$router.replace({
         path: '/login'
       });

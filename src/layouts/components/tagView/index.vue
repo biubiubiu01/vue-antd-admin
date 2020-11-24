@@ -56,7 +56,7 @@ export default {
     }
   },
   watch: {
-    $route() {
+    $route(nl) {
       this.addTag();
     }
   }
@@ -69,8 +69,7 @@ export default {
   box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
   padding: 0 25px;
   .tag_btn {
-    width: 28px;
-    text-align: center;
+    width: 26px;
   }
   .tag-item {
     height: 32px;
