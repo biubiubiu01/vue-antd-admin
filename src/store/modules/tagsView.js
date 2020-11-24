@@ -1,5 +1,12 @@
 const state = {
-  tagList: []
+  tagList: [
+    {
+      path: '/index',
+      meta: {
+        title: '首页'
+      }
+    }
+  ]
 };
 
 const mutations = {
@@ -16,7 +23,14 @@ const mutations = {
     state.tagList.splice(index, 1);
   },
   CLEAR_TAGS(state) {
-    state.tagList = [];
+    state.tagList = [
+      {
+        path: '/index',
+        meta: {
+          title: '首页'
+        }
+      }
+    ];
   }
 };
 

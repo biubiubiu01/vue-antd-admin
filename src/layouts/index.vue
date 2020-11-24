@@ -12,6 +12,7 @@
       </div>
       <div class="app-main">
         <router-view />
+        <back-top />
       </div>
     </div>
   </div>
@@ -19,10 +20,11 @@
 
 <script>
 import { sideBar, navBar, tagView, setting } from './components';
+import backTop from '@/components/backTop/index';
 import { mapState } from 'vuex';
 export default {
   name: 'layout',
-  components: { sideBar, navBar, tagView, setting },
+  components: { sideBar, navBar, tagView, setting, backTop },
   data() {
     return {};
   },
