@@ -9,9 +9,14 @@
       <div class="right-menu-item pointer boxHover" @click.stop="screenFull">
         <svg-icon :icon="isFullscreen ? 'exit-fullscreen' : 'fullscreen'" :size="18" />
       </div>
-      <div class="right-menu-item pointer boxHover">
-        <svg-icon icon="color" :size="18" />
-      </div>
+      <a-tooltip placement="bottom">
+        <template slot="title">
+          主题配置
+        </template>
+        <div class="right-menu-item pointer boxHover" @click="changeVisible">
+          <svg-icon icon="color" :size="18" />
+        </div>
+      </a-tooltip>
 
       <nav-international class="right-menu-item pointer boxHover" />
       <div class="right-menu-item pointer boxHover" style="margin-right:15px">
@@ -50,8 +55,6 @@ export default {
       isFullscreen: false
     };
   },
-
-  mounted() {},
   methods: {
     toggleOpen() {
       this.$store.commit('setting/TOGGLE_OPEN');
@@ -63,6 +66,9 @@ export default {
       }
       screenfull.toggle();
       this.isFullscreen = !this.isFullscreen;
+    },
+    changeVisible() {
+      this.$store.dispatch('setting/changeVisible', true);
     }
   }
 };

@@ -1,14 +1,14 @@
 <template>
   <div class="all-container flex" :class="{ closeSide: !open }">
     <side-bar class="aside-container" :collapsed="open" />
-    <div class="main-container">
+    <div class="main-container" :class="{ hasTag: tagShow }">
       <div :class="{ 'fixed-header': fixHeader }">
         <nav-bar :collapsed="open" />
         <tag-view v-if="tagShow" />
       </div>
-      <div class="rightPanl fixed pointer">
+      <div class="rightPanl fixed pointer" @click="changeVisivle">
         <a-icon type="setting" />
-        <setting v-if="settingShow" />
+        <setting />
       </div>
       <div class="app-main">
         <router-view />
@@ -32,9 +32,13 @@ export default {
     ...mapState({
       open: state => state.setting.open,
       fixHeader: state => state.setting.fixHeader,
-      tagShow: state => state.setting.tagShow,
-      settingShow: state => state.setting.settingShow
+      tagShow: state => state.setting.tagShow
     })
+  },
+  methods: {
+    changeVisivle() {
+      this.$store.dispatch('setting/changeVisible', true);
+    }
   }
 };
 </script>
@@ -62,7 +66,15 @@ export default {
     transition: width 0.28s;
     width: calc(100% - 256px);
     & ~ .app-main {
-      padding-top: 100px;
+      padding-top: 54px;
+      min-height: 100vh;
+    }
+  }
+}
+.hasTag {
+  .fixed-header {
+    & ~ .app-main {
+      padding-top: 100px !important;
       min-height: 100vh;
     }
   }

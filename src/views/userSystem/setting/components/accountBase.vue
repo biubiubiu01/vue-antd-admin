@@ -20,7 +20,7 @@
     <a-form-model-item prop="position" label="职位" hasFeedback>
       <a-input v-model="accountFrom.position" allow-clear />
     </a-form-model-item>
-    <a-form-model-item prop="location" label="所在城市 hasFeedback">
+    <a-form-model-item prop="location" label="所在城市">
       <a-input v-model="accountFrom.location" allow-clear />
     </a-form-model-item>
     <a-form-model-item prop="label" label="个人介绍">
