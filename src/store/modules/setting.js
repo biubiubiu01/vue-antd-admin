@@ -2,8 +2,9 @@ import { getCache, setCache } from '@/utils/session';
 const state = {
   open: true,
   fixHeader: getCache('FIX_HEARDER') == null ? true : getCache('FIX_HEARDER'),
-  tagShow: getCache('TAG_SHOW'),
-  settingVisible: false
+  tagShow: getCache('TAG_SHOW') == null ? true : getCache('TAG_SHOW'),
+  settingVisible: false,
+  layout: getCache('LAYOUT') || 'inline'
 };
 
 const mutations = {

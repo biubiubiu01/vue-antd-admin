@@ -1,8 +1,13 @@
 <template>
   <div class="nav-wrapper flex justify-between align-center">
-    <a-icon :type="collapsed ? 'menu-fold' : 'menu-unfold'" class="nav-fold boxHover" @click="toggleOpen" />
+    <a-icon
+      :type="collapsed ? 'menu-fold' : 'menu-unfold'"
+      class="nav-fold boxHover"
+      @click="toggleOpen"
+      v-show="!horizontal"
+    />
 
-    <bread-crumb />
+    <bread-crumb v-show="!horizontal" />
 
     <div class="right-menu flex">
       <nav-search class="right-menu-item pointer" />
@@ -39,6 +44,10 @@ export default {
   name: 'navBar',
   props: {
     collapsed: {
+      type: Boolean,
+      default: true
+    },
+    horizontal: {
       type: Boolean,
       default: true
     }

@@ -1,10 +1,10 @@
 <template>
   <div class="side-wrapper">
-    <logo :collapse="collapsed" />
+    <logo :collapse="collapsed" :style="{ 'margin-right': mode == 'inline' ? 0 : '50px' }" />
     <scroll-bar class="side-main">
       <a-menu
-        mode="inline"
-        :inline-collapsed="!collapsed"
+        :mode="mode"
+        :inline-collapsed="mode == 'inline' ? !collapsed : null"
         theme="dark"
         :selectedKeys="[$route.path]"
         :open-keys="openKeys"
@@ -12,7 +12,6 @@
       >
         <template v-for="item in baseRoute">
           <menu-item v-if="!item.children && !item.hidden" :key="item.path" :currentRoute="item" />
-
           <template v-else v-for="temp in item.children">
             <menu-item v-if="!temp.children" :key="temp.path" :currentRoute="temp" />
             <sub-menu v-else :key="temp.path" :currentRoute="temp"></sub-menu>
@@ -34,6 +33,10 @@ export default {
     collapsed: {
       type: Boolean,
       default: true
+    },
+    mode: {
+      type: String,
+      default: 'inline'
     }
   },
   components: { logo, subMenu, menuItem },

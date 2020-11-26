@@ -1,8 +1,8 @@
 <template>
-  <div class="logo-wrapper">
+  <router-link to="index" class="logo-wrapper ">
     <svg-icon icon="logo" class="verticalMiddle" :size="30" />
     <div class="logo-title verticalMiddle">Vue Antd Admin</div>
-  </div>
+  </router-link>
 </template>
 
 <script>
