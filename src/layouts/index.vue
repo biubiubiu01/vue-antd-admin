@@ -70,6 +70,9 @@ export default {
       min-height: 100vh;
     }
   }
+  .paddingBox-container {
+    min-height: calc(100vh - 54px);
+  }
 }
 .hasTag {
   .fixed-header {
@@ -77,6 +80,9 @@ export default {
       padding-top: 100px !important;
       min-height: 100vh;
     }
+  }
+  .paddingBox-container {
+    min-height: calc(100vh - 100px);
   }
 }
 
