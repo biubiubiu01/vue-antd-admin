@@ -112,6 +112,9 @@ export default {
         // if(this)
 
         //标签在左边
+        if (eleLeft == 0 && index == 0) {
+          return;
+        }
         if (eleLeft < -this.tagBodyLeft) {
           this.tagBodyLeft = -eleLeft + 4;
         } else if (eleLeft > -this.tagBodyLeft && eleLeft + eleWidth < -this.tagBodyLeft + scrollOuterWidth) {

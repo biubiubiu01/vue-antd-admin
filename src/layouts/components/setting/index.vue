@@ -11,9 +11,9 @@
 
     <div class="item-setting">
       <p>布局方式</p>
-      <a-radio-group button-style="solid">
-        <a-radio-button :value="item" v-for="item in layoutList" :key="item">
-          {{ item }}
+      <a-radio-group :value="layout" button-style="solid" @change="changeLayout">
+        <a-radio-button :value="item.key" v-for="item in layoutList" :key="item.key">
+          {{ item.label }}
         </a-radio-button>
       </a-radio-group>
     </div>
@@ -44,7 +44,16 @@ export default {
     return {
       visible: false,
       customList: ['简约白', '冷酷黑', '蓝色', '橙色'],
-      layoutList: ['左侧导航', '头部导航'],
+      layoutList: [
+        {
+          label: '左侧导航',
+          key: 'inline'
+        },
+        {
+          label: '头部导航',
+          key: 'horizontal'
+        }
+      ],
       interList: ['简体中文', '繁体中文', 'English']
     };
   },
@@ -55,6 +64,18 @@ export default {
       },
       set(val) {
         this.$store.dispatch('setting/changeVisible', val);
+      }
+    },
+    layout: {
+      get() {
+        return this.$store.state.setting.layout;
+      },
+      set(val) {
+        this.$store.dispatch('setting/changeSetting', {
+          key: 'layout',
+          value: val,
+          cache: 'LAYOUT'
+        });
       }
     },
     tagShow: {
@@ -88,6 +109,9 @@ export default {
     },
     changeHeader(checked) {
       this.fixHeader = checked;
+    },
+    changeLayout(val) {
+      this.layout = val.target.value;
     }
   }
 };

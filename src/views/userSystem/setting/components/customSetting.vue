@@ -9,9 +9,9 @@
         </a-radio-group>
       </a-form-model-item>
       <a-form-model-item prop="layout" label="布局方式">
-        <a-radio-group :default-value="customFrom.layout" button-style="solid">
-          <a-radio-button :value="item" v-for="item in layoutList" :key="item">
-            {{ item }}
+        <a-radio-group :value="layout" button-style="solid" @change="changeLayout">
+          <a-radio-button :value="item.key" v-for="item in layoutList" :key="item.key">
+            {{ item.label }}
           </a-radio-button>
         </a-radio-group>
       </a-form-model-item>
@@ -38,16 +38,36 @@ export default {
   data() {
     return {
       customList: ['简约白', '冷酷黑', '蓝色', '橙色'],
-      layoutList: ['左侧导航', '头部导航'],
+      layoutList: [
+        {
+          label: '左侧导航',
+          key: 'inline'
+        },
+        {
+          label: '头部导航',
+          key: 'horizontal'
+        }
+      ],
       interList: ['简体中文', '繁体中文', 'English'],
       customFrom: {
         customColor: '简约白',
-        layout: '左侧导航',
         inter: '简体中文'
       }
     };
   },
   computed: {
+    layout: {
+      get() {
+        return this.$store.state.setting.layout;
+      },
+      set(val) {
+        this.$store.dispatch('setting/changeSetting', {
+          key: 'layout',
+          value: val,
+          cache: 'LAYOUT'
+        });
+      }
+    },
     tagShow: {
       get() {
         return this.$store.state.setting.tagShow;
@@ -80,6 +100,9 @@ export default {
     },
     changeTag(checked) {
       this.tagShow = checked;
+    },
+    changeLayout(val) {
+      this.layout = val.target.value;
     }
   }
 };

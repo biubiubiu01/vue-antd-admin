@@ -1,9 +1,13 @@
 <template>
-  <div class="all-container flex" :class="{ closeSide: !open }">
-    <side-bar class="aside-container" :collapsed="open" />
+  <div class="all-container flex" :class="{ closeSide: !open, horizontal: horizontal }">
+    <side-bar class="aside-container" :collapsed="open" v-if="!horizontal" />
     <div class="main-container" :class="{ hasTag: tagShow }">
       <div :class="{ 'fixed-header': fixHeader }">
-        <nav-bar :collapsed="open" />
+        <nav-bar :collapsed="open" v-if="!horizontal" />
+        <div v-else class="horizontal-nav flex">
+          <side-bar class="flex-sub" :mode="layout" />
+          <nav-bar :horizontal="horizontal" class="nav-user"></nav-bar>
+        </div>
         <tag-view v-if="tagShow" />
       </div>
       <div class="rightPanl fixed pointer" @click="changeVisivle">
@@ -32,8 +36,12 @@ export default {
     ...mapState({
       open: state => state.setting.open,
       fixHeader: state => state.setting.fixHeader,
-      tagShow: state => state.setting.tagShow
-    })
+      tagShow: state => state.setting.tagShow,
+      layout: state => state.setting.layout
+    }),
+    horizontal() {
+      return this.layout == 'horizontal';
+    }
   },
   methods: {
     changeVisivle() {
@@ -115,5 +123,34 @@ export default {
 }
 .app-main {
   min-height: calc(100vh - 100px);
+}
+
+//水平布局
+.horizontal {
+  .aside-container {
+    width: 0;
+  }
+  .horizontal-nav {
+    background: #293348;
+    color: #f1f1f1;
+    height: 54px;
+    line-height: 54px;
+  }
+  .main-container {
+    width: 100%;
+    margin-left: 0;
+  }
+  .fixed-header {
+    width: 100%;
+  }
+  .nav-user {
+    background: #293348;
+  }
+  .app-main {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 6%;
+    background: #f0f2f5;
+  }
 }
 </style>
