@@ -2,19 +2,19 @@
   <a-dropdown class="navUser-wrppaer">
     <div>
       <img src="../../../assets/nav/user.gif" class="userImg" alt="" />
-      <span class="userTitle">admin</span>
+      <span class="userTitle">{{ accountInfo.username }}</span>
       <a-icon type="caret-down" style="margin-left:5px" />
     </div>
 
     <a-menu slot="overlay">
       <a-menu-item>
-        个人中心
+        <router-link to="/userSystem/userInfo">个人中心</router-link>
       </a-menu-item>
       <a-menu-item>
-        个人设置
+        <router-link to="/userSystem/setting">个人设置</router-link>
       </a-menu-item>
       <a-menu-item>
-        项目地址
+        <a href="https://github.com/biubiubiu01/vue-antd-admin" target="parent">项目地址</a>
       </a-menu-item>
       <a-menu-divider />
       <a-menu-item>
@@ -25,10 +25,16 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 export default {
   name: 'navUser',
   data() {
     return {};
+  },
+  computed: {
+    ...mapState({
+      accountInfo: state => state.user.accountInfo
+    })
   },
   methods: {
     async logout() {

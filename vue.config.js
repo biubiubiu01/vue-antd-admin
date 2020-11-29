@@ -1,4 +1,6 @@
 const path = require('path');
+const CompressionWebpackPlugin = require('compression-webpack-plugin');
+const HappyPack = require('happypack');
 
 function resolve(dir) {
   return path.join(__dirname, dir);
@@ -8,7 +10,6 @@ module.exports = {
   productionSourceMap: false,
   outputDir: 'dist',
   publicPath: './',
-  assetsDir: 'static',
   lintOnSave: process.env.NODE_ENV === 'development',
   devServer: {
     port: 8999,
@@ -33,6 +34,15 @@ module.exports = {
         '@': resolve('src')
       }
     },
+    plugins: [
+      new CompressionWebpackPlugin({
+        filename: '[path].gz[query]',
+        algorithm: 'gzip',
+        test: /\.js$|\.css/, //匹配文件名
+        threshold: 10240, //对超过10k的数据压缩
+        minRatio: 0.8
+      })
+    ],
     externals: {}
   },
   chainWebpack(config) {
@@ -55,7 +65,7 @@ module.exports = {
 
     //设置开发环境sourceMap
     config.when(process.env.NODE_ENV === 'development', config => config.devtool('cheap-source-map'));
-    //生产环境 抽离elementUi等
+    //生产环境
     config.when(process.env.NODE_ENV !== 'development', config => {
       config.optimization.splitChunks({
         chunks: 'all',
@@ -77,5 +87,15 @@ module.exports = {
       });
       config.optimization.runtimeChunk('single');
     });
+
+    config.plugin('HappyPack').use(HappyPack, [
+      {
+        loaders: [
+          {
+            loader: 'babel-loader?cacheDirectory=true'
+          }
+        ]
+      }
+    ]);
   }
 };

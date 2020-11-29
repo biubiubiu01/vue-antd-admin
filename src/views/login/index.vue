@@ -202,8 +202,12 @@ export default {
               .then(() => {
                 if (this.loginForm.remember) {
                   setCache('LOGIN_INFO', { username, password });
+                  let path = '/index';
+                  if (this.loginForm.username == 'editor') {
+                    path = '/components/editor';
+                  }
                   this.$router.push({
-                    path: '/index'
+                    path: path
                   });
                   this.loading = false;
                 } else {

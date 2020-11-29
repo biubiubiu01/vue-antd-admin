@@ -5,7 +5,7 @@
       <div :class="{ 'fixed-header': fixHeader }">
         <nav-bar :collapsed="open" v-if="!horizontal" />
         <div v-else class="horizontal-nav flex">
-          <side-bar class="flex-sub" :mode="layout" />
+          <horizontal-side />
           <nav-bar :horizontal="horizontal" class="nav-user"></nav-bar>
         </div>
         <tag-view v-if="tagShow" />
@@ -23,12 +23,12 @@
 </template>
 
 <script>
-import { sideBar, navBar, tagView, setting } from './components';
+import { sideBar, navBar, tagView, setting, horizontalSide } from './components';
 import backTop from '@/components/backTop/index';
 import { mapState } from 'vuex';
 export default {
   name: 'layout',
-  components: { sideBar, navBar, tagView, setting, backTop },
+  components: { sideBar, navBar, tagView, setting, backTop, horizontalSide },
   data() {
     return {};
   },

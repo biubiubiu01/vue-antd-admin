@@ -51,16 +51,7 @@ export const asyncRoutes = [
           icon: 'dashboard'
         }
       },
-      {
-        name: 'guide',
-        path: '/guide',
-        component: () => import('@/views/guide/index'),
-        meta: {
-          role: ['admin', 'test'],
-          title: '引导页',
-          icon: 'guide'
-        }
-      },
+
       {
         name: 'icon',
         path: '/icon',

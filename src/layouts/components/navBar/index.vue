@@ -10,7 +10,6 @@
     <bread-crumb v-show="!horizontal" />
 
     <div class="right-menu flex">
-      <nav-search class="right-menu-item pointer" />
       <div class="right-menu-item pointer boxHover" @click.stop="screenFull">
         <svg-icon :icon="isFullscreen ? 'exit-fullscreen' : 'fullscreen'" :size="18" />
       </div>
@@ -24,8 +23,8 @@
       </a-tooltip>
 
       <nav-international class="right-menu-item pointer boxHover" />
-      <div class="right-menu-item pointer boxHover" style="margin-right:15px">
-        <a-badge :count="10" :overflow-count="99" :offset="[3, -4]">
+      <div class="right-menu-item pointer boxHover" style="margin-right:15px" @click="toNotice">
+        <a-badge :count="count" :overflow-count="99" :offset="[3, -4]">
           <svg-icon icon="bell" :size="18" />
         </a-badge>
       </div>
@@ -35,7 +34,6 @@
 </template>
 
 <script>
-import navSearch from './navSearch';
 import navInternational from './navInternational';
 import navUser from './navUser';
 import screenfull from 'screenfull';
@@ -49,10 +47,10 @@ export default {
     },
     horizontal: {
       type: Boolean,
-      default: true
+      default: false
     }
   },
-  components: { navSearch, navInternational, navUser, breadCrumb },
+  components: { navInternational, navUser, breadCrumb },
   data() {
     return {
       breadList: [
@@ -61,6 +59,7 @@ export default {
           meta: { title: '首页', icon: 'dashboard' }
         }
       ],
+      count: 6,
       isFullscreen: false
     };
   },
@@ -78,6 +77,15 @@ export default {
     },
     changeVisible() {
       this.$store.dispatch('setting/changeVisible', true);
+    },
+    toNotice() {
+      this.count = 0;
+      this.$router.push({
+        name: 'userInfo',
+        params: {
+          key: 'noticePage'
+        }
+      });
     }
   }
 };

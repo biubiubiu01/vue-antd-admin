@@ -16,6 +16,5 @@ export default {
 .paddingBox-container {
   padding: 24px;
   background: #f0f2f5;
-  min-height: calc(100vh - 100px);
 }
 </style>

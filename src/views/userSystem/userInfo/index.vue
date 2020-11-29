@@ -137,7 +137,9 @@ export default {
       accountInfo: state => state.user.accountInfo
     })
   },
-  mounted() {},
+  created() {
+    this.currentKey = this.$route.params.key || 'dynamicPage';
+  },
   methods: {
     changeTab(key) {
       this.currentKey = key;

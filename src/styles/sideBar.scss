@@ -17,6 +17,14 @@
 }
 
 .closeSide {
+  .horizontalSide-wrapper {
+    .logo-title {
+      display: inline-block !important;
+    }
+    .menu-title {
+      display: inline-block !important;
+    }
+  }
   .logo-title {
     display: none;
   }

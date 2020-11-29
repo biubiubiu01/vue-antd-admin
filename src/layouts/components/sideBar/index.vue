@@ -1,10 +1,10 @@
 <template>
   <div class="side-wrapper">
-    <logo :collapse="collapsed" :style="{ 'margin-right': mode == 'inline' ? 0 : '50px' }" />
+    <logo :collapse="collapsed" />
     <scroll-bar class="side-main">
       <a-menu
         :mode="mode"
-        :inline-collapsed="mode == 'inline' ? !collapsed : null"
+        :inline-collapsed="!collapsed"
         theme="dark"
         :selectedKeys="[$route.path]"
         :open-keys="openKeys"

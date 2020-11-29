@@ -1,5 +1,5 @@
 <template>
-  <div class="arcgis-wrapper relative">
+  <div class="arcgis-wrapper relative" :style="{ height: tagShow ? 'calc(100vh - 148px)' : 'calc(100vh - 102px)' }">
     <div class="handle-list flex flex-wrap align-content-around" v-if="map">
       <div class="handle-item" v-for="item in handleList" :key="item.icon" @click="changeHandle(item.icon)">
         <a-tooltip placement="right">
@@ -16,6 +16,7 @@
 
 <script>
 import baseMap from './baseMap';
+import { mapState } from 'vuex';
 export default {
   name: 'arcgis',
   components: { baseMap },
@@ -65,7 +66,11 @@ export default {
       map: ''
     };
   },
-  mounted() {},
+  computed: {
+    ...mapState({
+      tagShow: state => state.setting.tagShow
+    })
+  },
   methods: {
     changeHandle(val) {
       if (val == 'clear') {
@@ -192,7 +197,6 @@ export default {
 <style lang="scss" scoped>
 .arcgis-wrapper {
   width: 100%;
-  height: calc(100vh - 148px);
   .handle-list {
     position: absolute;
     left: 15px;

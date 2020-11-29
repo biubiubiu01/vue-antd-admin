@@ -135,7 +135,7 @@ export default {
         )
         .catch(err => {
           console.log(err);
-          this.$message.error('页面出错了，请稍后重试');
+          this.$message.error('arcgis 加载出错');
         });
     }
   },
