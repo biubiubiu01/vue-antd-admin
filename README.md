@@ -1,34 +1,140 @@
-# vue-test-admin
+<p align="center">
+  <a href="https://gist006.gitee.io/vue-antd-admin/">
+    <img src="https://images.gitee.com/uploads/images/2020/1129/181145_3aeaf5c3_7647779.png" alt="Logo" width="250">
+   <h1 align="center"> vue antd admin</h3>
+  </a>
+</p>
 
-## Project setup
+  <p align="center">
+    <a href="https://github.com/biubiubiu01/vue-antd-admin"><strong>探索本项目的文档 »</strong></a>
+    <br />
+    <br />
+    <a href="https://gist006.gitee.io/vue-antd-admin/">在线预览</a>
+    ·
+    <a href="https://github.com/biubiubiu01/vue-antd-admin/issues">提出Bug</a>
+    ·
+    <a href="https://github.com/biubiubiu01/vue-antd-admin/issues">提出建议</a>
+  </p>
+
+## 简介
+
+[vue-antd-admin](https://gist006.gitee.io/vue-antd-admin/)是一个后台管理系统，基于[vue](https://github.com/vuejs/vue)+[ant-design-vue](https://github.com/vueComponent/ant-design-vue)开发，包含动态路由+权限管理解决用户权限问题，提供基础固定权限：admin、test、editor和自定义用户权限，可自定义修改角色对应的菜单；布局方面提供左右布局和上下布局两种，可自由切换；使用i18n 国际化，可自由切换语言（开发中...）；系统内置了4套主题，可随意切换（开发中...）；还有一些其他功能，感兴趣的话可以看看。
+## 前序准备
+* 该项目采用[vue](https://github.com/vuejs/vue)+[vue-cli4](https://github.com/vuejs/vue-cli)+[vuex](https://github.com/vuejs/vuex)+[ant-design-vue](https://github.com/vueComponent/ant-design-vue)和[axios](https://github.com/axios/axios)开发，数据采用[mock.js](https://github.com/nuysoft/Mock)进行模拟,后期打算使用node写后台；
+* [webpack](https://github.com/webpack/webpack)方面稍微优化了下，添加了g-zip压缩和happypack加快运行和打包速度，还有些别的方法如 抽离cdn和dll，暂时还没做，之后再看看；
+* 系统内置了echarts常用的图表展示和arcgis地图；
+* 使用了[jest](https://github.com/facebook/jest)单元测试，目前覆盖率还比较低，有时间再写；
+* 格式化方面采用 [ESlint](https://github.com/eslint/eslint)+[prettier](https://github.com/prettier/prettier)。
+
+![home](https://images.gitee.com/uploads/images/2020/1129/194928_63e651ea_7647779.png)
+
+## 功能
+
 ```
+- 登录  用户名密码/手机号验证码
+- 权限  
+- 动态路由
+- echarts各种图表
+- arcgis地图
+- openLayer插值分析图
+- 全景图
+- 富文本
+- Markdown
+- 错误页面 403 404 500
+- 个人设置
+- 系统设置
+- 更换主题(开发中)
+- i18n国际化 (开发中)
+- 布局方式
+- 面包屑
+- 标签页
+- socket (开发中)
+- svg图标
+- 全屏
+- 返回顶部
+- webpack g-zip happypack
+```
+
+## 使用说明
+```
+- 拥有 admin、test和editor三种权限，每个权限对应的路由和左侧菜单不同；
+- 点击个人设置个性化或者右边设置，可以更改页面的设置，如果标签页是否开启，布局方式等；
+- 系统管理员拥有所有权限，可以更改用户对应的菜单路由和角色对应的权限。
+......
+```
+
+
+### 文件目录说明
+```
+
+├── mock                             ---mock模拟数据
+├── public                           ---静态资源文件
+├── src          
+│  ├── api                           ---接口     
+│  ├── assets                        ---图片
+│  ├── components                    ---可复用的vue组件
+│  ├── layouts                       ---布局方式
+│  ├── router                        ---路由
+│  ├── store                         ---vuex
+│  ├── styles                        ---sass样式
+│  ├── utils                         ---方法函数
+│  ├── vendor                        ---导出excel
+│  ├── views                         ---页面
+│  ├── App.vue                       
+│  ├── main.js            
+│  ├── permission.js                 ---路由拦截           
+├── tests                            ---单元测试文件
+├── .browserslistrc
+├── .env
+├── .eslintrc.js
+├──  babel.config.js
+├── .jest.config.js                  ---jest的配置
+├──  package.json
+├──  package-lock.json
+├──  README.md
+└──  vue.config.js                   ---webpack的配置
+
+
+```
+
+
+ 
+## 安装
+
+```
+# 克隆项目
+git clone https://github.com/biubiubiu01/vue-antd-admin.git
+# 进入项目目录
+cd vue-antd-admin
+# 安装依赖
 npm install
-```
-
-### Compiles and hot-reloads for development
-```
+# 本地开发 启动项目
 npm run serve
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
 
-### Run your unit tests
+### 部署
+
 ```
+# 打包项目
+npm run build
+# 单元测试
 npm run test:unit
 ```
 
-### Run your end-to-end tests
-```
-npm run test:e2e
-```
+## Online Demo
 
-### Lints and fixes files
-```
-npm run lint
-```
+[在线 Demo](https://gist006.gitee.io/vue-antd-admin/)
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## 最后
+
+这个项目参考了 [vue-element-admin](https://panjiachen.gitee.io/vue-element-admin/#/) 和 [ant-design-pro](https://preview.pro.antdv.com/dashboard/workplace),发现了好多好用的写法和方法，建议如果真想提升自己的代码水平，可以多看看大佬们的代码。
+开源不易，若觉得这个项目对你有用，可以点个[star](https://github.com/biubiubiu01/vue-antd-admin)，欢迎提出建议和bug :smile: 。
+
+
+
+
+
+
+
+
