@@ -92,8 +92,13 @@ export default {
 </script>
 <style lang="scss" scoped>
 .markdownEditor {
-  /deep/ .te-md-container {
-    background: #fff !important;
+  /deep/ {
+    .te-md-container {
+      background: #fff !important;
+    }
+    .te-preview {
+      min-width: 400px !important;
+    }
   }
 }
 </style>
