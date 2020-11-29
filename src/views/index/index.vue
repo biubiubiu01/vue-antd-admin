@@ -7,10 +7,10 @@
         <template slot="title"> {{ currentName }} 统计图 </template>
       </sale-title>
       <a-row class="sale-container" :gutter="16">
-        <a-col :span="16" class="all-container">
+        <a-col :span="16" style="height:100%">
           <line-chart :chartData="lineData" :title="currentName" />
         </a-col>
-        <a-col :span="8" class="all-container">
+        <a-col :span="8" style="height:100%">
           <div class="shop-title">门店{{ currentName }}排行榜 Top10</div>
           <shop-rank style="height:calc(100% - 50px)" :rankData="rankData" />
         </a-col>
