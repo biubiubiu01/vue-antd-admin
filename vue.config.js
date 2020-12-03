@@ -1,10 +1,27 @@
 const path = require('path');
 const CompressionWebpackPlugin = require('compression-webpack-plugin');
 const HappyPack = require('happypack');
+const os = require('os');
+const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
 
 function resolve(dir) {
   return path.join(__dirname, dir);
 }
+
+// const cdn = {
+//   css: ['https://cdn.bootcdn.net/ajax/libs/ant-design-vue/1.6.5/antd.min.css'],
+//   js: [
+//     'https://cdn.bootcdn.net/ajax/libs/echarts/4.8.0/echarts.min.js',
+//     'https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.min.js',
+//     'https://cdn.bootcdn.net/ajax/libs/vue-router/3.2.0/vue-router.min.js',
+//     'https://cdn.bootcdn.net/ajax/libs/vuex/3.5.1/vuex.min.js',
+//     'https://cdn.bootcdn.net/ajax/libs/ant-design-vue/1.6.5/antd.min.js',
+//     'https://cdn.jsdelivr.net/npm/echarts-wordcloud@1.1.3/dist/echarts-wordcloud.min.js',
+//     'https://cdn.jsdelivr.net/npm/echarts-liquidfill@2.0.6/dist/echarts-liquidfill.min.js',
+//     'https://cdn.jsdelivr.net/npm/vue-count-to@1.0.13/dist/vue-count-to.min.js',
+//     'https://cdn.jsdelivr.net/npm/kriging@0.1.12/dist/kriging.js'
+//   ]
+// };
 
 module.exports = {
   productionSourceMap: false,
@@ -27,6 +44,7 @@ module.exports = {
       }
     }
   },
+
   configureWebpack: {
     name: process.env.VUE_APP_BASE_NAME,
     resolve: {
@@ -34,18 +52,18 @@ module.exports = {
         '@': resolve('src')
       }
     },
+    externals: {},
     plugins: [
-      new CompressionWebpackPlugin({
-        filename: '[path].gz[query]',
-        algorithm: 'gzip',
-        test: /\.js$|\.css/, //匹配文件名
-        threshold: 10240, //对超过10k的数据压缩
-        minRatio: 0.8
+      new HappyPack({
+        id: 'happyBabel',
+        loaders: ['babel-loader?cacheDirectory=true'],
+        threadPool: happyThreadPool
       })
-    ],
-    externals: {}
+    ]
   },
   chainWebpack(config) {
+    config.plugins.delete('prefetch');
+    config.plugins.delete('preload');
     // 设置svg
     config.module
       .rule('svg')
@@ -74,7 +92,7 @@ module.exports = {
             name: 'chunk-libs',
             test: /[\\/]node_modules[\\/]/,
             priority: 10,
-            chunks: 'initial' // only package third parties that are initially dependent
+            chunks: 'initial'
           },
           commons: {
             name: 'chunk-commons',
@@ -85,17 +103,20 @@ module.exports = {
           }
         }
       });
-      config.optimization.runtimeChunk('single');
-    });
 
-    config.plugin('HappyPack').use(HappyPack, [
-      {
-        loaders: [
-          {
-            loader: 'babel-loader?cacheDirectory=true'
-          }
-        ]
+      config.optimization.runtimeChunk('single');
+
+      config.plugin('CompressionWebpackPlugin').use(CompressionWebpackPlugin, [
+        {
+          algorithm: 'gzip',
+          test: /\.js$|\.css/, //匹配文件名
+          threshold: 10240, //对超过10k的数据压缩
+          minRatio: 0.8
+        }
+      ]);
+      if (process.env.npm_config_report) {
+        config.plugin('webpack-bundle-analyzer').use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin);
       }
-    ]);
+    });
   }
 };
