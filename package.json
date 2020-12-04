@@ -15,8 +15,6 @@
     "clipboard": "^2.0.6",
     "core-js": "^3.6.5",
     "echarts": "^4.8.0",
-    "echarts-liquidfill": "^2.0.6",
-    "echarts-wordcloud": "^1.1.3",
     "esri-loader": "^2.16.0",
     "file-saver": "^2.0.5",
     "mockjs": "^1.1.0",
