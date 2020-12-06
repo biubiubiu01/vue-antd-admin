@@ -21,7 +21,7 @@
 [vue-antd-admin](https://gist006.gitee.io/vue-antd-admin/)是一个后台管理系统，基于[vue](https://github.com/vuejs/vue)+[ant-design-vue](https://github.com/vueComponent/ant-design-vue)开发，包含动态路由+权限管理解决用户权限问题，提供基础固定权限：admin、test、editor和自定义用户权限，可自定义修改角色对应的菜单；布局方面提供左右布局和上下布局两种，可自由切换；使用i18n 国际化，可自由切换语言（开发中...）；系统内置了4套主题，可随意切换（开发中...）；还有一些其他功能，感兴趣的话可以看看。
 ## 前序准备
 * 该项目采用[vue](https://github.com/vuejs/vue)+[vue-cli4](https://github.com/vuejs/vue-cli)+[vuex](https://github.com/vuejs/vuex)+[ant-design-vue](https://github.com/vueComponent/ant-design-vue)和[axios](https://github.com/axios/axios)开发，数据采用[mock.js](https://github.com/nuysoft/Mock)进行模拟,后期打算使用node写后台；
-* [webpack](https://github.com/webpack/webpack)方面稍微优化了下，添加了g-zip压缩和happypack加快运行和打包速度，还有些别的方法如 抽离cdn和dll，暂时还没做，之后再看看；
+* [webpack](https://github.com/webpack/webpack)大幅度优化了下，首屏加载速度更快；
 * 系统内置了echarts常用的图表展示和arcgis地图；
 * 使用了[jest](https://github.com/facebook/jest)单元测试，目前覆盖率还比较低，有时间再写；
 * 格式化方面采用 [ESlint](https://github.com/eslint/eslint)+[prettier](https://github.com/prettier/prettier)。
@@ -52,7 +52,20 @@
 - svg图标
 - 全屏
 - 返回顶部
-- webpack g-zip happypack
+- webpack优化
+```
+
+## webpack优化
+```
+- 关闭生产环境sourceMap;
+- 关闭预加载(vue会预加载后面的页面，会导致首屏加载比较慢)
+- g-zip压缩(需要nginx配置);
+- 生产环境CDN加载部分插件
+- 去除生产环境console和debugger;
+- 公共代码抽离
+- 打包大小分析
+- 打包缓存
+
 ```
 
 ## 使用说明
