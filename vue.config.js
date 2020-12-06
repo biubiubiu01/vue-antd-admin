@@ -1,33 +1,34 @@
 const path = require('path');
 const CompressionWebpackPlugin = require('compression-webpack-plugin');
-const HappyPack = require('happypack');
-const os = require('os');
-const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
 
 function resolve(dir) {
   return path.join(__dirname, dir);
 }
 
-// const cdn = {
-//   css: ['https://cdn.bootcdn.net/ajax/libs/ant-design-vue/1.6.5/antd.min.css'],
-//   js: [
-//     'https://cdn.bootcdn.net/ajax/libs/echarts/4.8.0/echarts.min.js',
-//     'https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.min.js',
-//     'https://cdn.bootcdn.net/ajax/libs/vue-router/3.2.0/vue-router.min.js',
-//     'https://cdn.bootcdn.net/ajax/libs/vuex/3.5.1/vuex.min.js',
-//     'https://cdn.bootcdn.net/ajax/libs/ant-design-vue/1.6.5/antd.min.js',
-//     'https://cdn.jsdelivr.net/npm/echarts-wordcloud@1.1.3/dist/echarts-wordcloud.min.js',
-//     'https://cdn.jsdelivr.net/npm/echarts-liquidfill@2.0.6/dist/echarts-liquidfill.min.js',
-//     'https://cdn.jsdelivr.net/npm/vue-count-to@1.0.13/dist/vue-count-to.min.js',
-//     'https://cdn.jsdelivr.net/npm/kriging@0.1.12/dist/kriging.js'
-//   ]
-// };
+const isProd = process.env.NODE_ENV === 'production';
+
+const cdn = {
+  css: [],
+  js: [
+    'https://cdn.bootcdn.net/ajax/libs/vue/2.6.12/vue.min.js',
+    'https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.min.js',
+    'https://cdn.bootcdn.net/ajax/libs/vue-router/3.2.0/vue-router.min.js',
+    'https://cdn.bootcdn.net/ajax/libs/vuex/3.5.1/vuex.min.js'
+    // 'https://cdn.jsdelivr.net/npm/kriging@0.1.12/dist/kriging.js'
+  ],
+  externals: {
+    vue: 'Vue',
+    'vue-router': 'VueRouter',
+    vuex: 'Vuex',
+    axios: 'axios'
+  }
+};
 
 module.exports = {
   productionSourceMap: false,
   outputDir: 'dist',
   publicPath: './',
-  lintOnSave: process.env.NODE_ENV === 'development',
+  lintOnSave: !isProd,
   devServer: {
     port: 8999,
     open: true,
@@ -35,7 +36,7 @@ module.exports = {
       warnings: false,
       errors: true
     },
-    before: process.env.NODE_ENV == 'development' ? require('./mock/mock-server.js') : ''
+    before: !isProd ? require('./mock/mock-server.js') : ''
   },
   css: {
     loaderOptions: {
@@ -52,14 +53,7 @@ module.exports = {
         '@': resolve('src')
       }
     },
-    externals: {},
-    plugins: [
-      new HappyPack({
-        id: 'happyBabel',
-        loaders: ['babel-loader?cacheDirectory=true'],
-        threadPool: happyThreadPool
-      })
-    ]
+    externals: isProd ? cdn.externals : {}
   },
   chainWebpack(config) {
     config.plugins.delete('prefetch');
@@ -82,9 +76,9 @@ module.exports = {
       .end();
 
     //设置开发环境sourceMap
-    config.when(process.env.NODE_ENV === 'development', config => config.devtool('cheap-source-map'));
+    config.when(!isProd, config => config.devtool('cheap-source-map'));
     //生产环境
-    config.when(process.env.NODE_ENV !== 'development', config => {
+    config.when(isProd, config => {
       config.optimization.splitChunks({
         chunks: 'all',
         cacheGroups: {
@@ -96,15 +90,28 @@ module.exports = {
           },
           commons: {
             name: 'chunk-commons',
-            test: resolve('src/components'), // can customize your rules
-            minChunks: 3, //  minimum common number
+            test: /[\\/]src[\\/]js[\\/]/,
+            minChunks: 2, //  minimum common number
             priority: 5,
             reuseExistingChunk: true
           }
         }
       });
 
+      config.plugin('html').tap(args => {
+        args[0].cdn = cdn;
+        return args;
+      });
+
       config.optimization.runtimeChunk('single');
+
+      config.optimization.minimizer('terser').tap(args => {
+        args[0].terserOptions.compress.warnings = false;
+        args[0].terserOptions.compress.drop_console = true;
+        args[0].terserOptions.compress.drop_debugger = true;
+        args[0].terserOptions.compress.pure_funcs = ['console.*'];
+        return args;
+      });
 
       config.plugin('CompressionWebpackPlugin').use(CompressionWebpackPlugin, [
         {

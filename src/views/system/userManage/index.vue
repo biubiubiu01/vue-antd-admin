@@ -90,7 +90,6 @@ import userModel from './userModel';
 import standardTable from '@/components/standardTable/index';
 import moment from 'moment';
 import 'moment/locale/zh-cn';
-import UserModel from './userModel.vue';
 moment.locale('zh-cn');
 
 const tableHead = [

@@ -5,10 +5,8 @@
 <script>
 import resize from '@/mixins/resize';
 import echarts from 'echarts';
-// require('echarts-wordcloud');
-import load from '@/utils/loadScript';
+require('echarts-wordcloud');
 const colorList = ['#4FD8FF', '#C15FFF', '#FF5F55', '#FFC935', '#767BFB'];
-const wordcloudCDN = 'https://cdn.jsdelivr.net/npm/echarts-wordcloud@1.1.3/dist/echarts-wordcloud.min.js';
 export default {
   name: 'hotChart',
   props: {
@@ -22,22 +20,11 @@ export default {
     return {};
   },
   mounted() {
-    this.init();
-    // this.$nextTick(() => {
-    //   this.initEchart();
-    // });
+    this.$nextTick(() => {
+      this.initEchart();
+    });
   },
   methods: {
-    init() {
-      load(wordcloudCDN, err => {
-        if (err) {
-          this.$message.error(err.message);
-          return;
-        }
-        console.log(12345);
-        // this.initTinymce();
-      });
-    },
     initEchart() {
       this.myChart = echarts.init(this.$refs.hotChart);
       this.myChart.setOption(
@@ -78,7 +65,7 @@ export default {
   watch: {
     chartData: {
       handler(nl, ol) {
-        // this.initEchart();
+        this.initEchart();
       },
       deep: true
     }

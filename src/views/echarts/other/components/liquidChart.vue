@@ -5,7 +5,7 @@
 <script>
 import resize from '@/mixins/resize';
 import echarts from 'echarts';
-// require('echarts-liquidfill');
+require('echarts-liquidfill');
 export default {
   name: 'liquidChart',
   mixins: [resize],

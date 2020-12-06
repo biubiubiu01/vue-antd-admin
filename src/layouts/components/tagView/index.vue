@@ -108,8 +108,6 @@ export default {
         const eleWidth = this.$refs.tagWrapper[index].$el.offsetWidth;
         const eleLeft = this.$refs.tagWrapper[index].$el.offsetLeft;
         const scrollOuterWidth = this.$refs.scrollOuter.offsetWidth;
-        const scrollBodyWidth = this.$refs.scrollBody.offsetWidth;
-        // if(this)
 
         //标签在左边
         if (eleLeft == 0 && index == 0) {

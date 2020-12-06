@@ -12,7 +12,7 @@
   </div>
 </template>
 <script>
-import { loadModules } from 'esri-loader';
+import { loadModules, esri } from 'esri-loader';
 
 export default {
   name: 'mapview',

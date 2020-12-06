@@ -10,17 +10,17 @@
 
 <script>
 import 'ol/ol.css';
-import { Map, View, Feature } from 'ol';
+import { Map, View } from 'ol';
 import TileLayer from 'ol/layer/Tile';
 import { XYZ } from 'ol/source';
 import Polygon from 'ol/geom/Polygon';
-import Point from 'ol/geom/Point';
 import Image from 'ol/layer/Image';
 import ImageCanvas from 'ol/source/ImageCanvas';
 import { getGeoJson } from '@/utils/index';
 import { getCenter } from 'ol/extent';
 
 var kriging = require('../../../../public/kriging');
+import loadKriging from './loadKriging';
 const params = {
   krigingModel: 'exponential', // model还可选'gaussian','spherical'
   krigingSigma2: 0,
@@ -44,6 +44,10 @@ export default {
     return {};
   },
   mounted() {
+    // console.log(loadKriging());
+    // loadkKriging().then(kriging => {
+    //   console.log(kriging);
+    // });
     this.initMap();
   },
   methods: {
