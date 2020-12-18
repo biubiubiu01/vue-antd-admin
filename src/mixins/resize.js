@@ -1,11 +1,15 @@
 import { debounce } from '@/utils/index.js';
-
 export default {
   data() {
     return {
       myChart: null,
       resizeHandler: null
     };
+  },
+  computed: {
+    open() {
+      return this.$store.state.setting.open;
+    }
   },
   mounted() {
     this.resizeHandler = debounce(() => {
@@ -46,5 +50,12 @@ export default {
 
   deactivated() {
     this.destroyResizeEvent();
+  },
+  watch: {
+    open() {
+      if (this.myChart) {
+        this.myChart.resize();
+      }
+    }
   }
 };

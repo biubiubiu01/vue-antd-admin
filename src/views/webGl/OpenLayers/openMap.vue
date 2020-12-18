@@ -11,16 +11,13 @@
 <script>
 import 'ol/ol.css';
 import { Map, View } from 'ol';
-import TileLayer from 'ol/layer/Tile';
-import { XYZ } from 'ol/source';
 import Polygon from 'ol/geom/Polygon';
 import Image from 'ol/layer/Image';
 import ImageCanvas from 'ol/source/ImageCanvas';
 import { getGeoJson } from '@/utils/index';
 import { getCenter } from 'ol/extent';
+import remoteLoad from '@/utils/remoteLoad';
 
-var kriging = require('../../../../public/kriging');
-import loadKriging from './loadKriging';
 const params = {
   krigingModel: 'exponential', // model还可选'gaussian','spherical'
   krigingSigma2: 0,
@@ -39,46 +36,37 @@ const params = {
     '#54cf31'
   ]
 };
+const krigingCDN = 'https://cdn.jsdelivr.net/npm/kriging@0.1.12/dist/kriging.js';
 export default {
   data() {
-    return {};
+    return {
+      kriging: null
+    };
   },
-  mounted() {
-    // console.log(loadKriging());
-    // loadkKriging().then(kriging => {
-    //   console.log(kriging);
-    // });
-    this.initMap();
+  async mounted() {
+    try {
+      await remoteLoad(krigingCDN);
+      if (test) {
+        this.kriging = test.kriging;
+        this.initMap();
+      } else {
+        this.$message.error('加载资源失败');
+      }
+    } catch (error) {
+      console.log(error);
+      this.$message.error(error);
+    }
   },
   methods: {
     initMap() {
-      const key = '0f5cb733f04223ac733dc4d36063f44f';
-
-      //矢量底图
-      let tiandituBaseMap = new TileLayer({
-        title: '天地图矢量图层',
-        source: new XYZ({
-          url: 'http://t{0-7}.tianditu.gov.cn/DataServer?T=vec_w&x={x}&y={y}&l={z}&tk=' + key
-        })
-      });
-      //矢量注记
-      let tiandituVector = new TileLayer({
-        title: '天地图矢量图层注记',
-        source: new XYZ({
-          url: 'http://t3.tianditu.com/DataServer?T=cva_w&x={x}&y={y}&l={z}&tk=' + key
-        })
-      });
-
       this.map = new Map({
         target: 'openMap',
-        layers: [tiandituBaseMap, tiandituVector],
         view: new View({
           projection: 'EPSG:4326', // 使用这个坐标系
           zoom: 8.95
-          // center: [112.316200103, 28.5810841269]
         })
       });
-      this.getMapJson(420000);
+      this.getMapJson(150000);
     },
     getMapJson(adcode) {
       getGeoJson(adcode).then(data => {
@@ -107,7 +95,7 @@ export default {
       if (xList.length <= 3) {
         this.$message.warning('插值点数不足，无法进行插值分析');
       }
-      var variogram = kriging.default.train(
+      var variogram = this.kriging.train(
         valueList,
         xList,
         yList,
@@ -115,7 +103,7 @@ export default {
         params.krigingSigma2,
         params.krigingAlpha
       );
-      var grid = kriging.default.grid(this.coord, variogram, (this.extent[2] - this.extent[0]) / 200);
+      var grid = this.kriging.grid(this.coord, variogram, (this.extent[2] - this.extent[0]) / 200);
       // 移除已有图层
       if (this.canvasLayer) {
         this.map.removeLayer(this.canvasLayer);
@@ -139,7 +127,7 @@ export default {
             canvas.getContext('2d').globalAlpha = params.canvasAlpha;
 
             // 使用分层设色渲染
-            kriging.default.plot(canvas, grid, [extent[0], extent[2]], [extent[1], extent[3]], params.colorList);
+            this.kriging.plot(canvas, grid, [extent[0], extent[2]], [extent[1], extent[3]], params.colorList);
 
             return canvas;
           },
@@ -176,6 +164,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+#openMap {
+  background: #fff;
+}
 .direction {
   position: absolute;
   top: 35px;

@@ -1,3 +1,6 @@
+import remoteLoad from './remoteLoad';
+const { AMapCDN, AMapUiCDN } = require('@/plugins/cdn');
+
 /**
  * 用于将地址后面的参数转换成对象返回
  * @param {string} url
@@ -51,6 +54,13 @@ export function debounce(func, delay, immediate = false) {
  */
 export function getGeoJson(adcode, childAdcode = '') {
   return new Promise((resolve, reject) => {
+    initAMap().then(status => {
+      if (status) {
+        insideFun(adcode, childAdcode);
+      } else {
+        reject('高德api获取失败');
+      }
+    });
     function insideFun(adcode, childAdcode) {
       // eslint-disable-next-line
       AMapUI.loadUI(['geo/DistrictExplorer'], DistrictExplorer => {
@@ -80,6 +90,36 @@ export function getGeoJson(adcode, childAdcode = '') {
         });
       });
     }
-    insideFun(adcode, childAdcode);
   });
+}
+
+/**
+ * 初始化AMap 和AMapUI 异步加载
+ */
+async function initAMap() {
+  if (window.AMap && window.AMapUI) {
+    return true;
+  } else {
+    try {
+      await remoteLoad(AMapCDN);
+      await remoteLoad(AMapUiCDN);
+      if (window.AMap && window.AMapUI) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (err) {
+      return false;
+    }
+  }
+}
+
+/**
+ * 转换JSON  导出
+ * @param  {Array}
+ * @return {Array}
+ */
+
+export function formatJson(arr, filterVal) {
+  return arr.map(v => filterVal.map(j => v[j].toString()));
 }

@@ -12,6 +12,7 @@ const mutations = {
     state.open = !state.open;
   },
   CHANGE_SETTING(state, { key, value, cache }) {
+    // eslint-disable-next-line
     if (state.hasOwnProperty(key)) {
       state[key] = value;
       setCache(cache, value);

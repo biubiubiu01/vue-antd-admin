@@ -15,6 +15,7 @@
 </template>
 
 <script>
+/* eslint-disable */
 import baseMap from './baseMap';
 import { mapState } from 'vuex';
 export default {

@@ -6,8 +6,10 @@ const user = require('./controller/user');
 const dashboard = require('./controller/dashboard');
 const system = require('./controller/system');
 const role = require('./controller/role');
+const lottery = require('./controller/lottery');
+const table = require('./controller/table');
 
-const mocks = [...user, ...dashboard, ...system, ...role];
+const mocks = [...user, ...dashboard, ...system, ...role, ...lottery, ...table];
 
 function mockXHR() {
   Mock.XHR.prototype.proxy_send = Mock.XHR.prototype.send;

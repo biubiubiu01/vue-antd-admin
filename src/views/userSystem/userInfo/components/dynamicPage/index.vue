@@ -35,6 +35,21 @@ export default {
           color: 'gray'
         },
         {
+          title: '异步加载AMap,去除本地的kriging',
+          time: '2020-12-08',
+          color: 'gray'
+        },
+        {
+          title: '优化webpack',
+          time: '2020-12-05',
+          color: 'gray'
+        },
+        {
+          title: '打王者，休息休息',
+          time: '2020-11-28',
+          color: 'gray'
+        },
+        {
           title: '完成系统设置的一些功能',
           time: '2020-11-21',
           color: 'gray'

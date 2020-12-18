@@ -6,6 +6,8 @@
       :loading="loading"
       :pagination="pagination"
       :row-selection="rowSelection"
+      @change="handleTableChange"
+      rowKey="id"
     >
       <template
         slot-scope="text, record, index"
@@ -35,8 +37,7 @@ export default {
       default: false
     },
     pagination: {
-      type: Boolean,
-      default: true
+      type: Boolean | Object
     },
     rowSelection: {
       type: Object
@@ -44,6 +45,11 @@ export default {
   },
   data() {
     return {};
+  },
+  methods: {
+    handleTableChange(val) {
+      this.$emit('changeCurrent', val.current);
+    }
   }
 };
 </script>

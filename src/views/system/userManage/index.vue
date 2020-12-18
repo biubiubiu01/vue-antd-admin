@@ -86,6 +86,7 @@
 
 <script>
 import { getUserTable, deleteTable, batchDeleteTable } from '@/api/userManage';
+import { formatJson } from '@/utils';
 import userModel from './userModel';
 import standardTable from '@/components/standardTable/index';
 import moment from 'moment';
@@ -225,7 +226,7 @@ export default {
     //批量删除
     handleBatchDelete() {
       if (this.selectValue.length == 0) {
-        this.$message.error('请至少勾选一项');
+        this.$message.warning('请至少勾选一项');
         return;
       }
       this.deleteLoading = true;
@@ -264,7 +265,7 @@ export default {
             filterVal.push(item.dataIndex);
           }
         });
-        const data = this.formatJson(filterVal);
+        const data = formatJson(this.tableData, filterVal);
 
         excel.export_json_to_excel({
           header,
@@ -273,9 +274,6 @@ export default {
         });
         this.exportLoading = false;
       });
-    },
-    formatJson(filterVal) {
-      return this.tableData.map(v => filterVal.map(j => v[j].toString()));
     },
     //获取table数据
     getTableList() {

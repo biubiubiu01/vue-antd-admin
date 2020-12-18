@@ -12,7 +12,8 @@
   </div>
 </template>
 <script>
-import { loadModules, esri } from 'esri-loader';
+/* eslint-disable */
+import { loadModules } from 'esri-loader';
 
 export default {
   name: 'mapview',
@@ -134,7 +135,7 @@ export default {
           }
         )
         .catch(err => {
-          console.log(err);
+          // console.log(err);
           this.$message.error('arcgis 加载出错');
         });
     }

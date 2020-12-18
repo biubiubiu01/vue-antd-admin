@@ -7,15 +7,11 @@ function resolve(dir) {
 
 const isProd = process.env.NODE_ENV === 'production';
 
+const { VueCDN, AxiosCDN, VueRouterCDN, VuexCDN } = require('./src/plugins/cdn');
+
 const cdn = {
   css: [],
-  js: [
-    'https://cdn.bootcdn.net/ajax/libs/vue/2.6.12/vue.min.js',
-    'https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.min.js',
-    'https://cdn.bootcdn.net/ajax/libs/vue-router/3.2.0/vue-router.min.js',
-    'https://cdn.bootcdn.net/ajax/libs/vuex/3.5.1/vuex.min.js'
-    // 'https://cdn.jsdelivr.net/npm/kriging@0.1.12/dist/kriging.js'
-  ],
+  js: [VueCDN, AxiosCDN, VueRouterCDN, VuexCDN],
   externals: {
     vue: 'Vue',
     'vue-router': 'VueRouter',
@@ -105,6 +101,7 @@ module.exports = {
 
       config.optimization.runtimeChunk('single');
 
+      //去除生产环境debugger 和console
       config.optimization.minimizer('terser').tap(args => {
         args[0].terserOptions.compress.warnings = false;
         args[0].terserOptions.compress.drop_console = true;
@@ -112,15 +109,17 @@ module.exports = {
         args[0].terserOptions.compress.pure_funcs = ['console.*'];
         return args;
       });
-
+      //g-zip开启
       config.plugin('CompressionWebpackPlugin').use(CompressionWebpackPlugin, [
         {
+          filename: '[path].gz[query]',
           algorithm: 'gzip',
           test: /\.js$|\.css/, //匹配文件名
           threshold: 10240, //对超过10k的数据压缩
           minRatio: 0.8
         }
       ]);
+      //打包大小分析
       if (process.env.npm_config_report) {
         config.plugin('webpack-bundle-analyzer').use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin);
       }

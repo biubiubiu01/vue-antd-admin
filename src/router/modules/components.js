@@ -27,7 +27,25 @@ const componentsRouter = {
       path: '/components/markdown',
       component: () => import('@/views/components/markdown/index'),
       meta: { title: 'Markdown' }
+    },
+    {
+      name: 'lottery',
+      path: '/components/lottery',
+      component: () => import('@/views/components/lottery/index'),
+      meta: { title: '抽奖页' }
+    },
+    {
+      name: 'table',
+      path: '/components/table',
+      component: () => import('@/views/components/table/index'),
+      meta: { title: 'Table表' }
     }
+    // {
+    //   name: 'loading',
+    //   path: '/components/loading',
+    //   component: () => import('@/views/components/loading/index'),
+    //   meta: { title: 'Loading' }
+    // }
   ]
 };
 

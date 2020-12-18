@@ -5,17 +5,17 @@
 </template>
 
 <script>
-import load from './dynamicLoadScript';
 import toolbar from './toolbar';
 import plugins from './plugins';
 import styles from './style';
-const tinymceCDN = 'https://cdn.jsdelivr.net/npm/tinymce-all-in-one@4.9.3/tinymce.min.js';
+import remoteLoad from '@/utils/remoteLoad';
+const { TinymceCDN } = require('@/plugins/cdn');
 export default {
   name: 'tinymce',
   props: {
     height: {
       type: [Number, String],
-      default: '300'
+      default: '500'
     },
     resize: {
       type: Boolean,
@@ -38,14 +38,18 @@ export default {
     this.init();
   },
   methods: {
-    init() {
-      load(tinymceCDN, err => {
-        if (err) {
-          this.$message.error(err.message);
-          return;
+    async init() {
+      try {
+        await remoteLoad(TinymceCDN);
+        if (window.tinymce) {
+          this.initTinymce();
+        } else {
+          this.$message.error('加载资源失败');
         }
-        this.initTinymce();
-      });
+      } catch (error) {
+        console.log(error);
+        this.$message.error(error);
+      }
     },
     initTinymce() {
       const that = this;
