@@ -31,34 +31,35 @@
           导出
         </a-button>
       </div>
-      <standard-table
-        :tableData="tableData"
-        :tableHead="tableHead"
-        :loading="loading"
-        :pagination="{
-          pageSize: filterList.size,
-          current: filterList.page,
-          total: filterList.total,
-          showTotal: total => `${filterList.total} 条`
-        }"
-        :rowSelection="{ selectedRowKeys: selectedRowKeys, onChange: handleSelect }"
-        @changeCurrent="handleChangeCurrent"
-      >
-        <div slot="index" slot-scope="{ index }">
-          {{ index + 1 }}
-        </div>
-        <div slot="money" slot-scope="{ text }">¥ {{ text }}</div>
-        <div slot="action" slot-scope="{ text }">
-          <a-button type="primary" size="small" @click="handleEdit(text)">
-            编辑
-          </a-button>
-          <a-popconfirm title="你确定要删除当前列吗?" ok-text="是" cancel-text="否" @confirm="handleDelete(text)">
-            <a-button type="danger" size="small" style="margin-left:8px">
-              删除
+        
+        <standard-table
+          :tableData="tableData"
+          :tableHead="tableHead"
+          :loading="loading"
+          :pagination="{
+            pageSize: filterList.size,
+            current: filterList.page,
+            total: filterList.total,
+            showTotal: total => `${filterList.total} 条`
+          }"
+          :rowSelection="{ selectedRowKeys: selectedRowKeys, onChange: handleSelect }"
+          @changeCurrent="handleChangeCurrent"
+        >
+          <div slot="index" slot-scope="{ index }">
+            {{ index + 1 }}
+          </div>
+          <div slot="money" slot-scope="{ text }">¥ {{ text }}</div>
+          <div slot="action" slot-scope="{ text }">
+            <a-button type="primary" size="small" @click="handleEdit(text)">
+              编辑
             </a-button>
-          </a-popconfirm>
-        </div>
-      </standard-table>
+            <a-popconfirm title="你确定要删除当前列吗?" ok-text="是" cancel-text="否" @confirm="handleDelete(text)">
+              <a-button type="danger" size="small" style="margin-left:8px">
+                删除
+              </a-button>
+            </a-popconfirm>
+          </div>
+        </standard-table>
     </a-card>
 
     <a-modal

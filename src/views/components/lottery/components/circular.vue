@@ -58,7 +58,6 @@ export default {
     width: 500px;
     height: 500px;
     margin: 0 auto;
-    max-width: 100%;
     position: relative;
     .outBox {
       background: url('~@/assets/lottery/outBg.png') no-repeat;

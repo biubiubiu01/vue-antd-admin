@@ -39,13 +39,49 @@ const componentsRouter = {
       path: '/components/table',
       component: () => import('@/views/components/table/index'),
       meta: { title: 'Table表' }
+    },
+    {
+      name: 'form',
+      path: '/components/form',
+      component: () => import('@/views/components/form/index'),
+      meta: { title: '表单页' }
+    },
+    {
+      name: 'loading',
+      path: '/components/loading',
+      component: () => import('@/views/components/loading/index'),
+      meta: { title: 'Loading' }
+    },
+    {
+      name: 'uploadExcel',
+      path: '/components/uploadExcel',
+      component: () => import('@/views/components/uploadExcel/index'),
+      meta: { title: '上传Excel' }
+    },
+    {
+      name: 'uploadAvatar',
+      path: '/components/uploadAvatar',
+      component: () => import('@/views/components/uploadAvatar/index'),
+      meta: { title: '头像上传' }
+    },
+    {
+      name: 'uploadSimple',
+      path: '/components/uploadSimple',
+      component: () => import('@/views/components/uploadSimple/index'),
+      meta: { title: '断点上传' }
+    },
+    {
+      name: 'socket',
+      path: '/components/socket',
+      component: () => import('@/views/components/socket/index'),
+      meta: { title: 'socket' }
+    },
+    {
+      name: '截屏',
+      path: '/components/screenshot',
+      component: () => import('@/views/components/screenshot/index'),
+      meta: { title: '截屏' }
     }
-    // {
-    //   name: 'loading',
-    //   path: '/components/loading',
-    //   component: () => import('@/views/components/loading/index'),
-    //   meta: { title: 'Loading' }
-    // }
   ]
 };
 

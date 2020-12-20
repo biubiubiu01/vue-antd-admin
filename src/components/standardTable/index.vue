@@ -8,6 +8,7 @@
       :row-selection="rowSelection"
       @change="handleTableChange"
       rowKey="id"
+      :scroll="scroll"
     >
       <template
         slot-scope="text, record, index"
@@ -41,6 +42,9 @@ export default {
     },
     rowSelection: {
       type: Object
+    },
+    scroll:{
+      type:Object
     }
   },
   data() {

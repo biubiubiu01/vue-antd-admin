@@ -63,6 +63,15 @@ export const asyncRoutes = [
         }
       },
       {
+        name: 'permission',
+        path: '/permission',
+        component: () => import('@/views/permission/index'),
+        meta: {
+          title: '权限测试页',
+          icon: 'permission'
+        }
+      },
+      {
         name: 'webGl',
         component: mainLayout,
         path: '/webGl',

@@ -1,18 +1,14 @@
 <template>
-  <div class=""></div>
+  <div class="loading-wrapper">开发中...</div>
 </template>
 
 <script>
 export default {
-  name: '',
-  components: {},
+  name: 'loading',
   data() {
     return {};
   },
-  created() {},
   mounted() {},
-  methods: {},
-  watch: {}
 };
 </script>
 <style lang="scss" scoped></style>
