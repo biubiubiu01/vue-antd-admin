@@ -54,13 +54,23 @@ export function debounce(func, delay, immediate = false) {
  */
 export function getGeoJson(adcode, childAdcode = '') {
   return new Promise((resolve, reject) => {
-    initAMap().then(status => {
-      if (status) {
-        insideFun(adcode, childAdcode);
-      } else {
-        reject('高德api获取失败');
-      }
-    });
+    if (window.AMap && window.AMapUI) {
+      insideFun(adcode, childAdcode);
+    } else {
+      remoteLoad(AMapCDN).then(() => {
+        if (window.AMap) {
+          remoteLoad(AMapUiCDN).then(() => {
+            if (window.AMapUI) {
+              insideFun(adcode, childAdcode);
+            } else {
+              console.error('AMapUI获取失败');
+            }
+          });
+        } else {
+          console.error('AMap获取失败');
+        }
+      });
+    }
     function insideFun(adcode, childAdcode) {
       // eslint-disable-next-line
       AMapUI.loadUI(['geo/DistrictExplorer'], DistrictExplorer => {
@@ -91,27 +101,6 @@ export function getGeoJson(adcode, childAdcode = '') {
       });
     }
   });
-}
-
-/**
- * 初始化AMap 和AMapUI 异步加载
- */
-async function initAMap() {
-  if (window.AMap && window.AMapUI) {
-    return true;
-  } else {
-    try {
-      await remoteLoad(AMapCDN);
-      await remoteLoad(AMapUiCDN);
-      if (window.AMap && window.AMapUI) {
-        return true;
-      } else {
-        return false;
-      }
-    } catch (err) {
-      return false;
-    }
-  }
 }
 
 /**

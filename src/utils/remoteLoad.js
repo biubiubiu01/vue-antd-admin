@@ -7,9 +7,12 @@ const remoteLoad = url => {
       script.id = url;
       script.src = url;
       document.body.appendChild(script);
+      script.async = true;
       script.onload = function() {
-        this.onerror = this.onload = null;
-        resolve();
+        setTimeout(() => {
+          this.onerror = this.onload = null;
+          resolve();
+        }, 500);
       };
       script.onerror = function() {
         this.onerror = this.onload = null;
