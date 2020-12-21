@@ -6,8 +6,8 @@ const remoteLoad = url => {
       const script = document.createElement('script');
       script.id = url;
       script.src = url;
-      document.body.appendChild(script);
       script.async = true;
+      document.body.appendChild(script);
       script.onload = function() {
         setTimeout(() => {
           this.onerror = this.onload = null;

@@ -1,17 +1,13 @@
 <template>
   <div class="circular-wrapper">
-    <div class="main-box">
-      <div class="outBox">
-        <img src="../../../../assets/lottery/draw.png" alt="" class="drawImg" @click="rotateCirculat" />
-        <div
-          class="baseBg"
-          :style="{
-            transform: 'rotate(' + rotate + 'deg)',
-            transition: rotateStatus ? 'all ' + duringTime + 's ease-in-out' : ''
-          }"
-        ></div>
-      </div>
-    </div>
+    <img src="../../../../assets/lottery/draw.png" alt="" class="drawImg" @click="rotateCirculat" />
+    <div
+      class="baseBg"
+      :style="{
+        transform: 'rotate(' + rotate + 'deg)',
+        transition: rotateStatus ? 'all ' + duringTime + 's ease-in-out' : ''
+      }"
+    ></div>
   </div>
 </template>
 
@@ -30,7 +26,6 @@ export default {
   },
   methods: {
     async rotateCirculat() {
-      // 330-370
       if (this.rotateStatus) return;
 
       this.rotateStatus = true;
@@ -51,41 +46,38 @@ export default {
 </script>
 <style lang="scss" scoped>
 .circular-wrapper {
-  height: 500px;
-  width: 100%;
+  width: 500px;
+  max-width: 100%;
+  overflow: hidden;
+  margin: 0 auto;
+  position: relative;
+  background: url('~@/assets/lottery/outBg.png') no-repeat;
+  background-size: 100% 100%;
 
-  .main-box {
-    width: 500px;
-    height: 500px;
-    margin: 0 auto;
-    position: relative;
-    .outBox {
-      background: url('~@/assets/lottery/outBg.png') no-repeat;
-      background-size: 100% 100%;
-      width: 100%;
-      height: 100%;
-      position: relative;
-      .drawImg {
-        width: 150px;
-        height: auto;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        z-index: 15;
-      }
-    }
-    .baseBg {
-      background: url('~@/assets/lottery/insideBg.png') no-repeat;
-      background-size: 100% 100%;
-      border-radius: 50%;
-      overflow: hidden;
-      position: absolute;
-      top: 25px;
-      right: 25px;
-      left: 25px;
-      bottom: 25px;
-    }
+  &:after {
+    content: '';
+    display: block;
+    margin-top: 100%;
+  }
+
+  .drawImg {
+    width: 150px;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 15;
+  }
+  .baseBg {
+    background: url('~@/assets/lottery/insideBg.png') no-repeat;
+    background-size: 100% 100%;
+    border-radius: 50%;
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    left: 25px;
+    bottom: 25px;
   }
 }
 </style>
