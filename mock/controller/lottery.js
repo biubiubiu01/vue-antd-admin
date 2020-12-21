@@ -73,6 +73,54 @@ function prizeList() {
   return temp;
 }
 
+const nineData = [
+  {
+    number: 1,
+    win: true,
+    message: '恭喜您，你获得精美大礼包一份'
+  },
+  {
+    number: 2,
+    win: true,
+    message: '恭喜您，你获得华为手机一部'
+  },
+  {
+    number: 3,
+    win: true,
+    message: '恭喜您，你获得典藏版棒球帽一顶'
+  },
+  {
+    number: 6,
+    win: true,
+    message: '恭喜您，您获得劳斯莱斯雨伞'
+  },
+  {
+    number: 7,
+    win: true,
+    message: '恭喜您，您获得香奈儿香水'
+  },
+  {
+    number: 8,
+    win: true,
+    message: '恭喜您，您获得iPhone手机一部'
+  },
+  {
+    number: 9,
+    win: true,
+    message: '恭喜您，你获得888元现金红包'
+  }
+];
+
+function nineList() {
+  const random = Mock.Random.natural(0, 15); //中奖号码随机生成
+  return  nineData.find(item => item.number === random) || {
+    number: 4,
+    win: false,
+    message: '很遗憾,您没有获得奖品，再试一次吧'
+  };
+
+}
+
 module.exports = [
   {
     url: '/lottery/circular',
@@ -85,5 +133,17 @@ module.exports = [
         message: temp.message
       };
     }
-  }
+  },
+  {
+    url: '/lottery/nineLucky',
+    type: 'post',
+    response: () => {
+      const temp = nineList();
+      return {
+        data: temp,
+        code: 200,
+        message: temp.message
+      };
+    }
+  },
 ];
