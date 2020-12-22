@@ -1,19 +1,16 @@
 <template>
-  <div class="loading-container" :style="{ background: background }">
+  <div class="loading-container" :style="{ background: background }" v-if="show">
     <div class="loading-wrapper">
-      <div class="flex justify-center">
-        <div class="center1"></div>
-        <div class="center2"></div>
-        <div class="center3"></div>
-      </div>
+      <svg-icon v-if="spin == 'loading'" icon="loading" color="#3ff9dc" :size="25" class="loading-icon" />
+      <component :is="spin + '-spin'" v-else />
       <div class="text" :style="{ color: textColor }">{{ text }}</div>
     </div>
   </div>
 </template>
 
 <script>
+import { pulseSpin, rectSpin, planeSpin, cubeSpin } from './spin';
 export default {
-  name: 'loading',
   props: {
     show: {
       type: Boolean,
@@ -25,27 +22,18 @@ export default {
     },
     textColor: {
       type: String,
-      default: '#fff'
+      default: '#3ff9dc'
     },
     background: {
       type: String,
-      default: 'rgba(0,0,0,0.3)'
+      default: 'rgba(0,0,0,0.7)'
     },
-    spinner: {
-      // required: true
+    spin: {
       type: String,
-      default: 'pulse'
+      default: 'loading'
     }
   },
-  mounted() {
-    console.log(this.spinner);
-    console.log(this.show);
-  },
-  watch: {
-    show(nl) {
-      console.log(nl);
-    }
-  }
+  components: { pulseSpin, rectSpin, planeSpin, cubeSpin }
 };
 </script>
 <style lang="scss" scoped>
@@ -59,12 +47,24 @@ export default {
   .loading-wrapper {
     position: absolute;
     top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    margin-top: -21px;
+    text-align: center;
+    width: 100%;
     .text {
-      padding-top: 10px;
+      margin: 8px 0;
       width: 100%;
     }
+    .loading-icon {
+      animation: rotating 1.5s linear infinite;
+    }
+  }
+}
+@keyframes rotating {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(1turn);
   }
 }
 </style>

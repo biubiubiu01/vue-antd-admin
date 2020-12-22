@@ -18,23 +18,38 @@ export default {
     return {
       utilList: [
         {
-          title: '无线电脉搏',
+          title: '默认效果',
+          type: 'loading'
+        },
+        {
+          title: 'loading1',
           type: 'pulse'
+        },
+        {
+          title: 'loading2',
+          type: 'rect'
+        },
+        {
+          title: 'loading3',
+          type: 'plane'
+        },
+        {
+          title: 'loading4',
+          type: 'cube'
         }
       ]
     };
   },
-  components: {},
   methods: {
     //方法loading
     startLoading(type) {
-      console.log(this.$loading);
-      // console.log(type);
-      this.$loading.show();
+      this.$loading.show({
+        spin: type
+      });
+      // setTimeout(() => {
+      //   this.$loading.hide();
+      // }, 3000);
     }
   }
 };
 </script>
-<style lang="scss" scoped>
-@import url('../../../styles/spinner.scss');
-</style>

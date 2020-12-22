@@ -1,39 +1,42 @@
-.pulse-loader {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: #3ff9dc;
-}
+<template>
+  <div class="pulse-wrapper">
+    <div class="pulse-item one"></div>
+    <div class="pulse-item two"></div>
+    <div class="pulse-item three"></div>
+  </div>
+</template>
 
-.center1 {
+<script>
+export default {
+  name: 'pulseSpin'
+};
+</script>
+<style lang="scss" scoped>
+.pulse-item {
   width: 20px;
   height: 20px;
   border-radius: 50%;
   background-color: #3ff9dc;
   animation: pulse-loader 0.4s ease 0s infinite alternate;
+  position: relative;
+  display: inline-block;
 }
-.center2 {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: #3ff9dc;
+.two {
+  margin: 0 15px;
   animation: pulse-loader 0.4s ease 0.2s infinite alternate;
-  margin: 0 30px;
 }
-.center3 {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: #3ff9dc;
+.three {
   animation: pulse-loader 0.4s ease 0.4s infinite alternate;
 }
+
 @keyframes pulse-loader {
   0% {
     opacity: 1;
     transform: scale(1);
   }
   100% {
-    opacity: 0.7;
+    opacity: 0.5;
     transform: scale(0.75);
   }
 }
+</style>
