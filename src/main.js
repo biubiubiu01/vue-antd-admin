@@ -25,6 +25,9 @@ if (process.env.NODE_ENV === 'production') {
   mockXHR();
 }
 
+import loading from '@/utils/loading'; // 引入loading
+Vue.use(loading); // 全局使用loading
+
 new Vue({
   router,
   store,

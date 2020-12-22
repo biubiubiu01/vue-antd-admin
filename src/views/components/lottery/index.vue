@@ -12,8 +12,6 @@
         </a-card>
       </a-col>
     </a-row>
-
-    <a-card title="王者抽奖系统" :hoverable="true" :bordered="false" class="marginBottom"> </a-card>
   </div>
 </template>
 

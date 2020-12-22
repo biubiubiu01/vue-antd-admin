@@ -75,37 +75,37 @@ function prizeList() {
 
 const nineData = [
   {
-    number: 1,
+    number: 0,
     win: true,
     message: '恭喜您，你获得精美大礼包一份'
   },
   {
-    number: 2,
+    number: 1,
     win: true,
     message: '恭喜您，你获得华为手机一部'
   },
   {
-    number: 3,
+    number: 2,
     win: true,
-    message: '恭喜您，你获得典藏版棒球帽一顶'
+    message: '恭喜您，你获得保时捷50元代金券'
   },
   {
-    number: 6,
+    number: 3,
     win: true,
     message: '恭喜您，您获得劳斯莱斯雨伞'
   },
   {
-    number: 7,
+    number: 6,
     win: true,
-    message: '恭喜您，您获得香奈儿香水'
+    message: '恭喜您，您获得9999元现金红包'
   },
   {
-    number: 8,
+    number: 5,
     win: true,
     message: '恭喜您，您获得iPhone手机一部'
   },
   {
-    number: 9,
+    number: 4,
     win: true,
     message: '恭喜您，你获得888元现金红包'
   }
@@ -113,12 +113,13 @@ const nineData = [
 
 function nineList() {
   const random = Mock.Random.natural(0, 15); //中奖号码随机生成
-  return  nineData.find(item => item.number === random) || {
-    number: 4,
-    win: false,
-    message: '很遗憾,您没有获得奖品，再试一次吧'
-  };
-
+  return (
+    nineData.find(item => item.number === random) || {
+      number: 7,
+      win: false,
+      message: '很遗憾,您没有获得奖品，再试一次吧'
+    }
+  );
 }
 
 module.exports = [
@@ -145,5 +146,5 @@ module.exports = [
         message: temp.message
       };
     }
-  },
+  }
 ];
