@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { pulseSpin, rectSpin, planeSpin, cubeSpin } from './spin';
+import { pulseSpin, rectSpin, planeSpin, cubeSpin, preloaderSpin, chaseSpin } from './spin';
 export default {
   props: {
     show: {
@@ -33,7 +33,7 @@ export default {
       default: 'loading'
     }
   },
-  components: { pulseSpin, rectSpin, planeSpin, cubeSpin }
+  components: { pulseSpin, rectSpin, planeSpin, cubeSpin, preloaderSpin, chaseSpin }
 };
 </script>
 <style lang="scss" scoped>

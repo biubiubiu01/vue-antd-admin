@@ -12,9 +12,9 @@ instance.show = false;
 const loading = {
   show(options) {
     instance.show = true;
+    const el = options.el || document.body;
     if (options) {
-      const { el = document.body, text, textColor, background, spin } = options;
-      el.appendChild(instance.$el);
+      const { text, textColor, background, spin } = options;
       if (text) {
         instance.text = text;
       }
@@ -27,9 +27,8 @@ const loading = {
       if (spin) {
         instance.spin = spin;
       }
-    } else {
-      document.body.appendChild(instance.$el);
     }
+    el.appendChild(instance.$el);
   },
   hide() {
     instance.show = false;

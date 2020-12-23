@@ -35,6 +35,11 @@ export default {
           color: 'gray'
         },
         {
+          title: '添加页面loading模块，方法有点low，写了很多个组件，看到可以用svg去时间loading动画，后续研究下再改进',
+          time: '2020-12-23',
+          color: 'gray'
+        },
+        {
           title: '异步加载AMap,去除本地的kriging',
           time: '2020-12-08',
           color: 'gray'
