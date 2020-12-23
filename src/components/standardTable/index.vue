@@ -43,8 +43,8 @@ export default {
     rowSelection: {
       type: Object
     },
-    scroll:{
-      type:Object
+    scroll: {
+      type: Object
     }
   },
   data() {

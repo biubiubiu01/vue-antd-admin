@@ -1,6 +1,24 @@
 <template>
   <div class="loading-wrapper">
-    <a-card title="指令方式加载loading" :hoverable="true" :bordered="false"> </a-card>
+    <a-card title="指令方式加载loading" :hoverable="true" :bordered="false">
+      <div
+        class="relative"
+        style="width:100%;height:150px"
+        v-loading="loading"
+        loading-text="自定义指令loading"
+        loading-spin="pulse"
+        :loading-full="full"
+      >
+        <a-space :size="15">
+          <a-button type="primary" @click="startCustomLoading(1)">
+            v-loading指令全屏
+          </a-button>
+          <a-button type="primary" @click="startCustomLoading(2)">
+            v-loading指令非全屏
+          </a-button>
+        </a-space>
+      </div>
+    </a-card>
     <a-card title="方法函数加载loading" :hoverable="true" :bordered="false" style="margin-top:15px">
       <a-space :size="15">
         <a-button type="primary" v-for="item in utilList" :key="item.type" @click="startLoading(item)">
@@ -12,8 +30,9 @@
 </template>
 
 <script>
+import loading from '@/directive/loading/index.js';
 export default {
-  name: 'loading',
+  name: 'customLoading',
   data() {
     return {
       utilList: [
@@ -45,9 +64,12 @@ export default {
           title: 'loading6',
           type: 'chase'
         }
-      ]
+      ],
+      loading: false,
+      full: true
     };
   },
+  directives: { loading },
   methods: {
     //方法loading
     startLoading(item) {
@@ -61,6 +83,14 @@ export default {
       });
       setTimeout(() => {
         this.$loading.hide();
+      }, 3000);
+    },
+
+    startCustomLoading(index) {
+      this.full = index == 1 ? true : false;
+      this.loading = true;
+      setTimeout(() => {
+        this.loading = false;
       }, 3000);
     }
   }
