@@ -14,7 +14,7 @@ const loading = {
     instance.show = true;
     let el = document.body;
     if (options) {
-      const { text, textColor, background } = options;
+      const { text, textColor, background, spin } = options;
       if (options.el) {
         el = options.el;
       }
@@ -26,6 +26,9 @@ const loading = {
       }
       if (background) {
         instance.background = background;
+      }
+      if (spin) {
+        instance.spin = spin;
       }
     }
     el.appendChild(instance.$el);
