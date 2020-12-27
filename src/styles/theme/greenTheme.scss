@@ -1,0 +1,34 @@
+$baseGreenThemeColor: rgb(82, 196, 26);
+
+body.vue-antd-admin-greenTheme {
+  .rightPanl {
+    background: $baseGreenThemeColor !important;
+    .settingIcon {
+      color: #fff;
+    }
+  }
+  .tagView-wrapper .scroll-outer .scroll-body .activeTag {
+    background: $baseGreenThemeColor !important;
+  }
+  .sale-title .sale-time .time-item.activeTime {
+    background: $baseGreenThemeColor !important;
+    &:hover {
+      background: $baseGreenThemeColor !important;
+    }
+  }
+  .backTop .ant-back-top {
+    background: $baseGreenThemeColor !important;
+  }
+
+  .ant-menu.ant-menu-dark .ant-menu-item-selected {
+    background: $baseGreenThemeColor !important;
+  }
+  .ant-radio-group-solid .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled) {
+    background: $baseGreenThemeColor !important;
+    border-color: $baseGreenThemeColor !important;
+    box-shadow: -1px 0 0 0 $baseGreenThemeColor !important;
+  }
+  .ant-switch-checked {
+    background: $baseGreenThemeColor !important;
+  }
+}

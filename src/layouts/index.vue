@@ -11,7 +11,7 @@
         <tag-view v-if="tagShow" />
       </div>
       <div class="rightPanl fixed pointer" @click="changeVisivle">
-        <a-icon type="setting" />
+        <a-icon type="setting" class="settingIcon" />
         <setting />
       </div>
       <div class="app-main">

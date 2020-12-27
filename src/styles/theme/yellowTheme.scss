@@ -1,0 +1,32 @@
+$baseYellowThemeColor: #faad14;
+
+body.vue-antd-admin-yellowTheme {
+  .rightPanl {
+    background: $baseYellowThemeColor !important;
+  }
+  .tagView-wrapper .scroll-outer .scroll-body .activeTag {
+    background: $baseYellowThemeColor !important;
+  }
+  .sale-title .sale-time .time-item.activeTime {
+    background: $baseYellowThemeColor !important;
+    &:hover {
+      background: $baseYellowThemeColor !important;
+    }
+  }
+
+  .backTop .ant-back-top {
+    background: $baseYellowThemeColor !important;
+  }
+
+  .ant-menu.ant-menu-dark .ant-menu-item-selected {
+    background: $baseYellowThemeColor !important;
+  }
+  .ant-radio-group-solid .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled) {
+    background: $baseYellowThemeColor !important;
+    border-color: $baseYellowThemeColor !important;
+    box-shadow: -1px 0 0 0 $baseYellowThemeColor !important;
+  }
+  .ant-switch-checked {
+    background: $baseYellowThemeColor !important;
+  }
+}

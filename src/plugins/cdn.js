@@ -5,6 +5,7 @@ const AxiosCDN = 'https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.min.js';
 const VueRouterCDN = 'https://cdn.bootcdn.net/ajax/libs/vue-router/3.2.0/vue-router.min.js';
 const VuexCDN = 'https://cdn.bootcdn.net/ajax/libs/vuex/3.5.1/vuex.min.js';
 const TinymceCDN = 'https://cdn.jsdelivr.net/npm/tinymce-all-in-one@4.9.3/tinymce.min.js';
+const html2canvasCDN = 'https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.7/dist/html2canvas.min.js';
 
 module.exports = {
   AMapCDN,
@@ -13,5 +14,6 @@ module.exports = {
   AxiosCDN,
   VueRouterCDN,
   VuexCDN,
-  TinymceCDN
+  TinymceCDN,
+  html2canvasCDN
 };

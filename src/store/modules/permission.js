@@ -1,5 +1,6 @@
 import { baseRoute, asyncRoutes } from '@/router';
-
+import { setCache } from '@/utils/session';
+import router, { resetRouter } from '@/router';
 const state = {
   routes: []
 };
@@ -22,6 +23,16 @@ const actions = {
       commit('SET_ROUTE', accessedRoutes);
       resolve(accessedRoutes);
     });
+  },
+  async changeRole({ commit, dispatch }, role) {
+    const token = role + '20201013';
+    commit('user/SET_TOKEN', token, { root: true });
+    setCache('TOKEN', token);
+    await dispatch('user/getInfo', token, { root: true });
+    resetRouter();
+    const accessedRoutes = await dispatch('getRoute', role);
+    router.addRoutes(accessedRoutes);
+    await dispatch('tagsView/clearTag', null, { root: true });
   }
 };
 

@@ -92,7 +92,7 @@ export const asyncRoutes = [
             name: 'OpenLayers',
             path: '/webGl/OpenLayers',
             component: () => import('@/views/webGl/OpenLayers/index'),
-            meta: { title: 'OpenLayers' }
+            meta: { title: '插值分析图' }
           }
         ]
       },

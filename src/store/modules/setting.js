@@ -4,7 +4,8 @@ const state = {
   fixHeader: getCache('FIX_HEARDER') == null ? true : getCache('FIX_HEARDER'),
   tagShow: getCache('TAG_SHOW') == null ? true : getCache('TAG_SHOW'),
   settingVisible: false,
-  layout: getCache('LAYOUT') || 'inline'
+  layout: getCache('LAYOUT') || 'inline',
+  theme: getCache('THEME') || 'blue'
 };
 
 const mutations = {

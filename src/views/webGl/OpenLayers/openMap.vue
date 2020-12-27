@@ -17,7 +17,7 @@ import ImageCanvas from 'ol/source/ImageCanvas';
 import { getGeoJson } from '@/utils/index';
 import { getCenter } from 'ol/extent';
 import remoteLoad from '@/utils/remoteLoad';
-
+import axios from 'axios';
 const params = {
   krigingModel: 'exponential', // model还可选'gaussian','spherical'
   krigingSigma2: 0,
@@ -66,7 +66,7 @@ export default {
           zoom: 8.95
         })
       });
-      this.getMapJson(150000);
+      this.getMapJson(100000);
     },
     getMapJson(adcode) {
       getGeoJson(adcode).then(data => {

@@ -22,7 +22,6 @@
         </div>
       </a-tooltip>
 
-      <nav-international class="right-menu-item pointer boxHover" />
       <div class="right-menu-item pointer boxHover" style="margin-right:15px" @click="toNotice">
         <a-badge :count="count" :overflow-count="99" :offset="[3, -4]">
           <svg-icon icon="bell" :size="18" />
@@ -34,7 +33,6 @@
 </template>
 
 <script>
-import navInternational from './navInternational';
 import navUser from './navUser';
 import screenfull from 'screenfull';
 import breadCrumb from './breadCrumb';
@@ -50,7 +48,7 @@ export default {
       default: false
     }
   },
-  components: { navInternational, navUser, breadCrumb },
+  components: { navUser, breadCrumb },
   data() {
     return {
       breadList: [

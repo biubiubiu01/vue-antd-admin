@@ -2,9 +2,9 @@
   <a-drawer title="个性化配置" placement="right" :visible="settingVisible" @close="settingVisible = false" :width="325">
     <div class="item-setting">
       <p>主题配置</p>
-      <a-radio-group button-style="solid">
-        <a-radio-button :value="item" v-for="item in customList" :key="item">
-          {{ item }}
+      <a-radio-group button-style="solid" :value="theme" @change="changeTheme">
+        <a-radio-button :value="item.key" v-for="item in customList" :key="item.key">
+          {{ item.label }}
         </a-radio-button>
       </a-radio-group>
     </div>
@@ -14,14 +14,6 @@
       <a-radio-group :value="layout" button-style="solid" @change="changeLayout">
         <a-radio-button :value="item.key" v-for="item in layoutList" :key="item.key">
           {{ item.label }}
-        </a-radio-button>
-      </a-radio-group>
-    </div>
-    <div class="item-setting" style="margin-bottom:25px">
-      <p>语言选择</p>
-      <a-radio-group button-style="solid">
-        <a-radio-button :value="item" v-for="item in interList" :key="item">
-          {{ item }}
         </a-radio-button>
       </a-radio-group>
     </div>
@@ -43,7 +35,20 @@ export default {
   data() {
     return {
       visible: false,
-      customList: ['简约白', '冷酷黑', '蓝色', '橙色'],
+      customList: [
+        {
+          key: 'blue',
+          label: '天空蓝'
+        },
+        {
+          key: 'yellow',
+          label: '日落黄'
+        },
+        {
+          key: 'green',
+          label: '草原绿'
+        }
+      ],
       layoutList: [
         {
           label: '左侧导航',
@@ -53,11 +58,23 @@ export default {
           label: '头部导航',
           key: 'horizontal'
         }
-      ],
-      interList: ['简体中文', '繁体中文', 'English']
+      ]
     };
   },
   computed: {
+    theme: {
+      get() {
+        return this.$store.state.setting.theme;
+      },
+      set(val) {
+        this.$store.dispatch('setting/changeSetting', {
+          key: 'theme',
+          value: val,
+          cache: 'THEME'
+        });
+        document.getElementsByTagName('body')[0].className = `vue-antd-admin-${val}Theme`;
+      }
+    },
     settingVisible: {
       get() {
         return this.$store.state.setting.settingVisible;
@@ -103,6 +120,11 @@ export default {
       }
     }
   },
+  created() {
+    if (this.theme) {
+      document.getElementsByTagName('body')[0].className = `vue-antd-admin-${this.theme}Theme`;
+    }
+  },
   methods: {
     changeTag(checked) {
       this.tagShow = checked;
@@ -112,6 +134,9 @@ export default {
     },
     changeLayout(val) {
       this.layout = val.target.value;
+    },
+    changeTheme(val) {
+      this.theme = val.target.value;
     }
   }
 };

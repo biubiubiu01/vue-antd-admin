@@ -34,8 +34,10 @@
             <a-button icon="redo" />
             <a-button type="primary" icon="picture" :loading="loading"> 重新选择图片 </a-button>
           </a-space>
-          <a-avatar :src="previewsImg" :size="165" class="previewsImg" :key="number" />
-          <a-button type="primary" icon="upload" style="margin-left:130px"> 上传头像 </a-button>
+          <div class="accountImg">
+            <img :src="previewsImg.url" alt="" :style="previewsImg.img" />
+          </div>
+          <a-button type="primary" icon="upload" style="margin-left:150px" @click="saveHeadImg"> 保存头像 </a-button>
         </a-col>
       </a-row>
     </a-modal>
@@ -58,8 +60,7 @@ export default {
         autoCropHeight: 200,
         fixedBox: true
       },
-      previewsImg: '',
-      number: 0
+      previewsImg: {}
     };
   },
   methods: {
@@ -80,11 +81,16 @@ export default {
       reader.readAsDataURL(file);
       reader.onload = e => {
         this.option.imgUrl = e.target.result;
-        this.number = Math.random(0, 1) * 10000;
         this.loading = false;
         this.modalShow = true;
       };
       return false;
+    },
+
+    saveHeadImg() {
+      this.$message.success('上传成功!');
+      this.imgUrl = this.previewsImg.url;
+      this.modalShow = false;
     },
 
     // handleChange(info) {
@@ -109,8 +115,7 @@ export default {
     // },
 
     realTime(data) {
-      console.log(data);
-      this.previewsImg = data.url;
+      this.previewsImg = data;
     },
 
     isImage(file) {
@@ -131,8 +136,14 @@ export default {
 .cropper-wrapper {
   height: 350px;
 }
-.previewsImg {
-  text-align: center;
-  margin: 25px 0 75px 105px;
+.accountImg {
+  width: 200px;
+  height: 200px;
+  margin: 35px 0 55px 105px;
+  overflow: hidden;
+  border-radius: 50%;
+  img {
+    border-radius: 50%;
+  }
 }
 </style>

@@ -32,55 +32,49 @@ const componentsRouter = {
       name: 'lottery',
       path: '/components/lottery',
       component: () => import('@/views/components/lottery/index'),
-      meta: { title: '抽奖页' }
+      meta: { title: '抽奖页', role: ['admin', 'test'] }
     },
     {
       name: 'table',
       path: '/components/table',
       component: () => import('@/views/components/table/index'),
-      meta: { title: 'Table表' }
+      meta: { title: 'Table表', role: ['admin', 'test'] }
     },
     {
       name: 'form',
       path: '/components/form',
       component: () => import('@/views/components/form/index'),
-      meta: { title: '表单页' }
+      meta: { title: '表单页', role: ['admin', 'test'] }
     },
     {
       name: 'loading',
       path: '/components/loading',
       component: () => import('@/views/components/loading/index'),
-      meta: { title: 'Loading' }
+      meta: { title: 'Loading', role: ['admin', 'test'] }
     },
     {
       name: 'uploadExcel',
       path: '/components/uploadExcel',
       component: () => import('@/views/components/uploadExcel/index'),
-      meta: { title: '上传Excel' }
+      meta: { title: '上传Excel', role: ['admin', 'test'] }
     },
     {
       name: 'uploadAvatar',
       path: '/components/uploadAvatar',
       component: () => import('@/views/components/uploadAvatar/index'),
-      meta: { title: '头像上传' }
+      meta: { title: '头像上传', role: ['admin', 'test'] }
     },
     {
-      name: 'uploadSimple',
-      path: '/components/uploadSimple',
-      component: () => import('@/views/components/uploadSimple/index'),
-      meta: { title: '断点上传' }
-    },
-    {
-      name: 'socket',
-      path: '/components/socket',
-      component: () => import('@/views/components/socket/index'),
-      meta: { title: 'socket' }
+      name: 'webSocket',
+      path: '/components/webSocket',
+      component: () => import('@/views/components/webSocket/index'),
+      meta: { title: 'webSocket', role: ['admin', 'test'] }
     },
     {
       name: '截屏',
       path: '/components/screenshot',
       component: () => import('@/views/components/screenshot/index'),
-      meta: { title: '截屏' }
+      meta: { title: '截屏', role: ['admin', 'test'] }
     }
   ]
 };
