@@ -1,1 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d2163f3"],{c23a:function(e,n,t){"use strict";t.r(n);var a=function(){var e=this,n=e.$createElement,t=e._self._c||n;return t("div",{},[e._v("开发中....")])},c=[],u={},r=u,s=t("2877"),f=Object(s["a"])(r,a,c,!1,null,"fadf0e3a",null);n["default"]=f.exports}}]);
