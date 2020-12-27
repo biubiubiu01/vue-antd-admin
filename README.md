@@ -18,7 +18,7 @@
 
 ## 简介
 
-[vue-antd-admin](https://gist006.gitee.io/vue-antd-admin/)是一个后台管理系统，基于[vue](https://github.com/vuejs/vue)+[ant-design-vue](https://github.com/vueComponent/ant-design-vue)开发，包含动态路由+权限管理解决用户权限问题，提供基础固定权限：admin、test、editor和自定义用户权限，可自定义修改角色对应的菜单；布局方面提供左右布局和上下布局两种，可自由切换；使用i18n 国际化，可自由切换语言（开发中...）；系统内置了4套主题，可随意切换（开发中...）；还有一些其他功能，感兴趣的话可以看看。
+[vue-antd-admin](https://gist006.gitee.io/vue-antd-admin/)是一个后台管理系统，基于[vue](https://github.com/vuejs/vue)+[ant-design-vue](https://github.com/vueComponent/ant-design-vue)开发，包含动态路由+权限管理解决用户权限问题，提供基础固定权限：admin、test、editor和自定义用户权限，可自定义修改角色对应的菜单；布局方面提供左右布局和上下布局两种，可自由切换；系统内置了3套主题，可随意切换；还有一些后台管理系统常用的功能如表单，table表等；
 ## 前序准备
 * 该项目采用[vue](https://github.com/vuejs/vue)+[vue-cli4](https://github.com/vuejs/vue-cli)+[vuex](https://github.com/vuejs/vuex)+[ant-design-vue](https://github.com/vueComponent/ant-design-vue)和[axios](https://github.com/axios/axios)开发，数据采用[mock.js](https://github.com/nuysoft/Mock)进行模拟,后期打算使用node写后台；
 * [webpack](https://github.com/webpack/webpack)大幅度优化了下，首屏加载速度更快；
@@ -36,23 +36,29 @@
 - 动态路由
 - echarts各种图表
 - arcgis地图
-- openLayer插值分析图
+- 克里金插值分析图
 - 全景图
 - 富文本
 - Markdown
 - 错误页面 403 404 500
 - 个人设置
 - 系统设置
-- 更换主题(开发中)
-- i18n国际化 (开发中)
-- 布局方式
+- 更换主题
+- 两种布局方式
 - 面包屑
 - 标签页
-- socket (开发中)
+- webSocket 
 - svg图标
 - 全屏
 - 返回顶部
 - webpack优化
+- 抽奖页
+- table表
+- form表单
+- 上传Excel
+- 上传头像和裁剪
+- htmlcanvas2截屏
+- 封装自定义loading
 ```
 
 ## webpack优化
@@ -65,13 +71,14 @@
 - 公共代码抽离
 - 打包大小分析
 - 打包缓存
+- 部分依赖使用异步cdn加载
 
 ```
 
 ## 使用说明
 ```
 - 拥有 admin、test和editor三种权限，每个权限对应的路由和左侧菜单不同；
-- 点击个人设置个性化或者右边设置，可以更改页面的设置，如果标签页是否开启，布局方式等；
+- 点击个人设置个性化或者右边设置，可以更改页面的设置，如果标签页是否开启，布局方式,主题颜色等；
 - 系统管理员拥有所有权限，可以更改用户对应的菜单路由和角色对应的权限。
 ......
 ```
