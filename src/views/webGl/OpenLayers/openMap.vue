@@ -19,7 +19,7 @@ import ImageCanvas from 'ol/source/ImageCanvas';
 import { getGeoJson } from '@/utils/index';
 import { getCenter } from 'ol/extent';
 import remoteLoad from '@/utils/remoteLoad';
-import axios from 'axios';
+import cityJson from '../../../../public/420000.json';
 const params = {
   krigingModel: 'exponential', // model还可选'gaussian','spherical'
   krigingSigma2: 0,
@@ -77,22 +77,20 @@ export default {
       this.getMapJson(420000);
     },
     getMapJson(adcode) {
-      axios.get('https://geo.datav.aliyun.com/areas/bound/geojson?code=420000').then(res => {
-        const data = res.data || [];
-        this.coord = [data.features[0].geometry.coordinates[0]];
-        let clipgeom = new Polygon(this.coord);
-        this.extent = clipgeom.getExtent();
-        getGeoJson(adcode).then(list => {
-          let xList = [],
-            yList = [],
-            valueList = [];
-          list.features.forEach(item => {
-            xList.push(item.properties.center[0]);
-            yList.push(item.properties.center[1]);
-            valueList.push(Math.random(0, 1) * 100);
-          });
-          this.drawKriging(xList, yList, valueList);
+      const data = cityJson;
+      this.coord = [data.features[0].geometry.coordinates[0]];
+      let clipgeom = new Polygon(this.coord);
+      this.extent = clipgeom.getExtent();
+      getGeoJson(adcode).then(list => {
+        let xList = [],
+          yList = [],
+          valueList = [];
+        list.features.forEach(item => {
+          xList.push(item.properties.center[0]);
+          yList.push(item.properties.center[1]);
+          valueList.push(Math.random(0, 1) * 100);
         });
+        this.drawKriging(xList, yList, valueList);
       });
     },
 
