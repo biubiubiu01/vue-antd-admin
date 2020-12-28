@@ -13,6 +13,8 @@ import 'ol/ol.css';
 import { Map, View } from 'ol';
 import Polygon from 'ol/geom/Polygon';
 import Image from 'ol/layer/Image';
+import Tile from 'ol/layer/Tile';
+import OSM from 'ol/source/OSM';
 import ImageCanvas from 'ol/source/ImageCanvas';
 import { getGeoJson } from '@/utils/index';
 import { getCenter } from 'ol/extent';
@@ -61,33 +63,36 @@ export default {
     initMap() {
       this.map = new Map({
         target: 'openMap',
+        layers: [
+          new Tile({
+            source: new OSM(),
+            opacity: 1
+          })
+        ],
         view: new View({
           projection: 'EPSG:4326', // 使用这个坐标系
-          zoom: 8.95
+          zoom: 7
         })
       });
-      this.getMapJson(100000);
+      this.getMapJson(420000);
     },
     getMapJson(adcode) {
-      getGeoJson(adcode).then(data => {
-        if (this.extent) {
+      axios.get('https://geo.datav.aliyun.com/areas/bound/geojson?code=420000').then(res => {
+        const data = res.data || [];
+        this.coord = [data.features[0].geometry.coordinates[0]];
+        let clipgeom = new Polygon(this.coord);
+        this.extent = clipgeom.getExtent();
+        getGeoJson(adcode).then(list => {
           let xList = [],
             yList = [],
             valueList = [];
-          data.features.forEach(item => {
+          list.features.forEach(item => {
             xList.push(item.properties.center[0]);
             yList.push(item.properties.center[1]);
             valueList.push(Math.random(0, 1) * 100);
           });
           this.drawKriging(xList, yList, valueList);
-          return;
-        }
-        //获取边界值
-        this.coord = data.features[0].geometry.coordinates[0];
-        let clipgeom = new Polygon(this.coord);
-        this.extent = clipgeom.getExtent();
-
-        this.getMapJson(data.features[0].properties.adcode);
+        });
       });
     },
 
