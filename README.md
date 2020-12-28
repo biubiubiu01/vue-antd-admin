@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://gist006.gitee.io/vue-antd-admin/">
+  <a href="http://gist006.gitee.io/vue-antd-admin/">
     <img src="https://images.gitee.com/uploads/images/2020/1129/181145_3aeaf5c3_7647779.png" alt="Logo" width="250">
    <h1 align="center"> vue antd admin</h3>
   </a>
@@ -9,7 +9,7 @@
     <a href="https://github.com/biubiubiu01/vue-antd-admin"><strong>探索本项目的文档 »</strong></a>
     <br />
     <br />
-    <a href="https://gist006.gitee.io/vue-antd-admin/">在线预览</a>
+    <a href="http://gist006.gitee.io/vue-antd-admin/">在线预览</a>
     ·
     <a href="https://github.com/biubiubiu01/vue-antd-admin/issues">提出Bug</a>
     ·
@@ -18,7 +18,7 @@
 
 ## 简介
 
-[vue-antd-admin](https://gist006.gitee.io/vue-antd-admin/)是一个后台管理系统，基于[vue](https://github.com/vuejs/vue)+[ant-design-vue](https://github.com/vueComponent/ant-design-vue)开发，包含动态路由+权限管理解决用户权限问题，提供基础固定权限：admin、test、editor和自定义用户权限，可自定义修改角色对应的菜单；布局方面提供左右布局和上下布局两种，可自由切换；系统内置了3套主题，可随意切换；还有一些后台管理系统常用的功能如表单，table表等；
+[vue-antd-admin](http://gist006.gitee.io/vue-antd-admin/)是一个后台管理系统，基于[vue](https://github.com/vuejs/vue)+[ant-design-vue](https://github.com/vueComponent/ant-design-vue)开发，包含动态路由+权限管理解决用户权限问题，提供基础固定权限：admin、test、editor和自定义用户权限，可自定义修改角色对应的菜单；布局方面提供左右布局和上下布局两种，可自由切换；系统内置了3套主题，可随意切换；还有一些后台管理系统常用的功能如表单，table表等；
 ## 前序准备
 * 该项目采用[vue](https://github.com/vuejs/vue)+[vue-cli4](https://github.com/vuejs/vue-cli)+[vuex](https://github.com/vuejs/vuex)+[ant-design-vue](https://github.com/vueComponent/ant-design-vue)和[axios](https://github.com/axios/axios)开发，数据采用[mock.js](https://github.com/nuysoft/Mock)进行模拟,后期打算使用node写后台；
 * [webpack](https://github.com/webpack/webpack)大幅度优化了下，首屏加载速度更快；
@@ -144,7 +144,7 @@ npm run test:unit
 
 ## Online Demo
 
-[在线 Demo](https://gist006.gitee.io/vue-antd-admin/)
+[在线 Demo](http://gist006.gitee.io/vue-antd-admin/)
 
 ## 最后
 
