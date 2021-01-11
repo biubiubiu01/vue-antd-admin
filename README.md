@@ -19,6 +19,20 @@
 ## 简介
 
 [vue-antd-admin](http://gist006.gitee.io/vue-antd-admin/)是一个后台管理系统，基于[vue](https://github.com/vuejs/vue)+[ant-design-vue](https://github.com/vueComponent/ant-design-vue)开发，包含动态路由+权限管理解决用户权限问题，提供基础固定权限：admin、test、editor和自定义用户权限，可自定义修改角色对应的菜单；布局方面提供左右布局和上下布局两种，可自由切换；系统内置了3套主题，可随意切换；还有一些后台管理系统常用的功能如表单，table表等；
+
+## 测试账号
+```
+过一段时间后才发现忘记放测试账号和密码了，哈哈哈
+
+1.  用户名：admin  密码 任意6位数 （如果你喜欢，可以用123456） 拥有admin的权限可以查看所有页面
+2.  用户名：test   密码 任意6位数 （如果你喜欢，可以用123456） 拥有test的页面权限，可以查看部分页面
+3.  用户名：editor 密码 任意6位数 （如果你喜欢，可以用123456） 拥有editor的页面权限，可以查看富文本等页面
+4.  使用手机号验证码登录 ，默认拥有admin的权限
+
+目前在使用node+express+mysql写后台，顺带说一句mysql真不会啊，难受。。。
+```
+
+
 ## 前序准备
 * 该项目采用[vue](https://github.com/vuejs/vue)+[vue-cli4](https://github.com/vuejs/vue-cli)+[vuex](https://github.com/vuejs/vuex)+[ant-design-vue](https://github.com/vueComponent/ant-design-vue)和[axios](https://github.com/axios/axios)开发，数据采用[mock.js](https://github.com/nuysoft/Mock)进行模拟,后期打算使用node写后台；
 * [webpack](https://github.com/webpack/webpack)大幅度优化了下，首屏加载速度更快；
