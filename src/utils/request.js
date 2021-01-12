@@ -11,7 +11,7 @@ const service = axios.create({
 //请求
 service.interceptors.request.use(config => {
   if (store.getters.token) {
-    config.headers['X-Token'] = store.getters.token;
+    config.headers['authorization'] = store.getters.token;
   }
   return config;
 });
@@ -22,60 +22,7 @@ service.interceptors.response.use(response => {
   if (data.code === 200) {
     return Promise.resolve(response);
   } else {
-    let err = {};
-    switch (data.code) {
-      case 400:
-        err.info = '请求无效';
-        break;
-
-      case 401:
-        err.info = '由于长时间未操作，登录已超时，请重新登录';
-        break;
-
-      case 403:
-        err.info = '拒绝访问';
-        break;
-
-      case 404:
-        err.info = `请求地址出错`;
-        break;
-
-      case 405:
-        err.info = `未授权`;
-        break;
-
-      case 408:
-        err.info = '请求超时';
-        break;
-
-      case 500:
-        err.info = '服务器内部错误';
-        break;
-
-      case 501:
-        err.info = '服务未实现';
-        break;
-
-      case 502:
-        err.info = '网关错误';
-        break;
-
-      case 503:
-        err.info = '服务不可用';
-        break;
-
-      case 504:
-        err.info = '网关超时';
-        break;
-
-      case 505:
-        err.info = 'HTTP版本不受支持';
-        break;
-
-      default:
-        err.info = '网络波动，请重试';
-    }
-    message.error(err.info + ' ' + response.data.message || '');
+    message.error(response.data.message || '');
     return Promise.reject(response);
   }
 });
@@ -96,7 +43,7 @@ http.get = function(url, params = null) {
         resolve(res.data);
       })
       .catch(e => {
-        reject(e.data);
+        reject(e);
       });
   });
 };
@@ -115,7 +62,7 @@ http.post = function(url, params) {
         resolve(res.data);
       })
       .catch(e => {
-        reject(e.data);
+        reject(e);
       });
   });
 };

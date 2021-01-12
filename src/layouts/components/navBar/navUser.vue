@@ -58,5 +58,11 @@ export default {
   margin-left: 8px;
   font-weight: 700;
   font-size: 1rem;
+  display: inline-block;
+  width: 70px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: middle;
 }
 </style>
