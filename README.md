@@ -29,8 +29,9 @@
 3.  用户名：editor 密码 任意6位数 （如果你喜欢，可以用123456） 拥有editor的页面权限，可以查看富文本等页面
 4.  使用手机号验证码登录 ，默认拥有admin的权限
 
-目前在使用node+express+mysql写后台，顺带说一句mysql真不会啊，难受。。。
 ```
+
+已实现基础版node+express+mysql后台，地址：[vue-antd-server](https://github.com/biubiubiu01/vue-antd-server)
 
 
 ## 前序准备
