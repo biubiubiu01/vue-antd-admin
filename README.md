@@ -33,6 +33,8 @@
 
 已实现基础版node+express+mysql后台，地址：[vue-antd-server](https://github.com/biubiubiu01/vue-antd-server)
 
+react版本，地址：[reacct-antd-admin](https://github.com/biubiubiu01/react-antd-admin)
+
 
 ## 前序准备
 * 该项目采用[vue](https://github.com/vuejs/vue)+[vue-cli4](https://github.com/vuejs/vue-cli)+[vuex](https://github.com/vuejs/vuex)+[ant-design-vue](https://github.com/vueComponent/ant-design-vue)和[axios](https://github.com/axios/axios)开发，数据采用[mock.js](https://github.com/nuysoft/Mock)进行模拟,后期打算使用node写后台；
