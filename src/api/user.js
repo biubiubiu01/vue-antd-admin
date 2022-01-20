@@ -37,12 +37,3 @@ export function getPhoneCode(data) {
 export function getCodeTest(data) {
   return request.post('/user/testCode', data);
 }
-
-/**
- * @description 获取用户信息
- * @param {string}  token
- * @returns {string} userInfo
- */
-export function getInfo(data) {
-  return request.post('/user/userInfo', data);
-}

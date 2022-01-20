@@ -60,7 +60,7 @@
       flex: auto;
       color: #fff;
     }
-    /deep/ .ant-menu-horizontal {
+    ::v-deep .ant-menu-horizontal {
       height: 54px !important;
       line-height: 54px;
     }

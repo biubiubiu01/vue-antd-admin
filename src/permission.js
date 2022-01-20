@@ -19,19 +19,24 @@ router.beforeEach(async (to, from, next) => {
     if (!isLogin) {
       next('/login');
     } else {
-      const userInfo = store.state.user.accountInfo;
-      if (userInfo) {
+      const route = store.state.permission.routes;
+      if (route.length > 0) {
         next();
         NProgress.done();
       } else {
+        const userInfo = store.state.user.accountInfo;
         try {
-          const { username } = await store.dispatch('user/getInfo');
-          const accountRoute = await store.dispatch('permission/getRoute', username);
-
+          const { roleIds } = userInfo;
+          const accountRoute = await store.dispatch('permission/getRoute', roleIds);
           router.addRoutes(accountRoute);
-          next({ ...to, replace: true });
+          if (from.path == '/login') {
+            next(accountRoute[0].children[0].path);
+          } else {
+            next({ ...to, replace: true });
+          }
           NProgress.done();
-        } catch {
+        } catch (error) {
+          console.log(error);
           message.error('获取用户信息失败');
           next('/login');
           NProgress.done();

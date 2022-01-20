@@ -16,7 +16,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .backTop {
-  /deep/ .ant-back-top {
+  ::v-deep .ant-back-top {
     background-color: #1890ff;
     text-align: center;
     line-height: 40px;

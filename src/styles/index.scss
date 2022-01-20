@@ -1,16 +1,13 @@
 @import './antd.scss';
 @import './sideBar.scss';
 @import './common.scss';
-@import './theme/blueTheme.scss';
-@import './theme/yellowTheme.scss';
-@import './theme/greenTheme.scss';
+
 
 body {
   height: 100%;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  font-family: Helvetica Neue, Helvetica, PingFang SC, Microsoft YaHei, Arial, sans-serif;
 }
 html {
   height: 100%;
@@ -81,13 +78,6 @@ div:focus {
   width: 100%;
   height: 100%;
   position: relative;
-}
-
-.content {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  min-width: 1230px;
 }
 
 .relative {
@@ -172,15 +162,13 @@ div:focus {
   white-space: nowrap;
   overflow: hidden;
 }
-.bgImg {
+.bg-img {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
-.borderR15 {
-  border-radius: 15px;
-}
-.verticalMiddle {
+
+.vertical-middle {
   vertical-align: middle !important;
 }
 .vertical-bottom {

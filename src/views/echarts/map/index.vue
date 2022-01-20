@@ -51,7 +51,7 @@ export default {
   .darkBg {
     background: #001a3a;
 
-    /deep/ .ant-card-head-title {
+    ::v-deep .ant-card-head-title {
       color: #fff !important;
     }
   }

@@ -55,7 +55,7 @@ const tableHead = [
   },
   {
     title: '权限',
-    dataIndex: 'role',
+    dataIndex: 'roleString',
     ellipsis: true
   },
   {
@@ -70,8 +70,9 @@ const tableHead = [
   }
 ];
 import standardTable from '@/components/standardTable/index';
-import { getRoleTable, deleteRoleTable } from '@/api/roleManage';
+import { getRoleTable, deleteRoleTable, getRole } from '@/api/roleManage';
 import roleModel from './roleModel';
+import router, { resetRouter } from '@/router';
 export default {
   name: 'roleManage',
   components: { standardTable, roleModel },
@@ -86,6 +87,11 @@ export default {
   },
   created() {
     this.getRoleTable();
+  },
+  computed: {
+    userInfo() {
+      return this.$store.state.user.accountInfo;
+    }
   },
 
   methods: {
@@ -103,11 +109,32 @@ export default {
       this.currentRow = { ...row };
       this.dialogVisible = true;
     },
-    handleOk() {
+    handleOk(val) {
+      if (this.currentRow && val.role == this.userInfo.role) {
+        //刷新路由
+        this.resetRoute();
+      }
       this.dialogVisible = false;
       this.currentRow = null;
       this.getRoleTable();
     },
+
+    resetRoute() {
+      getRole({ role: this.userInfo.role }).then(async res => {
+        let obj = { ...this.userInfo };
+        await this.$store.dispatch(
+          'user/updateInfo',
+          Object.assign(obj, {
+            roleIds: res.data.roleIds
+          })
+        );
+        resetRouter();
+        const accessedRoutes = await this.$store.dispatch('permission/getRoute', res.data.roleIds);
+        console.log(accessedRoutes);
+        router.addRoutes(accessedRoutes);
+      });
+    },
+
     //删除
     handleDelete(val) {
       deleteRoleTable({ id: val.id }).then(() => {

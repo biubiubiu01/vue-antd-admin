@@ -1,29 +1,4 @@
-const roleData = [
-  {
-    id: parseInt(Math.random() * 1000000000000),
-    role: 'admin',
-    text: '系统管理员，拥有所有权限',
-    key: 'admin'
-  },
-  {
-    id: parseInt(Math.random() * 1000000000000),
-    role: 'test',
-    text: '普通用户，拥有大部分权限',
-    key: 'test'
-  },
-  {
-    id: parseInt(Math.random() * 1000000000000),
-    role: 'editor',
-    text: '文档管理人员，只能看富文本页面',
-    key: 'editor'
-  },
-  {
-    id: parseInt(Math.random() * 1000000000000),
-    role: 'custom',
-    text: '自定义权限，权限由管理员去定义',
-    key: 'custom'
-  }
-];
+let { roleData } = require('../constant');
 
 module.exports = [
   {
@@ -55,12 +30,13 @@ module.exports = [
     url: '/roleManage/editRole',
     type: 'post',
     response: config => {
-      const { id, role, text } = config.body;
+      const { id, roleString, text, roleIds } = config.body;
       roleData.forEach(item => {
         if (item.id == id) {
           Object.assign(item, {
-            role,
-            text
+            roleString,
+            text,
+            roleIds
           });
         }
       });
@@ -74,20 +50,36 @@ module.exports = [
     url: '/roleManage/addRole',
     type: 'post',
     response: config => {
-      const { role, text } = config.body;
+      const { roleString, text, roleIds } = config.body;
       const id = parseInt(Math.random() * 1000000000000);
-
       roleData.push({
-        role,
-        text,
         id,
-        key: id
+        roleString,
+        text,
+        key: id,
+        role: 'custom' + parseInt(Math.random() * 100000),
+        roleIds
       });
 
       return {
         code: 200,
         message: '添加成功！'
       };
+    }
+  },
+  {
+    url: '/roleManage/getRole',
+    type: 'post',
+    response: config => {
+      const { role } = config.body;
+      let str = roleData.find(item => item.role == role);
+      if (str) {
+        return {
+          code: 200,
+          data: str,
+          message: '查询成功'
+        };
+      }
     }
   }
 ];

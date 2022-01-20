@@ -8,6 +8,9 @@ const state = {
 const mutations = {
   SET_ROUTE(state, route) {
     state.routes = baseRoute.concat(route);
+  },
+  RESET_ROUTE(state) {
+    state.routes = [];
   }
 };
 
@@ -15,20 +18,15 @@ const actions = {
   getRoute({ commit }, role) {
     return new Promise((resolve, reject) => {
       let accessedRoutes = [];
-      if (role == 'admin') {
-        accessedRoutes = asyncRoutes;
-      } else {
-        accessedRoutes = filterAsyncRoute(asyncRoutes, role);
-      }
+      accessedRoutes = filterAsyncRoute(asyncRoutes, role);
       commit('SET_ROUTE', accessedRoutes);
       resolve(accessedRoutes);
     });
   },
+
+  //仅测试用，生产请去掉
   async changeRole({ commit, dispatch }, role) {
-    const token = role + '20201013';
-    commit('user/SET_TOKEN', token, { root: true });
-    setCache('TOKEN', token);
-    await dispatch('user/getInfo', token, { root: true });
+    await dispatch('user/login', role);
     resetRouter();
     const accessedRoutes = await dispatch('getRoute', role);
     router.addRoutes(accessedRoutes);
@@ -51,8 +49,9 @@ export function filterAsyncRoute(routes, role) {
 }
 
 export function hasChildren(route, role) {
+  let roleIds = role.split(',');
   if (route.meta && route.meta.role) {
-    return route.meta.role.some(item => item == role);
+    return roleIds.includes(String(route.meta.role));
   } else {
     return true;
   }

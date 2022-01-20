@@ -1,40 +1,16 @@
-const Mock = require('mockjs')
+const Mock = require('mockjs');
 
 const xDataList = {
-  day: [
-    '9:00',
-    '10:00',
-    '11:00',
-    '12:00',
-    '13:00',
-    '14:00',
-    '15:00',
-    '16:00',
-    '17:00',
-    '18:00',
-  ],
+  day: ['9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00'],
   week: ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期天'],
   month: Mock.Random.range(1, 31),
-  year: [
-    '1月',
-    '2月',
-    '3月',
-    '4月',
-    '5月',
-    '6月',
-    '7月',
-    '8月',
-    '9月',
-    '10月',
-    '11月',
-    '12月',
-  ],
-}
+  year: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
+};
 
 function lineData(type) {
   return Array.from({ length: xDataList[type].length }, () => {
-    return Mock.mock('@natural(20,2000)')
-  })
+    return Mock.mock('@natural(20,2000)');
+  });
 }
 
 function rankData() {
@@ -51,19 +27,19 @@ function rankData() {
       汉口江滩店: '@natural(20,2000)',
       中山公园店: '@natural(20,2000)',
       光谷店: '@natural(20,2000)',
-      晴川阁店: '@natural(20,2000)',
-    },
-  })
-  let list = []
+      晴川阁店: '@natural(20,2000)'
+    }
+  });
+  let list = [];
   for (let i in obj.name) {
     list.push({
       area: i,
-      value: obj.name[i],
-    })
+      value: obj.name[i]
+    });
   }
   return list.sort((a, b) => {
-    return b.value - a.value
-  })
+    return b.value - a.value;
+  });
 }
 
 function pieData() {
@@ -76,17 +52,17 @@ function pieData() {
       烤肉: '@natural(100,500)',
       服饰: '@natural(100,500)',
       网咖: '@natural(100,500)',
-      酒店: '@natural(100,500)',
-    },
-  })
-  let list = []
+      酒店: '@natural(100,500)'
+    }
+  });
+  let list = [];
   for (let i in obj.name) {
     list.push({
       name: i,
-      value: obj.name[i],
-    })
+      value: obj.name[i]
+    });
   }
-  return list
+  return list;
 }
 
 function hotData() {
@@ -109,17 +85,17 @@ function hotData() {
       园博园: '@natural(500,2000)',
       古琴台: '@natural(500,2000)',
       九峰山: '@natural(500,2000)',
-      户部巷: '@natural(500,2000)',
-    },
-  })
-  let list = []
+      户部巷: '@natural(500,2000)'
+    }
+  });
+  let list = [];
   for (let i in obj.name) {
     list.push({
       name: i,
-      value: obj.name[i],
-    })
+      value: obj.name[i]
+    });
   }
-  return list
+  return list;
 }
 
 function moreData() {
@@ -140,81 +116,81 @@ function moreData() {
       木兰草原: '@natural(500,2000)',
       海洋公园: '@natural(500,2000)',
       古琴台: '@natural(500,2000)',
-      户部巷: '@natural(500,2000)',
-    },
-  })
-  let list = []
+      户部巷: '@natural(500,2000)'
+    }
+  });
+  let list = [];
   for (let i in obj.name) {
-    let random = Math.floor(Math.random() * obj.name[i])
+    let random = Math.floor(Math.random() * obj.name[i]);
     list.push({
       name: i,
       male: random,
       female: obj.name[i] - random,
-      value: obj.name[i],
-    })
+      value: obj.name[i]
+    });
   }
-  return list
+  return list;
 }
 
 module.exports = [
   {
     url: '/dashboard/lineChart',
     type: 'post',
-    response: (config) => {
-      const { type } = config.body
+    response: config => {
+      const { type } = config.body;
       return {
         data: {
           xData: xDataList[type],
           yData: lineData(type),
-          lastData: lineData(type),
+          lastData: lineData(type)
         },
         code: 200,
-        message: '数据获取成功',
-      }
-    },
+        message: '数据获取成功'
+      };
+    }
   },
   {
     url: '/dashboard/rankData',
     type: 'post',
-    response: (config) => {
+    response: config => {
       return {
         data: rankData(),
         code: 200,
-        message: '数据获取成功',
-      }
-    },
+        message: '数据获取成功'
+      };
+    }
   },
   {
     url: '/dashboard/pieTypeData',
     type: 'post',
-    response: (config) => {
+    response: config => {
       return {
         data: pieData(),
         code: 200,
-        message: '数据获取成功',
-      }
-    },
+        message: '数据获取成功'
+      };
+    }
   },
   {
     url: '/dashboard/hotSearchData',
     type: 'post',
-    response: (config) => {
+    response: config => {
       return {
         data: hotData(),
         code: 200,
-        message: '数据获取成功',
-      }
-    },
+        message: '数据获取成功'
+      };
+    }
   },
   {
     url: '/dashboard/moreData',
     type: 'post',
-    response: (config) => {
+    response: config => {
       return {
         data: moreData(),
         code: 200,
-        message: '数据获取成功',
-      }
-    },
-  },
-]
+        message: '数据获取成功'
+      };
+    }
+  }
+];

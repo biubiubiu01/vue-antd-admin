@@ -37,16 +37,12 @@ export default {
       visible: false,
       customList: [
         {
-          key: 'blue',
-          label: '天空蓝'
+          key: 'white',
+          label: '浅色主题'
         },
         {
-          key: 'yellow',
-          label: '日落黄'
-        },
-        {
-          key: 'green',
-          label: '草原绿'
+          key: 'dark',
+          label: '深色主题'
         }
       ],
       layoutList: [

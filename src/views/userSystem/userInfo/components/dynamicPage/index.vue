@@ -25,9 +25,9 @@ export default {
     return {
       timelineList: [
         {
-          title: '学习下node写个后台，把这个项目后台写了',
-          time: '以后...',
-          color: 'red'
+          title: '优化角色控制权限，用户可绑定多个角色',
+          time: '2022-01-19',
+          color: 'gray'
         },
         {
           title: '',

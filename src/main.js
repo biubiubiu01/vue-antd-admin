@@ -16,6 +16,10 @@ import Antd from 'ant-design-vue';
 import 'ant-design-vue/dist/antd.css';
 Vue.use(Antd);
 
+import config from '@/config/index';
+
+Vue.use(config);
+
 import scrollBar from '@/components/scrollBar';
 import '@/components/scrollBar/index.scss';
 Vue.component('scroll-bar', scrollBar);

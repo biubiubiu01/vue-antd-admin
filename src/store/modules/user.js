@@ -1,9 +1,9 @@
 import { getCache, setCache, removeCache } from '@/utils/session';
-import { login, logout, getCodeTest, getInfo } from '@/api/user';
+import { login, logout, getCodeTest } from '@/api/user';
 import { resetRouter } from '@/router';
 
 const state = {
-  accountInfo: null,
+  accountInfo: getCache('USERINFO') || '',
   token: getCache('TOKEN') || ''
 };
 
@@ -25,6 +25,8 @@ const actions = {
           if (data) {
             commit('SET_TOKEN', data.token);
             setCache('TOKEN', data.token);
+            commit('SET_USERINFO', data.userInfo);
+            setCache('USERINFO', data.userInfo);
           }
           resolve();
         })
@@ -56,25 +58,11 @@ const actions = {
         .then(() => {
           commit('SET_TOKEN', '');
           commit('SET_USERINFO', '');
+          commit('permission/RESET_ROUTE', [], { root: true });
           removeCache('TOKEN');
+          removeCache('USERIFNO');
           resetRouter();
           resolve();
-        })
-        .catch(err => {
-          reject(err);
-        });
-    });
-  },
-
-  getInfo({ commit, state }) {
-    return new Promise((resolve, reject) => {
-      getInfo({ token: state.token })
-        .then(res => {
-          const { data } = res;
-          if (data) {
-            commit('SET_USERINFO', data);
-          }
-          resolve(data);
         })
         .catch(err => {
           reject(err);
@@ -85,6 +73,7 @@ const actions = {
   updateInfo({ commit }, userInfo) {
     return new Promise((resolve, reject) => {
       commit('SET_USERINFO', userInfo);
+      setCache('USERINFO', userInfo);
       resolve();
     });
   }

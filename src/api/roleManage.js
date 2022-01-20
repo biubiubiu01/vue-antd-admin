@@ -41,3 +41,13 @@ export function editRole(data) {
 export function addRole(data) {
   return request.post('/roleManage/addRole', data);
 }
+
+/**
+ * @description 根据角色标识查询角色详细
+ * @param {string}  role
+ * @returns {Object}
+ */
+
+export function getRole(data) {
+  return request.post('/roleManage/getRole', data);
+}

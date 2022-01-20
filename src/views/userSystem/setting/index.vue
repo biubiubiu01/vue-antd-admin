@@ -28,7 +28,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .setting-container {
-  /deep/ .ant-form-item-label {
+  ::v-deep .ant-form-item-label {
     font-weight: 600;
   }
 }

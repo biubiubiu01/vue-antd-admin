@@ -6,7 +6,7 @@ const nestRouter = {
   component: mainLayout,
   redirect: '/nest/menu1',
   meta: {
-    role: ['admin', 'test'],
+    role: 34,
     title: '嵌套路由',
     icon: 'nest'
   },

@@ -46,7 +46,7 @@ export const asyncRoutes = [
         path: '/index',
         component: () => import('@/views/index/index'),
         meta: {
-          role: ['admin', 'test'],
+          role: 1,
           title: '首页',
           icon: 'dashboard'
         }
@@ -57,7 +57,7 @@ export const asyncRoutes = [
         path: '/icon',
         component: () => import('@/views/icon/index'),
         meta: {
-          role: ['admin', 'test'],
+          role: 2,
           title: '图标',
           icon: 'icon'
         }
@@ -68,7 +68,8 @@ export const asyncRoutes = [
         component: () => import('@/views/permission/index'),
         meta: {
           title: '权限测试页',
-          icon: 'permission'
+          icon: 'permission',
+          role: 3
         }
       },
       {
@@ -77,7 +78,7 @@ export const asyncRoutes = [
         path: '/webGl',
         redirect: '/webGl/ArcGis',
         meta: {
-          role: ['admin', 'test'],
+          role: 4,
           title: '地图',
           icon: 'webGl'
         },
@@ -86,13 +87,13 @@ export const asyncRoutes = [
             name: 'ArcGis',
             path: '/webGl/ArcGis',
             component: () => import('@/views/webGl/ArcGis/index'),
-            meta: { title: 'ArcGis' }
+            meta: { title: 'ArcGis', role: 5 }
           },
           {
             name: 'OpenLayers',
             path: '/webGl/OpenLayers',
             component: () => import('@/views/webGl/OpenLayers/index'),
-            meta: { title: '插值分析图' }
+            meta: { title: '插值分析图', role: 6 }
           }
         ]
       },
@@ -104,25 +105,25 @@ export const asyncRoutes = [
         path: '/error',
         component: mainLayout,
         redirect: '/error/403',
-        meta: { title: '错误页面', icon: 'error' },
+        meta: { title: '错误页面', icon: 'error', role: 7 },
         children: [
           {
             name: '403',
             path: '/error/403',
             component: () => import('@/views/error/403'),
-            meta: { title: '403' }
+            meta: { title: '403', role: 8 }
           },
           {
             name: '404',
             path: '/error/404',
             component: () => import('@/views/error/404'),
-            meta: { title: '404' }
+            meta: { title: '404', role: 9 }
           },
           {
             name: '500',
             path: '/error/500',
             component: () => import('@/views/error/500'),
-            meta: { title: '500' }
+            meta: { title: '500', role: 10 }
           }
         ]
       },
@@ -131,19 +132,19 @@ export const asyncRoutes = [
         component: mainLayout,
         path: '/userSystem',
         redirect: '/userSystem/userInfo',
-        meta: { title: '个人设置', icon: 'user' },
+        meta: { title: '个人设置', icon: 'user', role: 11 },
         children: [
           {
             name: 'userInfo',
             path: '/userSystem/userInfo',
             component: () => import('@/views/userSystem/userInfo/index'),
-            meta: { title: '个人中心' }
+            meta: { title: '个人中心', role: 12 }
           },
           {
             name: 'setting',
             path: '/userSystem/setting',
             component: () => import('@/views/userSystem/setting/index'),
-            meta: { title: '用户设置' }
+            meta: { title: '个人设置', role: 13 }
           }
         ]
       },
@@ -153,8 +154,8 @@ export const asyncRoutes = [
         path: '/system',
         redirect: '/system/userManage',
         meta: {
-          role: ['admin'],
-          title: '系统设置',
+          role: 14,
+          title: '后台管理',
           icon: 'system'
         },
         children: [
@@ -162,13 +163,13 @@ export const asyncRoutes = [
             name: 'userManage',
             path: '/system/userManage',
             component: () => import('@/views/system/userManage/index'),
-            meta: { title: '用户管理' }
+            meta: { title: '用户管理', role: 15 }
           },
           {
             name: 'roleManage',
             path: '/system/roleManage',
             component: () => import('@/views/system/roleManage/index'),
-            meta: { title: '角色管理' }
+            meta: { title: '角色管理', role: 16 }
           }
         ]
       }

@@ -202,12 +202,9 @@ export default {
               .then(() => {
                 if (this.loginForm.remember) {
                   setCache('LOGIN_INFO', { username, password });
-                  let path = '/index';
-                  if (this.loginForm.username == 'editor') {
-                    path = '/components/editor';
-                  }
+
                   this.$router.push({
-                    path: path
+                    path: '/index'
                   });
                   this.loading = false;
                 } else {
@@ -247,6 +244,7 @@ export default {
 <style lang="scss" scoped>
 .login-container {
   background-image: url('~@/assets/login/background.jpg');
+  height: 100%;
   .layout {
     width: 55%;
     min-width: 900px;
