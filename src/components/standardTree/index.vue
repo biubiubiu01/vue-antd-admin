@@ -3,7 +3,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
 import { asyncRoutes } from '@/router';
 export default {
   name: 'standardTree',
@@ -17,7 +16,6 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['baseRoute']),
     asyncRoutes() {
       return asyncRoutes;
     }
@@ -49,13 +47,15 @@ export default {
       this.checkKeyList = newRoute;
     },
 
-    getRouteId(routes) {
+    getRouteId(routes, role = null) {
       const res = [];
       routes.forEach(item => {
         if (item.children && item.children.length > 0) {
-          res.push(...this.getRouteId(item.children));
+          res.push(...this.getRouteId(item.children, item.meta.role));
         } else if (item.meta && item.meta.role) {
           res.push(String(item.meta.role));
+        } else if (role) {
+          res.push(String(role));
         }
       });
       return res;

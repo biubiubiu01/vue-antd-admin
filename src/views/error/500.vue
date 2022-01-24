@@ -8,26 +8,28 @@
   </a-result>
 </template>
 <script>
+import { asyncRoutes } from '@/router';
 export default {
   data() {
     return {};
   },
   computed: {
-    role() {
-      return this.$store.getters.roles;
+    asyncRoutes() {
+      return asyncRoutes;
     }
   },
   methods: {
     returnHome() {
-      if (this.role === 'editor') {
-        this.$router.push({
-          path: '/components/editor'
-        });
-        return;
-      }
-      this.$router.push({
-        path: '/index'
+      const data = this.filtrRoute(this.asyncRoutes);
+      this.$router.replace({
+        path: data[0].path
       });
+    },
+    filtrRoute(routes) {
+      if (routes.length == 0) {
+        return [];
+      }
+      return routes.filter(item => item.children)[0].children;
     }
   }
 };

@@ -1,69 +1,4 @@
-var tableData = [
-  {
-    id: parseInt(Math.random() * 1000000000000),
-    username: 'admin',
-    password: '123456',
-    role: 'admin',
-    date: '2020-10-13',
-    text: '系统管理员，拥有所有权限',
-    key: 'admin'
-  },
-  {
-    id: parseInt(Math.random() * 1000000000000),
-    username: 'editor',
-    password: '123456',
-    role: 'editor',
-    date: '2020-10-13',
-    text: 'admin签约金牌作家--马老师',
-    key: 'editor'
-  },
-  {
-    id: parseInt(Math.random() * 1000000000000),
-    username: 'test',
-    password: '123456',
-    role: 'test',
-    date: '2020-10-13',
-    text: '不知名体验者，峡谷最快乐的男人',
-    key: 'test'
-  },
-  {
-    id: parseInt(Math.random() * 1000000000000),
-    username: 'custom',
-    password: '123456',
-    role: 'custom',
-    date: '2020-10-13',
-    text: '早安，打工人(自定义权限，路由权限由管理员分配)',
-    key: 'custom11'
-  },
-  {
-    id: parseInt(Math.random() * 1000000000000),
-    username: '黑虎阿福',
-    password: '123456',
-    role: 'custom',
-    date: '2020-10-16',
-    text: '乌鸦坐飞机',
-    key: 'custom22'
-  },
-  {
-    id: parseInt(Math.random() * 1000000000000),
-    username: '马大师',
-    password: '123456',
-    role: 'custom',
-    date: '2020-10-18',
-    text: '闪电五连鞭',
-    key: 'custom33'
-  },
-  {
-    id: parseInt(Math.random() * 1000000000000),
-    username: '张三',
-    password: '123456',
-    role: 'custom',
-    date: '2020-10-20',
-    text: '不知名用户张三',
-    key: 'custom44'
-  }
-];
-
+const { userData: tableData } = require('../constant');
 const moment = require('moment');
 
 function filterTable(list, key, value) {
@@ -94,7 +29,6 @@ module.exports = [
       if (startTime && endTime) {
         list = filterTable(list, 'date', [startTime, endTime]);
       }
-
       return {
         data: list,
         code: 200,
@@ -137,14 +71,18 @@ module.exports = [
     url: '/userManage/editTable',
     type: 'post',
     response: config => {
-      const { id, role, username, password, text } = config.body;
+      const { id, role, username, password, text, location, position, skill, label } = config.body;
       tableData.forEach(item => {
         if (item.id == id) {
           Object.assign(item, {
             role,
             username,
             password,
-            text
+            text,
+            location,
+            position,
+            skill,
+            label
           });
         }
       });
@@ -159,7 +97,7 @@ module.exports = [
     url: '/userManage/addTable',
     type: 'post',
     response: config => {
-      const { role, username, password, text } = config.body;
+      const { role, username, password, text, location, position, label, skill } = config.body;
       const id = parseInt(Math.random() * 1000000000000);
       const date = moment(new Date())
         .add(0, 'year')
@@ -171,7 +109,11 @@ module.exports = [
         text,
         id,
         date,
-        key: id
+        key: role,
+        location,
+        position,
+        label,
+        skill
       });
 
       return {

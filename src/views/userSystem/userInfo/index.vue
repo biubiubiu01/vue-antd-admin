@@ -6,11 +6,17 @@
           <div class="accountInfo">
             <img src="../../../assets/nav/user.gif" alt="" class="accountImg" />
             <div class="username">{{ accountInfo.username }}</div>
-            <div class="userRole">{{ accountInfo.role }}</div>
+            <div class="userRole">{{ accountInfo.roleString }}</div>
           </div>
           <div class="accountMajor">
             <template v-for="(v, k) in accountInfo">
-              <div class="major-wrapper" :key="k" v-if="k != 'username' && k != 'role'">
+              <div
+                class="major-wrapper"
+                :key="k"
+                v-if="
+                  !['id', 'key', 'date', 'username', 'role', 'password', 'text', 'roleIds', 'roleString'].includes(k)
+                "
+              >
                 <svg-icon :icon="k" class="vertical-bottom" />
                 <span class="major-name">{{ v }}</span>
               </div>

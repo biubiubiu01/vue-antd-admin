@@ -52,12 +52,13 @@ module.exports = [
     response: config => {
       const { roleString, text, roleIds } = config.body;
       const id = parseInt(Math.random() * 1000000000000);
+      const role = 'custom' + parseInt(Math.random() * 100000);
       roleData.push({
         id,
         roleString,
         text,
-        key: id,
-        role: 'custom' + parseInt(Math.random() * 100000),
+        key: role,
+        role: role,
         roleIds
       });
 

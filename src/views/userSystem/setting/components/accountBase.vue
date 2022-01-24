@@ -35,8 +35,8 @@
         :default-value="accountFrom.skill"
         @change="changeSkill"
       >
-        <a-select-option v-for="item in skillList" :key="item">
-          {{ item }}
+        <a-select-option v-for="item in SKILL_LIST" :key="item.key">
+          {{ item.label }}
         </a-select-option>
       </a-select>
     </a-form-model-item>
@@ -70,19 +70,7 @@ export default {
         location: [{ required: true, trigger: 'blur', message: '请选择所在城市！' }],
         label: [{ required: true, trigger: 'blur', message: '个人介绍不能为空！' }],
         skill: [{ required: true, trigger: 'blur', message: '请至少勾选一项技能' }]
-      },
-      skillList: [
-        '闪电五连鞭',
-        '偷袭',
-        '耗子尾汁',
-        '乌鸦坐飞机',
-        '龙卷风摧毁停车场',
-        '奥利给',
-        '好嗨哟',
-        '是个狼人',
-        '雨女无瓜',
-        '996'
-      ]
+      }
     };
   },
   computed: {
@@ -104,7 +92,7 @@ export default {
           this.loading = true;
           const { username, position, location, label, skill, role } = this.accountFrom;
           this.$store.dispatch('user/updateInfo', { username, position, location, label, skill, role }).then(() => {
-            this.$message.success('修改成功！');
+            this.$message.success('修改成功,这里是逻辑修改！');
             this.loading = false;
           });
         }

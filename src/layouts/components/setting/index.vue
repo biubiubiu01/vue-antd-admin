@@ -3,7 +3,7 @@
     <div class="item-setting">
       <p>主题配置</p>
       <a-radio-group button-style="solid" :value="theme" @change="changeTheme">
-        <a-radio-button :value="item.key" v-for="item in customList" :key="item.key">
+        <a-radio-button :value="item.key" v-for="item in THEME_LIST" :key="item.key">
           {{ item.label }}
         </a-radio-button>
       </a-radio-group>
@@ -12,7 +12,7 @@
     <div class="item-setting">
       <p>布局方式</p>
       <a-radio-group :value="layout" button-style="solid" @change="changeLayout">
-        <a-radio-button :value="item.key" v-for="item in layoutList" :key="item.key">
+        <a-radio-button :value="item.key" v-for="item in LAYOUT_LIST" :key="item.key">
           {{ item.label }}
         </a-radio-button>
       </a-radio-group>
@@ -34,27 +34,7 @@ export default {
   name: 'setting',
   data() {
     return {
-      visible: false,
-      customList: [
-        {
-          key: 'white',
-          label: '浅色主题'
-        },
-        {
-          key: 'dark',
-          label: '深色主题'
-        }
-      ],
-      layoutList: [
-        {
-          label: '左侧导航',
-          key: 'inline'
-        },
-        {
-          label: '头部导航',
-          key: 'horizontal'
-        }
-      ]
+      visible: false
     };
   },
   computed: {

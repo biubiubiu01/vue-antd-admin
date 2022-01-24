@@ -15,8 +15,8 @@
           批量删除
         </a-button>
         <a-select placeholder="用户权限" class="select-width" allowClear @change="changeRole">
-          <a-select-option v-for="item in roleOption" :key="item.key" :value="item.key">
-            {{ item.label }}
+          <a-select-option v-for="item in roleOption" :key="item.role" :value="item.role">
+            {{ item.roleString }}
           </a-select-option>
         </a-select>
         <a-input
@@ -52,7 +52,7 @@
         </div>
         <div slot="role" slot-scope="{ text }">
           <a-tag :color="text | statusFilter">
-            {{ text }}
+            {{ text | textFilter(roleOption) }}
           </a-tag>
         </div>
         <div slot="action" slot-scope="{ text }">
@@ -86,6 +86,7 @@
 
 <script>
 import { getUserTable, deleteTable, batchDeleteTable } from '@/api/userManage';
+import { getRoleTable } from '@/api/roleManage';
 import { formatJson } from '@/utils';
 import userModel from './userModel';
 import standardTable from '@/components/standardTable/index';
@@ -148,28 +149,18 @@ export default {
         custom: ''
       };
       return statusList[status];
+    },
+    textFilter(text, roleOption) {
+      const roleItem = roleOption.find(item => item.role == text);
+      if (roleItem) {
+        return roleItem.roleString;
+      }
+      return '';
     }
   },
   data() {
     return {
-      roleOption: [
-        {
-          key: 'admin',
-          label: '超级管理员'
-        },
-        {
-          key: 'test',
-          label: '普通用户'
-        },
-        {
-          key: 'editor',
-          label: '作家'
-        },
-        {
-          key: 'custom',
-          label: '自定义'
-        }
-      ],
+      roleOption: [],
       tableQuery: {
         role: null,
         username: '',
@@ -189,10 +180,19 @@ export default {
       tableHead
     };
   },
+  created() {
+    this.getRoleOption();
+  },
   mounted() {
     this.getTableList();
   },
   methods: {
+    //获取角色权限
+    async getRoleOption() {
+      const res = await getRoleTable();
+      this.roleOption = res.data || [];
+    },
+
     changeRole(val) {
       this.tableQuery.role = val;
     },
@@ -239,7 +239,6 @@ export default {
     },
     //编辑
     handleEdit(row) {
-      //这里还需要通过id获取用户对应的菜单，这里就不写了。
       this.currentRow = { ...row };
       this.dialogVisible = true;
     },

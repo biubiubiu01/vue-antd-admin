@@ -3,14 +3,14 @@
     <a-form-model :label-col="{ span: 4 }" :wrapper-col="{ span: 16 }" ref="customFrom">
       <a-form-model-item prop="customColor" label="主题配置">
         <a-radio-group button-style="solid" :value="theme" @change="changeTheme">
-          <a-radio-button :value="item.key" v-for="item in customList" :key="item.key">
+          <a-radio-button :value="item.key" v-for="item in THEME_LIST" :key="item.key">
             {{ item.label }}
           </a-radio-button>
         </a-radio-group>
       </a-form-model-item>
       <a-form-model-item prop="layout" label="布局方式">
         <a-radio-group :value="layout" button-style="solid" @change="changeLayout">
-          <a-radio-button :value="item.key" v-for="item in layoutList" :key="item.key">
+          <a-radio-button :value="item.key" v-for="item in LAYOUT_LIST" :key="item.key">
             {{ item.label }}
           </a-radio-button>
         </a-radio-group>
@@ -30,32 +30,7 @@
 export default {
   name: 'custom',
   data() {
-    return {
-      customList: [
-        {
-          key: 'blue',
-          label: '天空蓝'
-        },
-        {
-          key: 'yellow',
-          label: '日落黄'
-        },
-        {
-          key: 'green',
-          label: '草原绿'
-        }
-      ],
-      layoutList: [
-        {
-          label: '左侧导航',
-          key: 'inline'
-        },
-        {
-          label: '头部导航',
-          key: 'horizontal'
-        }
-      ]
-    };
+    return {};
   },
   computed: {
     theme: {
