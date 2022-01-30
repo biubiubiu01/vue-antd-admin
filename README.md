@@ -15,10 +15,23 @@
     ·
     <a href="https://github.com/biubiubiu01/vue-antd-admin/issues">提出建议</a>
   </p>
+  
+## 最近更新
+```
+1.优化之前版本的权限控制，菜单通过角色控制，可以给用户对应的角色和多角色
+2.优化mock数据部分，建立用户常量和角色常量
+3.添加tag标签页鼠标滚动功能
+4.添加真正的整体换肤功能
+5.添加外链
+6.添加可视化图，饼图，柱状图等拖拽
+
+
+之后可能不咋会更新了，准备写一个vue3+ts+vite了.
+```
 
 ## 简介（有好的idea可以提issues,灵感丧失了...）
 
-[vue-antd-admin](http://gist006.gitee.io/vue-antd-admin/)是一个后台管理系统，基于[vue](https://github.com/vuejs/vue)+[ant-design-vue](https://github.com/vueComponent/ant-design-vue)开发，包含动态路由+权限管理解决用户权限问题，提供基础固定权限：admin、test、editor和自定义用户权限，可自定义修改角色对应的菜单；布局方面提供左右布局和上下布局两种，可自由切换；系统内置了3套主题，可随意切换；还有一些后台管理系统常用的功能如表单，table表等；
+[vue-antd-admin](http://gist006.gitee.io/vue-antd-admin/)是一个后台管理系统，基于[vue](https://github.com/vuejs/vue)+[ant-design-vue](https://github.com/vueComponent/ant-design-vue)开发，包含动态路由+权限管理解决用户权限问题，提供基础固定权限：admin、test、editor和自定义用户权限，可自定义修改角色对应的菜单,可定义用户多角色，布局方面提供左右布局和上下布局两种，可自由切换；系统内置了混合主题、浅色主题，深色主题，可随意切换；还有一些后台管理系统常用的功能如表单，table表等；
 
 ## 测试账号
 ```
