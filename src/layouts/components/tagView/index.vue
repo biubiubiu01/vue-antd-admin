@@ -1,7 +1,7 @@
 <template>
   <div class="tagView-wrapper relative white">
     <a-icon type="left" class="absolute pointer tag_btn" style="left:0" @click="handleScroll(240)" v-show="hanldeBtn" />
-    <div class="scroll-outer" ref="scrollOuter" :style="outerWidth"  @mousewheel="handleMouseWheel">
+    <div class="scroll-outer" ref="scrollOuter" :style="outerWidth" @mousewheel="handleMouseWheel">
       <div class="scroll-body absolute" ref="scrollBody" :style="{ left: tagBodyLeft + 'px' }">
         <router-link
           class="tag-item pointer inline-block"
@@ -65,13 +65,15 @@ export default {
   },
 
   methods: {
-    handleMouseWheel(e){
-      if(e.wheelDelta>0){
-        this.handleScroll(240)
-      }else{
-         this.handleScroll(-240)
+    handleMouseWheel(e) {
+      if (this.hanldeBtn) {
+        if (e.wheelDelta > 0) {
+          this.handleScroll(240);
+        } else {
+          this.handleScroll(-240);
+        }
       }
-    }, 
+    },
     isActive(path) {
       return path == this.$route.path;
     },
