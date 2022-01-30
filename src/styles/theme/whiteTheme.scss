@@ -1,0 +1,53 @@
+$baseBackColor: #fff;
+$baseColor: rgba(0, 0, 0, 0.65);
+
+body.vue-antd-admin-whiteTheme {
+  .aside-container {
+    background: $baseBackColor !important;
+    .ant-menu {
+      background: $baseBackColor !important;
+    }
+    .logo-wrapper .logo-title {
+      color: $baseColor !important;
+    }
+    .ant-menu-submenu-title,
+    .ant-menu-item {
+      .svgClass {
+        color: $baseColor !important;
+      }
+      .menu-title {
+        color: $baseColor !important;
+      }
+      .ant-menu-submenu-arrow::before{
+        background-color: $baseColor !important;
+      }
+      .ant-menu-submenu-arrow::after{
+        background-color: $baseColor !important;
+      }
+    }
+    .ant-menu-inline.ant-menu-sub{
+        background: $baseBackColor !important;
+    }
+    .ant-menu-item-selected {
+      .svgClass {
+        color: #fff !important ;
+      }
+      .menu-title {
+        color: #fff !important ;
+      }
+    }
+  }
+  .ant-card-body{
+    background: $baseBackColor !important;
+  }
+  .ant-card-head{
+    background: $baseBackColor !important;
+  }
+  .map-list .darkBg{
+    .ant-card-head-title{
+        background: $baseBackColor !important;
+        color: rgba(0, 0, 0, 0.65) !important;
+      }
+  }
+
+}

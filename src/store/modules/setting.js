@@ -5,7 +5,7 @@ const state = {
   tagShow: getCache('TAG_SHOW') == null ? true : getCache('TAG_SHOW'),
   settingVisible: false,
   layout: getCache('LAYOUT') || 'inline',
-  theme: getCache('THEME') || 'blue'
+  theme: getCache('THEME') || 'mixins'
 };
 
 const mutations = {

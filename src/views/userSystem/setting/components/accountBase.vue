@@ -32,10 +32,10 @@
         placeholder="请输入个人技能"
         :maxTagCount="3"
         allowClear
-        :default-value="accountFrom.skill"
+        :default-value="accountFrom.skill?accountFrom.skill.split(','):undefined"
         @change="changeSkill"
       >
-        <a-select-option v-for="item in SKILL_LIST" :key="item.key">
+        <a-select-option v-for="item in SKILL_LIST" :key="item.label">
           {{ item.label }}
         </a-select-option>
       </a-select>

@@ -16,14 +16,22 @@ module.exports = [
           message: '账号不存在！'
         };
       }
-      const roleItem = roleData.find(item => item.role == userItem.role);
+      const roleList=roleData.filter(item=>userItem.role.includes(item.role))
+      let roleIds=[]
+      roleList.forEach(item=>{
+         item.roleIds.split(',').forEach(val=>{
+            if(roleIds.indexOf(val)==-1){
+               roleIds.push(val)
+            }
+         })
+      })
       return {
         data: {
           token: userItem.role + '20220120' + parseInt(Math.random() * 100000),
           userInfo: {
             ...userItem,
-            roleIds: roleItem.roleIds,
-            roleString: roleItem.roleString
+            roleIds:roleIds.join(','),
+            roleString: roleList.map(item=>item.roleString).join(',')
           }
         },
         code: 200,

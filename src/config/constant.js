@@ -2,12 +2,16 @@ export default {
   install(Vue) {
     Vue.prototype.THEME_LIST = [
       {
+        label: '混合主题',
+        key: 'mixins'
+      },
+      {
         label: '浅色主题',
-        value: 'white'
+        key: 'white'
       },
       {
         label: '深色主题',
-        value: 'dark'
+        key: 'dark'
       }
     ];
     Vue.prototype.SKILL_LIST = [

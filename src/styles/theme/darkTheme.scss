@@ -1,0 +1,158 @@
+$baseBackColor: #293348;
+$baseColor: #fff;
+
+$baseBackColor2: #182030;
+
+body.vue-antd-admin-darkTheme {
+  .rightPanl {
+    background: $baseBackColor !important;
+  }
+  .nav-wrapper {
+    background: $baseBackColor !important;
+    color: $baseColor !important;
+    .ant-breadcrumb {
+      color: $baseColor !important;
+      & > span:last-child {
+        color: $baseColor !important;
+      }
+      a,
+      .ant-breadcrumb-separator {
+        color: $baseColor !important;
+      }
+    }
+  }
+  .tagView-wrapper {
+    background: $baseBackColor !important;
+    border-top: 0.5px solid rgba(255, 255, 255, 0.1);
+    box-sizing: border-box;
+    .tag-title {
+      color: $baseColor !important;
+    }
+  }
+  .app-main {
+    background: $baseBackColor2 !important;
+  }
+  .index-container{
+    background: $baseBackColor2 !important;
+    .sale-card{
+      background: $baseBackColor !important;
+      .sale-title{
+        color: $baseColor !important;
+      }
+      .time-item{
+        background: $baseBackColor !important;
+      }
+      .shop-title{
+        color: $baseColor !important;
+      }
+      .shop-item{
+        color: $baseColor !important;
+      }
+    }
+  }
+  .ant-list {
+    color: $baseColor !important;
+  }
+  .paddingBox-container {
+    background: $baseBackColor2 !important;
+  }
+  .ant-card {
+    background: $baseBackColor !important;
+    .ant-card-head {
+      color: $baseColor !important;
+      border-bottom: none !important;
+    }
+    .chart-bar {
+      background: $baseBackColor !important;
+    }
+  }
+  .mce-panel {
+    background: $baseBackColor !important;
+    .mce-btn {
+      background: $baseBackColor !important;
+
+      button {
+        color: $baseColor !important;
+        .mce-ico {
+          color: $baseColor !important;
+        }
+      }
+    }
+    .mce-menubar .mce-menubtn button span {
+      color: $baseColor !important;
+    }
+  }
+  .ant-table-thead > tr > th {
+    background: $baseBackColor2 !important;
+    color: $baseColor !important;
+    border-bottom: none !important;
+  }
+  .ant-table-tbody > tr > td {
+    border-color: rgba(255, 255, 255, 0.1);
+    color: $baseColor !important;
+  }
+  .ant-table-tbody > tr:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected) > td {
+    background: $baseBackColor2 !important;
+  }
+  .ant-pagination-total-text {
+    color: $baseColor !important;
+  }
+  .ant-form-item-label > label {
+    color: $baseColor !important;
+  }
+  .ant-select-selection {
+    background: $baseBackColor2 !important;
+    color: $baseColor !important;
+  }
+  .ant-input {
+    background: $baseBackColor2 !important;
+    color: $baseColor !important;
+  }
+  .ant-radio-wrapper {
+    color: $baseColor !important;
+  }
+  .file-wrapper {
+    background: $baseBackColor !important;
+    .text {
+      color: $baseColor !important;
+    }
+  }
+  .chat-container {
+    background: $baseBackColor !important;
+  }
+  .ant-result-title {
+    color: $baseColor !important;
+  }
+  .ant-result-subtitle {
+    color: $baseColor !important;
+  }
+  .accountInfo .username {
+    color: $baseColor !important;
+  }
+  .ant-card {
+    color: $baseColor !important;
+  }
+  .ant-tabs-nav .ant-tabs-tab {
+    color: $baseColor !important;
+  }
+  .ant-timeline-item-content {
+    color: $baseColor !important;
+  }
+  .ant-list-item-meta-title > a {
+    color: $baseColor !important;
+  }
+  .ant-list-vertical .ant-list-item-meta-title {
+    color: $baseColor !important;
+  }
+  .ant-modal-header,
+  .ant-modal-content {
+    background: $baseBackColor !important;
+
+    .ant-modal-title {
+      color: $baseColor !important;
+    }
+  }
+  .ant-tree li .ant-tree-node-content-wrapper {
+    color: $baseColor !important;
+  }
+}

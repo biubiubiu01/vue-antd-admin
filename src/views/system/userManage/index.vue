@@ -51,8 +51,8 @@
           {{ index + 1 }}
         </div>
         <div slot="role" slot-scope="{ text }">
-          <a-tag :color="text | statusFilter">
-            {{ text | textFilter(roleOption) }}
+          <a-tag  v-for="(item,index) in text.split(',')" :key="index" :color="item | statusFilter" style="margin-bottom:6px">
+            {{ item | textFilter(roleOption) }}
           </a-tag>
         </div>
         <div slot="action" slot-scope="{ text }">
@@ -151,7 +151,7 @@ export default {
       return statusList[status];
     },
     textFilter(text, roleOption) {
-      const roleItem = roleOption.find(item => item.role == text);
+     const roleItem = roleOption.find(item => item.role == text);
       if (roleItem) {
         return roleItem.roleString;
       }

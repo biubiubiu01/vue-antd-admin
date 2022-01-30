@@ -27,3 +27,12 @@ export function isCode(value) {
   const reg = /^\d{6}$/;
   return reg.test(value);
 }
+
+/**
+ * @param {string} path
+ * @returns {Boolean}
+ */
+ export function isExternal(path) {
+  return /^(https?:|mailto:|tel:)/.test(path)
+}
+

@@ -63,13 +63,33 @@ export const asyncRoutes = [
         }
       },
       {
-        name: 'permission',
-        path: '/permission',
-        component: () => import('@/views/permission/index'),
+        name: 'drag',
+        path: 'http://gist006.gitee.io/vue-visual-drag/#/',
+        component:Layout,
         meta: {
-          title: '权限测试页',
-          icon: 'permission',
-          role: 3
+          title: '可视化拖拽',
+          icon: 'drag',
+          role: 3,
+        }
+      },
+      {
+        name: 'vue3',
+        path: 'https://gist006.gitee.io/vue3-bigdata/#/homepage',
+        component:Layout,
+        meta: {
+          title: 'vue3大屏',
+          icon: 'vue3',
+          role: 3,
+        }
+      },
+      {
+        name: 'music',
+        path: 'http://gist006.gitee.io/uni-music/#/',
+        component:Layout,
+        meta: {
+          title: '听听音乐',
+          icon: 'music',
+          role: 3,
         }
       },
       {

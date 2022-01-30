@@ -134,20 +134,32 @@ export default {
     border-radius: 6px;
     cursor: pointer;
     margin-bottom: 25px;
+    box-shadow: 3px 5px 15px rgba(40, 40, 40, 0.36);
     &.card-item-one {
       @include cardBg(#5171fd, #c97afd);
+      &:hover {
+        box-shadow: 0 5px 10px #c97afd;
+      }
     }
     &.card-item-two {
       @include cardBg(#3dadf6, #737bfc);
+       &:hover {
+        box-shadow: 0 5px 10px #737bfc;
+      }
     }
     &.card-item-three {
       @include cardBg(#ea677c, #ef9b5f);
+       &:hover {
+        box-shadow: 0 5px 10px #ef9b5f;
+      }
     }
     &.card-item-four {
       @include cardBg(#42d79b, #a6e25f);
+       &:hover {
+        box-shadow: 0 5px 10px #a6e25f;
+      }
     }
     &:hover {
-      box-shadow: 3px 5px 15px rgba(40, 40, 40, 0.36);
       transform: scale(1.03);
       transition: all 0.1s ease-out;
     }
