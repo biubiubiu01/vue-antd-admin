@@ -18,7 +18,7 @@
 
 ## 简介（有好的idea可以提issues,灵感丧失了...）
 
-[vue-antd-admin](http://gist006.gitee.io/vue-antd-admin/)是一个后台管理系统，基于[vue](https://github.com/vuejs/vue)+[ant-design-vue](https://github.com/vueComponent/ant-design-vue)开发，包含动态路由+权限管理解决用户权限问题，提供基础固定权限：admin、test、editor和自定义用户权限，可自定义修改角色对应的菜单；布局方面提供左右布局和上下布局两种，可自由切换；系统内置了3套主题，可随意切换；还有一些后台管理系统常用的功能如表单，table表等；
+[vue-antd-admin](http://gist006.gitee.io/vue-antd-admin/)是一个后台管理系统，基于[vue](https://github.com/vuejs/vue)+[ant-design-vue](https://github.com/vueComponent/ant-design-vue)开发，包含动态路由+权限管理解决用户权限问题，提供基础固定权限：admin、test、editor和自定义用户权限，可自定义修改角色对应的菜单,可定义用户多角色，布局方面提供左右布局和上下布局两种，可自由切换；系统内置了混合主题、浅色主题，深色主题，可随意切换；还有一些后台管理系统常用的功能如表单，table表等；
 
 ## 测试账号
 ```
