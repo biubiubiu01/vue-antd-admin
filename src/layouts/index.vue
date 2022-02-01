@@ -14,7 +14,7 @@
         <a-icon type="setting" class="settingIcon" />
         <setting />
       </div>
-      <div class="app-main">
+      <div class="app-main" >
         <router-view />
         <back-top />
       </div>
@@ -46,7 +46,7 @@ export default {
   methods: {
     changeVisivle() {
       this.$store.dispatch('setting/changeVisible', true);
-    }
+    },
   }
 };
 </script>

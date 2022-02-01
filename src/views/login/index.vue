@@ -254,7 +254,8 @@ export default {
       height: 550px;
       margin: 0 auto;
       margin-right: 0;
-      padding-top: calc(50vh - 249.5px);
+     padding-top: 55%;
+    transform: translateY(-50%);
       .title {
         font-weight: 700;
         font-size: 1.8rem;

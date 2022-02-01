@@ -1,5 +1,5 @@
 <template>
-  <div class="index-container  border-box">
+  <div class="index-container  border-box" >
     <card-list @sendTitle="getTitle" />
 
     <div class="sale-card">
@@ -89,6 +89,8 @@ export default {
       this.getHotData();
       this.getMoreData();
     },
+
+
 
     async getLineData() {
       const { currentType: type, currentKey } = this;

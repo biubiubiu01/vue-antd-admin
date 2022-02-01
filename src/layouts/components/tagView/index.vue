@@ -10,6 +10,7 @@
           :key="item.path"
           :class="isActive(item.path) ? 'activeTag' : ''"
           ref="tagWrapper"
+          @contextmenu.prevent="rightEvent(item)"
         >
           <span class="tag-title">{{ item.meta.title }}</span>
           <svg-icon
@@ -74,6 +75,10 @@ export default {
         }
       }
     },
+
+    rightEvent(){
+       console.log(1231);
+    },
     isActive(path) {
       return path == this.$route.path;
     },
@@ -116,9 +121,9 @@ export default {
         const eleWidth = this.$refs.tagWrapper[index].$el.offsetWidth;
         const eleLeft = this.$refs.tagWrapper[index].$el.offsetLeft;
         const scrollOuterWidth = this.$refs.scrollOuter.offsetWidth;
-
         //标签在左边
         if (eleLeft == 0 && index == 0) {
+           this.tagBodyLeft=0
           return;
         }
         if (eleLeft < -this.tagBodyLeft) {
