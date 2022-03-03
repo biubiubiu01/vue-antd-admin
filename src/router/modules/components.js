@@ -24,12 +24,6 @@ const componentsRouter = {
       meta: { title: '富文本编辑器', role: 24 }
     },
     {
-      name: 'Markdown',
-      path: '/components/markdown',
-      component: () => import('@/views/components/markdown/index'),
-      meta: { title: 'Markdown', role: 25 }
-    },
-    {
       name: 'lottery',
       path: '/components/lottery',
       component: () => import('@/views/components/lottery/index'),
