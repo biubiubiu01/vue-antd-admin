@@ -16,8 +16,6 @@
     <a href="https://github.com/biubiubiu01/vue-antd-admin/issues">提出建议</a>
   </p>
   
- ## 最新
-由于高德api不让使用了，要求除非能提供公益证明，不然都看做商用，所以目前地图模板暂时不能使用，正在解决中...
   
 ## 最近更新
 ```
@@ -184,6 +182,13 @@ npm run test:unit
 
 这个项目参考了 [vue-element-admin](https://panjiachen.gitee.io/vue-element-admin/#/) 和 [ant-design-pro](https://preview.pro.antdv.com/dashboard/workplace),发现了好多好用的写法和方法，建议如果真想提升自己的代码水平，可以多看看大佬们的代码。
 开源不易，若觉得这个项目对你有用，可以点个[star](https://github.com/biubiubiu01/vue-antd-admin)，欢迎提出建议和bug :smile: 。
+
+
+## 捐赠
+
+开源不易，若觉得这个项目对你有用，可以点个[star](https://github.com/biubiubiu01/EchartsMap)，欢迎提出建议和bug :smile: 。如果这个项目对你有所帮助，可以给作者买杯咖啡，欢迎投喂，任意金额捐赠加好友问题咨询。
+
+<img src="https://github.com/biubiubiu01/vue3-bigData/blob/master/alipay.png" alt="alipay" width="250"><img src="https://github.com/biubiubiu01/vue3-bigData/blob/master/wechat.png" alt="wechat" width="250">
 
 
 
