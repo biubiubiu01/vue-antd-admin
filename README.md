@@ -18,16 +18,16 @@
   
   
 ## 最近更新
+
 ```
+vue3+vite+ts+pinia开发的vue3-basic-admin已成功出炉，欢迎预览和使用：<a href="http://gist006.gitee.io/vue3-basic-admin/">vue3-basic-admin</a>
+
 1.优化之前版本的权限控制，菜单通过角色控制，可以给用户对应的角色和多角色
 2.优化mock数据部分，建立用户常量和角色常量
 3.添加tag标签页鼠标滚动功能
 4.添加真正的整体换肤功能
 5.添加外链
 6.添加可视化图，饼图，柱状图等拖拽
-
-
-之后可能不咋会更新了，准备写一个vue3+ts+vite了.
 ```
 
 ## 简介（有好的idea可以提issues,灵感丧失了...）
