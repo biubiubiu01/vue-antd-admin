@@ -19,7 +19,7 @@
   
 ## 最近更新
 
-vue3+vite+ts+pinia开发的 vue3-basic-admin 已成功出炉，欢迎预览和使用：<a href="http://gist006.gitee.io/vue3-basic-admin/">vue3-basic-admin</a>
+vue3+vite+ts+pinia开发的 vue3-basic-admin 已成功出炉，欢迎预览和使用：<a href="http://github.com/vue3-basic-admin/">vue3-basic-admin</a>
 ```
 
 1.优化之前版本的权限控制，菜单通过角色控制，可以给用户对应的角色和多角色
