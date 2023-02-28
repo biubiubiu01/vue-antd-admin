@@ -19,7 +19,8 @@
   
 ## 最近更新
 
-vue3+vite+ts+pinia开发的 vue3-basic-admin 已成功出炉，欢迎预览和使用：<a href="http://github.com/vue3-basic-admin/">vue3-basic-admin</a>
+vue3-basic-admin 已完成：`vue3-basic-admin` 是一款开源开箱即用的中后台管理系统。基于 `Vue3`、`Vite`、`Element-Plus`、`TypeScript`、`Pinia` 等主流技术开发，内置许多开箱即用的组件，能快速构建中后台管理系统，目前决定完全开源，如果角色该项目对你有所帮助，可以点一个star,如果有一定的经济能力，可以请作者喝一杯咖啡，开源不易！
+欢迎预览和使用：<a href="http://github.com/vue3-basic-admin/">vue3-basic-admin</a>
 ```
 
 1.优化之前版本的权限控制，菜单通过角色控制，可以给用户对应的角色和多角色
