@@ -192,7 +192,8 @@ npm run test:unit
 <img src="https://i.328888.xyz/2023/02/28/zV27Q.jpeg" alt="alipay" width="250"><img src="https://i.328888.xyz/2023/02/28/zVw2H.jpeg" alt="wechat" width="250">
 
 
-
+## 扫码领大红包啦，有朋友领到88元大红包
+<img src="https://i.328888.xyz/2023/04/24/iSolbq.jpeg" alt="alipay" width="250">
 
 
 
