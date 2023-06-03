@@ -5,7 +5,7 @@
         <a-button
           type="danger"
           icon="delete"
-          style="margin: 0 16px 10px"
+          style="margin:0 16px 10px"
           :loading="deleteLoading"
           @click="batchDeleteTable"
         >
@@ -15,7 +15,7 @@
           <span class="label">付款人：</span>
           <a-input placeholder="付款人" class="select-width" v-model="filterList.name" />
         </div>
-        <div class="filter-wrapper" style="margin: 0 15px">
+        <div class="filter-wrapper" style="margin:0 15px">
           <span class="label">订单状态：</span>
           <a-select placeholder="订单状态" class="select-width" allowClear @change="changeStatus">
             <a-select-option v-for="item in typeOption" :key="item.key" :value="item.key">
@@ -23,38 +23,45 @@
             </a-select-option>
           </a-select>
         </div>
-        <a-button type="primary" icon="search" class="select-bottom" style="margin-right: 16px" @click="search">
+
+        <a-button type="primary" icon="search" class="select-bottom" style="margin-right:16px" @click="search">
           查询
         </a-button>
         <a-button type="primary" icon="export" class="select-bottom" :loading="exportLoading" @click="handleExport">
           导出
         </a-button>
       </div>
-      <standardTable
-        :tableHead="tableHead"
-        :tableData="tableData"
-        :loading="loading"
-        :pagination="{
-          pageSize: filterList.size,
-          current: filterList.page,
-          total: filterList.total,
-          showTotal: total => `${filterList.total} 条`
-        }"
-        :rowSelection="{ selectedRowKeys: selectedRowKeys, onChange: handleSelect }"
-        @changeCurrent="handleChangeCurrent"
-      >
-        <div slot="index" slot-scope="{ index }">
-          {{ index + 1 }}
-        </div>
-        <div slot="money" slot-scope="{ text }">¥ {{ text }}</div>
-        <div slot="action" slot-scope="{ text }">
-          <a-button type="primary" size="small" @click="handleEdit(text)"> 编辑 </a-button>
-          <a-popconfirm title="你确定要删除当前列吗?" ok-text="是" cancel-text="否" @confirm="handleDelete(text)">
-            <a-button type="danger" size="small" style="margin-left: 8px"> 删除 </a-button>
-          </a-popconfirm>
-        </div>
-      </standardTable>
+        
+        <standard-table
+          :tableData="tableData"
+          :tableHead="tableHead"
+          :loading="loading"
+          :pagination="{
+            pageSize: filterList.size,
+            current: filterList.page,
+            total: filterList.total,
+            showTotal: total => `${filterList.total} 条`
+          }"
+          :rowSelection="{ selectedRowKeys: selectedRowKeys, onChange: handleSelect }"
+          @changeCurrent="handleChangeCurrent"
+        >
+          <div slot="index" slot-scope="{ index }">
+            {{ index + 1 }}
+          </div>
+          <div slot="money" slot-scope="{ text }">¥ {{ text }}</div>
+          <div slot="action" slot-scope="{ text }">
+            <a-button type="primary" size="small" @click="handleEdit(text)">
+              编辑
+            </a-button>
+            <a-popconfirm title="你确定要删除当前列吗?" ok-text="是" cancel-text="否" @confirm="handleDelete(text)">
+              <a-button type="danger" size="small" style="margin-left:8px">
+                删除
+              </a-button>
+            </a-popconfirm>
+          </div>
+        </standard-table>
     </a-card>
+
     <a-modal
       title="编辑"
       :visible="editShow"
@@ -63,7 +70,6 @@
       :width="620"
       @ok="handleOk"
       @cancel="editShow = false"
-      centered
     >
       <a-form-model :label-col="{ span: 4 }" :wrapper-col="{ span: 16 }" hideRequiredMark>
         <a-form-model-item prop="id" label="id">
@@ -203,8 +209,8 @@ export default {
       this.filterList.status = val;
     },
 
-    handleChangeCurrent(pagination) {
-      this.filterList.page = pagination;
+    handleChangeCurrent(val) {
+      this.filterList.page = val;
       this.getTableData();
     },
 
