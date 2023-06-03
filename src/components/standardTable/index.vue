@@ -51,8 +51,9 @@ export default {
     return {};
   },
   methods: {
-    handleTableChange(val) {
-      this.$emit('changeCurrent', val.current);
+    handleTableChange(pagination) {
+      console.log(pagination);
+      this.$emit('changeCurrent', pagination.current);
     }
   }
 };
